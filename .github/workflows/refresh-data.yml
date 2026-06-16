@@ -1,0 +1,59 @@
+name: refresh-data
+
+# Regenerate the service catalog + completion stats from the upstream
+# smilinTux/skstacks repo and commit them back if anything changed.
+#
+# Triggers:
+#   - schedule: once a day (06:17 UTC)
+#   - workflow_dispatch: manual run from the Actions tab
+#   - push: when the generator or workflow itself changes (verifies the run)
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/gen-data.py"
+      - ".github/workflows/refresh-data.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout site repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Regenerate data from upstream skstacks
+        run: python3 scripts/gen-data.py
+
+      - name: Update sitemap lastmod
+        run: |
+          today="$(date -u +%Y-%m-%d)"
+          sed -i "s|<lastmod>.*</lastmod>|<lastmod>${today}</lastmod>|" sitemap.xml || true
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain data/ sitemap.xml)" ]; then
+            git add data/ sitemap.xml
+            git commit -m "data: refresh services-catalog + completion from upstream skstacks"
+            git push
+            echo "Changes committed and pushed."
+          else
+            echo "No changes — data already up to date."
+          fi

@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="bg" cx="0.5" cy="-0.1" r="1.1">
+      <stop offset="0%"  stop-color="#1a1a3e"/>
+      <stop offset="42%" stop-color="#0d0d1f"/>
+      <stop offset="100%" stop-color="#0a0a0f"/>
+    </radialGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0.4">
+      <stop offset="0%"  stop-color="#FFD700"/>
+      <stop offset="38%" stop-color="#FF69B4"/>
+      <stop offset="70%" stop-color="#00FFFF"/>
+      <stop offset="100%" stop-color="#FFD700"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"  stop-color="#50fa7b"/>
+      <stop offset="50%" stop-color="#00FFFF"/>
+      <stop offset="100%" stop-color="#FFD700"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- starfield dots -->
+  <g fill="#ffffff">
+    <circle cx="120" cy="90"  r="2" opacity="0.8"/>
+    <circle cx="300" cy="60"  r="1.5" opacity="0.5"/>
+    <circle cx="520" cy="110" r="2" fill="#00FFFF" opacity="0.7"/>
+    <circle cx="900" cy="80"  r="2" fill="#FFD700" opacity="0.8"/>
+    <circle cx="1080" cy="140" r="1.5" opacity="0.5"/>
+    <circle cx="1000" cy="40" r="1.5" fill="#FF69B4" opacity="0.7"/>
+    <circle cx="700" cy="50"  r="1.5" opacity="0.5"/>
+    <circle cx="180" cy="520" r="2" fill="#bd93f9" opacity="0.6"/>
+    <circle cx="1100" cy="560" r="2" fill="#00FFFF" opacity="0.6"/>
+    <circle cx="60" cy="300"  r="1.5" opacity="0.5"/>
+  </g>
+
+  <!-- brand line -->
+  <text x="80" y="120" font-family="'JetBrains Mono', monospace" font-size="26" fill="#FFD700">🐧</text>
+  <text x="120" y="120" font-family="'JetBrains Mono', monospace" font-size="24" font-weight="700" fill="#ffffff" letter-spacing="1">
+    <tspan fill="#00FFFF">sk</tspan>stacks · SKWorld sovereign vertical
+  </text>
+
+  <!-- version pill -->
+  <g>
+    <rect x="80" y="160" width="220" height="40" rx="20" fill="rgba(255,215,0,0.06)" stroke="#FFD700" stroke-opacity="0.4" stroke-width="1.5"/>
+    <text x="100" y="187" font-family="'JetBrains Mono', monospace" font-size="20" fill="#FFD700" font-weight="600">skstacks-v2.8.0</text>
+  </g>
+
+  <!-- big title -->
+  <text x="76" y="330" font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="150" font-weight="800" fill="url(#title)" letter-spacing="-4">SKStacks</text>
+
+  <!-- tagline -->
+  <text x="80" y="400" font-family="'Inter', sans-serif" font-size="34" fill="#ffffff" font-weight="600">AI-first sovereign infrastructure framework.</text>
+
+  <!-- pipeline -->
+  <g font-family="'JetBrains Mono', monospace" font-size="30" font-weight="600">
+    <text x="80" y="465" fill="#FFD700">descriptor.yaml</text>
+    <text x="330" y="465" fill="rgba(255,255,255,0.45)">→</text>
+    <text x="372" y="465" fill="#00FFFF">Swarm</text>
+    <text x="480" y="465" fill="rgba(255,255,255,0.45)">/</text>
+    <text x="502" y="465" fill="#00FFFF">K8s</text>
+    <text x="575" y="465" fill="rgba(255,255,255,0.45)">/</text>
+    <text x="597" y="465" fill="#00FFFF">RKE2</text>
+  </g>
+
+  <!-- progress bar -->
+  <g>
+    <rect x="80" y="510" width="700" height="22" rx="11" fill="rgba(255,255,255,0.07)" stroke="#FFD700" stroke-opacity="0.2"/>
+    <rect x="80" y="510" width="336" height="22" rx="11" fill="url(#bar)"/>
+    <text x="800" y="528" font-family="'JetBrains Mono', monospace" font-size="24" fill="#50fa7b" font-weight="700">48% · 15 of 31 live</text>
+  </g>
+
+  <!-- url badge -->
+  <g transform="translate(80, 560)">
+    <rect x="0" y="0" width="340" height="44" rx="22" fill="#0f1020" stroke="#00FFFF" stroke-opacity="0.45" stroke-width="2"/>
+    <text x="22" y="30" font-family="'JetBrains Mono', monospace" font-size="20" fill="#00FFFF" font-weight="600">→ skstacks.skworld.io</text>
+  </g>
+
+  <!-- layer chips (right side) -->
+  <g font-family="'JetBrains Mono', monospace" font-size="18" font-weight="700">
+    <g transform="translate(900,250)">
+      <rect width="220" height="38" rx="8" fill="rgba(255,215,0,0.1)" stroke="#FFD700" stroke-opacity="0.4"/>
+      <text x="16" y="25" fill="#FFD700">core · 6</text>
+    </g>
+    <g transform="translate(900,300)">
+      <rect width="220" height="38" rx="8" fill="rgba(0,255,255,0.08)" stroke="#00FFFF" stroke-opacity="0.4"/>
+      <text x="16" y="25" fill="#00FFFF">comms · 5</text>
+    </g>
+    <g transform="translate(900,350)">
+      <rect width="220" height="38" rx="8" fill="rgba(80,250,123,0.08)" stroke="#50fa7b" stroke-opacity="0.4"/>
+      <text x="16" y="25" fill="#50fa7b">compute · 13</text>
+    </g>
+    <g transform="translate(900,400)">
+      <rect width="220" height="38" rx="8" fill="rgba(189,147,249,0.1)" stroke="#bd93f9" stroke-opacity="0.4"/>
+      <text x="16" y="25" fill="#bd93f9">cloud · 6</text>
+    </g>
+    <g transform="translate(900,450)">
+      <rect width="220" height="38" rx="8" fill="rgba(255,105,180,0.08)" stroke="#FF69B4" stroke-opacity="0.4"/>
+      <text x="16" y="25" fill="#FF69B4">apps · 1</text>
+    </g>
+  </g>
+</svg>

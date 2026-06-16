@@ -1,39 +1,771 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>skstacks — redirecting to skstacks.io</title>
-<meta name="description" content="skstacks.skworld.io is an alias for the skstacks.io site. Redirecting…">
-<!-- Canonical points to the apex FQDN: it stays the primary, indexed site (no duplicate content) -->
-<link rel="canonical" href="https://skstacks.io/">
-<meta http-equiv="refresh" content="0; url=https://skstacks.io/">
-<meta name="robots" content="noindex, follow">
-<meta property="og:type" content="website">
-<meta property="og:title" content="skstacks · SKWorld">
-<meta property="og:description" content="The skstacks project — part of the SKWorld sovereign AI ecosystem.">
-<meta property="og:url" content="https://skstacks.io/">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐧</text></svg>">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',system-ui,sans-serif;background:radial-gradient(ellipse at top,#11131f 0%,#08080f 60%);color:#e0e0e0;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center}
-.box{padding:2rem}
-.icon{font-size:3.5rem;margin-bottom:1rem}
-h1{font-size:1.6rem;font-weight:700;color:#ffd700;margin-bottom:.5rem}
-p{color:rgba(255,255,255,.7);margin-bottom:1.2rem}
-a{color:#67e8f9;text-decoration:none;border:1px solid rgba(103,232,249,.35);padding:.6rem 1.3rem;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:.9rem;transition:all .3s}
-a:hover{border-color:#67e8f9;color:#fff}
-.brand{margin-top:2rem;font-family:'JetBrains Mono',monospace;font-size:.8rem;color:rgba(255,255,255,.35)}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKStacks v2 — AI-first sovereign infrastructure framework</title>
+  <meta name="description" content="SKStacks v2 — an AI-first sovereign infrastructure framework. One descriptor deploys to Docker Swarm, K8s, or RKE2. 31 sk* services across core, comms, compute, cloud, and apps — 15 verified live on RKE2.">
+
+  <!-- Canonical: this is now the PRIMARY indexed site -->
+  <link rel="canonical" href="https://skstacks.skworld.io/">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="SKStacks v2 — AI-first sovereign infrastructure framework">
+  <meta property="og:description" content="One descriptor → Swarm / K8s / RKE2. 31 sovereign sk* services across 5 layers, 15 verified live on RKE2. Own the full vertical.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skstacks.skworld.io/">
+  <meta property="og:site_name" content="SKStacks · SKWorld">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://skstacks.skworld.io/assets/og-card.png">
+  <meta property="og:image:secure_url" content="https://skstacks.skworld.io/assets/og-card.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="SKStacks v2 — descriptor to Swarm / K8s / RKE2. 31 sovereign services.">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@smilinTux">
+  <meta name="twitter:title" content="SKStacks v2 — AI-first sovereign infrastructure framework">
+  <meta name="twitter:description" content="One descriptor → Swarm / K8s / RKE2. 31 sovereign sk* services, 15 verified live on RKE2.">
+  <meta name="twitter:image" content="https://skstacks.skworld.io/assets/og-card.png">
+  <meta name="twitter:image:alt" content="SKStacks v2 — sovereign infrastructure framework">
+  <meta name="twitter:creator" content="@smilinTux">
+
+  <!-- Theme -->
+  <meta name="theme-color" content="#0a0a1a">
+  <meta name="robots" content="index, follow">
+
+  <!-- Favicon: inline-SVG penguin -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐧</text></svg>">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://smilintux.github.io/#organization",
+        "name": "smilinTux",
+        "url": "https://smilintux.github.io",
+        "sameAs": ["https://github.com/smilinTux"],
+        "description": "Sovereign AI infrastructure — building open, authentic, human-first technology. Home of the Pengu Empire.",
+        "foundingDate": "2024",
+        "knowsAbout": ["Sovereign AI", "AI agent infrastructure", "Self-hosted infrastructure", "Kubernetes", "RKE2", "Infrastructure as code"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://skstacks.skworld.io/#website",
+        "name": "SKStacks",
+        "url": "https://skstacks.skworld.io",
+        "publisher": {"@id": "https://smilintux.github.io/#organization"},
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://skstacks.skworld.io/#app",
+        "name": "SKStacks v2",
+        "alternateName": "AI-first sovereign infrastructure framework",
+        "description": "SKStacks v2 is an AI-first sovereign infrastructure framework. A single declarative descriptor deploys 31 best-of-breed sk* services to Docker Swarm, Kubernetes, or RKE2 — across core, comms, compute, cloud, and apps layers. 15 of 31 services are verified live-proven on RKE2.",
+        "url": "https://skstacks.skworld.io",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Linux",
+        "softwareVersion": "2.8.0",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+        "license": "https://www.gnu.org/licenses/gpl-3.0.en.html",
+        "codeRepository": "https://github.com/smilinTux/skstacks",
+        "isPartOf": {"@type": "SoftwareApplication", "name": "SKWorld", "url": "https://skworld.io"},
+        "publisher": {"@id": "https://smilintux.github.io/#organization"}
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    /* ── Reset + tokens ───────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --gold:   #FFD700;
+      --pink:   #FF69B4;
+      --cyan:   #00FFFF;
+      --green:  #50fa7b;
+      --amber:  #f59e0b;
+      --purple: #bd93f9;
+      --bg:     #0a0a0f;
+      --bg2:    #0f1020;
+      --card:   rgba(15, 16, 40, 0.7);
+      --border: rgba(255,215,0,0.15);
+      --text:   rgba(255,255,255,0.88);
+      --dim:    rgba(255,255,255,0.55);
+      --mono:   'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── Starfield background ─────────────── */
+    .starfield {
+      position: fixed; inset: 0; z-index: -1;
+      background: radial-gradient(ellipse at 50% -10%, #1a1a3e 0%, #0d0d1f 40%, #0a0a0f 100%);
+    }
+    .stars {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(2px 2px at 20px 30px,  rgba(255,215,0,0.9),  transparent),
+        radial-gradient(2px 2px at 40px 70px,  rgba(0,255,255,0.7),  transparent),
+        radial-gradient(1px 1px at 90px 40px,  rgba(255,255,255,0.9),transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255,105,180,0.8),transparent),
+        radial-gradient(2px 2px at 160px 30px, rgba(255,255,255,0.6),transparent),
+        radial-gradient(1px 1px at 70px 55px,  rgba(189,147,249,0.7),transparent);
+      background-repeat: repeat;
+      background-size: 200px 100px;
+      animation: starscroll 100s linear infinite;
+    }
+    .stars:nth-child(2) { background-size: 270px 130px; animation-duration: 145s; animation-direction: reverse; opacity: .7; }
+    .stars:nth-child(3) { background-size: 340px 165px; animation-duration: 190s; opacity: .45; }
+    @keyframes starscroll {
+      from { transform: translateX(0)      translateY(0); }
+      to   { transform: translateX(-200px) translateY(-100px); }
+    }
+
+    /* ── Floating deco ────────────────────── */
+    .float-deco {
+      position: fixed; font-size: 1.6rem; z-index: 0; pointer-events: none;
+      animation: floatDeco 18s infinite ease-in-out;
+      opacity: .35;
+    }
+    @keyframes floatDeco {
+      0%,100% { transform: translateY(0) rotate(-4deg); opacity: .3; }
+      33%  { transform: translateY(-28px) rotate(6deg); opacity: .6; }
+      66%  { transform: translateY(-48px) rotate(-2deg); opacity: .45; }
+    }
+
+    /* ── Layout helpers ───────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+    section { padding: 5rem 0; }
+
+    /* ── Sticky nav ───────────────────────── */
+    .site-nav {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(10, 10, 20, 0.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,215,0,0.12);
+    }
+    .nav-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      max-width: 1200px; margin: 0 auto; padding: .75rem 2rem;
+    }
+    .nav-logo {
+      font-family: var(--mono); font-weight: 700; font-size: 1.25rem;
+      color: var(--gold); text-decoration: none; letter-spacing: -.5px;
+    }
+    .nav-logo span { color: var(--cyan); }
+    .nav-links { display: flex; list-style: none; gap: 1.4rem; align-items: center; }
+    .nav-links a {
+      color: var(--dim); text-decoration: none; font-size: .875rem;
+      font-weight: 500; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--gold), var(--pink));
+      color: #000 !important; padding: .45rem 1.2rem; border-radius: 6px;
+      font-weight: 700 !important; font-size: .85rem !important;
+    }
+    .nav-cta:hover { opacity: .85; }
+    @media (max-width: 880px) { .nav-links { display: none; } }
+
+    /* ── HERO ─────────────────────────────── */
+    .hero {
+      padding: 7rem 0 5rem;
+      text-align: center;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(0,255,255,.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: .9rem; color: var(--cyan);
+      letter-spacing: .15em; text-transform: uppercase; margin-bottom: 1.5rem;
+      display: inline-block;
+      animation: eyebrowPulse 4s ease-in-out infinite;
+    }
+    @keyframes eyebrowPulse {
+      0%,100% { text-shadow: 0 0 8px rgba(0,255,255,.4); }
+      50%      { text-shadow: 0 0 18px rgba(0,255,255,.8), 0 0 35px rgba(0,255,255,.3); }
+    }
+    .hero-title {
+      font-size: clamp(3.5rem, 9vw, 7.5rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -2px;
+      margin-bottom: .75rem;
+      background: linear-gradient(140deg, var(--gold) 0%, var(--pink) 35%, var(--cyan) 65%, var(--gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: titleShimmer 5s ease-in-out infinite;
+    }
+    @keyframes titleShimmer {
+      0%,100% { filter: hue-rotate(0deg); }
+      40%      { filter: hue-rotate(25deg); }
+      70%      { filter: hue-rotate(-15deg); }
+    }
+    .hero-version {
+      display: inline-block; font-family: var(--mono); font-size: .8rem;
+      color: var(--gold); border: 1px solid rgba(255,215,0,.3);
+      border-radius: 20px; padding: .25rem .9rem; margin-bottom: 1.25rem;
+      background: rgba(255,215,0,.05);
+    }
+    .hero-tagline {
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      color: rgba(255,255,255,.8);
+      font-weight: 300;
+      max-width: 760px;
+      margin: 0 auto 1rem;
+      line-height: 1.5;
+    }
+    .hero-tagline strong { color: var(--gold); font-weight: 600; }
+    .hero-sub {
+      font-size: 1rem; color: var(--dim);
+      max-width: 620px; margin: 0 auto 2rem;
+    }
+    .hero-pipeline {
+      display: inline-flex; align-items: center; gap: .6rem; flex-wrap: wrap;
+      font-family: var(--mono); font-size: .95rem;
+      background: rgba(0,0,0,.5); border: 1.5px solid rgba(0,255,255,.3);
+      border-radius: 12px; padding: .8rem 1.4rem; margin-bottom: 2.5rem;
+    }
+    .hero-pipeline .pp-desc { color: var(--gold); font-weight: 600; }
+    .hero-pipeline .pp-arrow { color: var(--dim); }
+    .hero-pipeline .pp-target { color: var(--cyan); }
+
+    /* Hero CTAs */
+    .hero-ctas {
+      display: flex; justify-content: center; gap: 1rem;
+      flex-wrap: wrap; margin-top: .5rem;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .8rem 1.8rem; border-radius: 10px;
+      font-weight: 600; font-size: .95rem; text-decoration: none;
+      transition: all .25s; position: relative; overflow: hidden;
+      border: none; cursor: pointer;
+    }
+    .btn::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent);
+      transform: translateX(-100%); transition: transform .5s;
+    }
+    .btn:hover::after { transform: translateX(100%); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--pink) 60%);
+      color: #000;
+      box-shadow: 0 4px 20px rgba(255,215,0,.35);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,215,0,.5); }
+    .btn-outline {
+      background: rgba(255,255,255,.04);
+      border: 1.5px solid rgba(0,255,255,.3);
+      color: rgba(255,255,255,.85);
+    }
+    .btn-outline:hover { border-color: var(--cyan); background: rgba(0,255,255,.07); transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent; border: 1.5px solid rgba(255,255,255,.15);
+      color: var(--dim);
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    /* Trust badges */
+    .hero-trust {
+      display: flex; justify-content: center; gap: 2rem;
+      flex-wrap: wrap; margin-top: 3rem;
+      font-size: .82rem; color: var(--dim);
+    }
+    .hero-trust span { display: flex; align-items: center; gap: .4rem; }
+    .hero-trust strong { color: rgba(255,255,255,.7); }
+
+    /* ── Section helpers ──────────────────── */
+    .section-eyebrow {
+      font-family: var(--mono); font-size: .8rem; color: var(--cyan);
+      letter-spacing: .15em; text-transform: uppercase; margin-bottom: .75rem;
+    }
+    .section-title {
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 800;
+      margin-bottom: .75rem; line-height: 1.15;
+    }
+    .section-sub { color: var(--dim); max-width: 640px; font-size: 1rem; line-height: 1.7; }
+    .section-divider { border: none; border-top: 1px solid rgba(255,215,0,.08); margin: 0; }
+    .gradient-section {
+      background: linear-gradient(135deg, rgba(0,255,255,.04) 0%, rgba(189,147,249,.04) 50%, rgba(255,105,180,.03) 100%);
+      border-top: 1px solid rgba(255,215,0,.08);
+      border-bottom: 1px solid rgba(255,215,0,.08);
+    }
+
+    /* ── COMPLETION COUNTER ──────────────── */
+    .completion-wrap { text-align: center; }
+    .completion-big {
+      font-size: clamp(5rem, 16vw, 11rem);
+      font-weight: 800; line-height: 1;
+      background: linear-gradient(135deg, var(--green) 0%, var(--cyan) 50%, var(--gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      letter-spacing: -3px;
+    }
+    .completion-big .pct-sign { font-size: .5em; -webkit-text-fill-color: var(--dim); color: var(--dim); }
+    .completion-caption {
+      font-size: 1.1rem; color: rgba(255,255,255,.8); margin-bottom: 2rem;
+    }
+    .completion-caption strong { color: var(--gold); }
+    .progress-track {
+      max-width: 720px; margin: 0 auto 2.5rem;
+      height: 18px; border-radius: 12px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,215,0,.18);
+      overflow: hidden; position: relative;
+    }
+    .progress-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--green), var(--cyan), var(--gold));
+      border-radius: 12px;
+      transition: width 1.6s cubic-bezier(.22,1,.36,1);
+      box-shadow: 0 0 20px rgba(0,255,255,.35);
+    }
+    .completion-breakdown {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem; max-width: 720px; margin: 0 auto;
+    }
+    @media (max-width: 560px) { .completion-breakdown { grid-template-columns: 1fr; } }
+    .breakdown-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.5rem 1rem; backdrop-filter: blur(12px);
+    }
+    .breakdown-num { font-size: 2.6rem; font-weight: 800; line-height: 1; }
+    .breakdown-card.live   .breakdown-num { color: var(--green); }
+    .breakdown-card.ready  .breakdown-num { color: var(--gold); }
+    .breakdown-card.planned .breakdown-num { color: var(--dim); }
+    .breakdown-label { font-size: .85rem; color: var(--dim); margin-top: .4rem; }
+
+    /* ── SERVICE GRID ────────────────────── */
+    .filter-bar {
+      display: flex; justify-content: center; gap: .6rem; flex-wrap: wrap; margin: 2.5rem 0 2rem;
+    }
+    .filter-btn {
+      font-family: var(--mono); font-size: .8rem;
+      padding: .45rem 1rem; border-radius: 20px; cursor: pointer;
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,215,0,.18);
+      color: var(--dim); transition: all .2s;
+    }
+    .filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--gold), var(--pink));
+      color: #000; font-weight: 700; border-color: transparent;
+    }
+    .filter-btn .fb-count { opacity: .6; margin-left: .35rem; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.25rem;
+    }
+    .svc-card {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: 16px; padding: 1.5rem;
+      backdrop-filter: blur(12px); transition: all .3s;
+      position: relative; overflow: hidden; display: flex; flex-direction: column;
+    }
+    .svc-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .svc-card[data-layer="core"]::before    { background: linear-gradient(90deg, var(--gold), var(--pink)); }
+    .svc-card[data-layer="comms"]::before    { background: linear-gradient(90deg, var(--cyan), var(--purple)); }
+    .svc-card[data-layer="compute"]::before  { background: linear-gradient(90deg, var(--green), var(--cyan)); }
+    .svc-card[data-layer="cloud"]::before    { background: linear-gradient(90deg, var(--purple), var(--pink)); }
+    .svc-card[data-layer="apps"]::before     { background: linear-gradient(90deg, var(--pink), var(--gold)); }
+    .svc-card:hover { transform: translateY(-5px); box-shadow: 0 18px 45px rgba(0,0,0,.4); border-color: rgba(255,215,0,.35); }
+    .svc-head { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-bottom: .4rem; }
+    .svc-name { font-family: var(--mono); font-size: 1.2rem; font-weight: 700; color: #fff; }
+    .svc-name span { color: var(--cyan); }
+    .svc-badges { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .75rem; }
+    .layer-badge {
+      font-family: var(--mono); font-size: .65rem; text-transform: uppercase; letter-spacing: .06em;
+      padding: .18rem .55rem; border-radius: 5px; font-weight: 700;
+    }
+    .layer-badge[data-layer="core"]    { background: rgba(255,215,0,.12); color: var(--gold); border: 1px solid rgba(255,215,0,.3); }
+    .layer-badge[data-layer="comms"]   { background: rgba(0,255,255,.1); color: var(--cyan); border: 1px solid rgba(0,255,255,.3); }
+    .layer-badge[data-layer="compute"] { background: rgba(80,250,123,.1); color: var(--green); border: 1px solid rgba(80,250,123,.3); }
+    .layer-badge[data-layer="cloud"]   { background: rgba(189,147,249,.12); color: var(--purple); border: 1px solid rgba(189,147,249,.3); }
+    .layer-badge[data-layer="apps"]    { background: rgba(255,105,180,.1); color: var(--pink); border: 1px solid rgba(255,105,180,.3); }
+    .status-badge {
+      font-family: var(--mono); font-size: .65rem; letter-spacing: .04em;
+      padding: .18rem .55rem; border-radius: 5px; font-weight: 700;
+    }
+    .status-badge.live    { background: rgba(80,250,123,.1); color: var(--green); border: 1px solid rgba(80,250,123,.3); }
+    .status-badge.ready   { background: rgba(255,215,0,.1); color: var(--gold); border: 1px solid rgba(255,215,0,.3); }
+    .status-badge.planned { background: rgba(255,255,255,.05); color: var(--dim); border: 1px solid rgba(255,255,255,.15); }
+    .svc-brief { font-size: .875rem; color: var(--dim); line-height: 1.6; flex: 1; margin-bottom: .9rem; }
+    .svc-provider { font-size: .72rem; color: rgba(255,255,255,.4); font-family: var(--mono); margin-bottom: .9rem; line-height: 1.45; }
+    .svc-links { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .svc-link {
+      font-family: var(--mono); font-size: .72rem; text-decoration: none;
+      color: var(--dim); border: 1px solid rgba(255,255,255,.14);
+      border-radius: 6px; padding: .3rem .65rem; transition: all .2s;
+    }
+    .svc-link:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── LATEST UPDATES ──────────────────── */
+    .updates-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 2rem; margin-top: 2.5rem; align-items: start; }
+    @media (max-width: 860px) { .updates-grid { grid-template-columns: 1fr; } }
+    .release-card {
+      background: var(--card); border: 1.5px solid rgba(255,215,0,.25);
+      border-radius: 16px; padding: 1.75rem; backdrop-filter: blur(12px);
+    }
+    .release-tag {
+      display: inline-block; font-family: var(--mono); font-weight: 700;
+      font-size: 1.1rem; color: var(--gold);
+      background: rgba(255,215,0,.08); border: 1px solid rgba(255,215,0,.3);
+      border-radius: 8px; padding: .35rem .8rem; margin-bottom: .9rem;
+    }
+    .release-name { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: .5rem; }
+    .release-body { font-size: .85rem; color: var(--dim); line-height: 1.6; margin-bottom: 1rem; white-space: pre-wrap; }
+    .release-meta { font-family: var(--mono); font-size: .72rem; color: rgba(255,255,255,.4); margin-bottom: 1rem; }
+    .commits-list { display: flex; flex-direction: column; gap: .6rem; }
+    .commit-row {
+      display: flex; gap: .8rem; align-items: baseline;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: .8rem 1rem; backdrop-filter: blur(12px);
+      transition: border-color .2s; text-decoration: none;
+    }
+    .commit-row:hover { border-color: rgba(255,215,0,.35); }
+    .commit-sha { font-family: var(--mono); font-size: .72rem; color: var(--cyan); flex-shrink: 0; }
+    .commit-msg { font-size: .82rem; color: var(--text); flex: 1; line-height: 1.45; }
+    .commit-date { font-family: var(--mono); font-size: .68rem; color: rgba(255,255,255,.35); flex-shrink: 0; }
+    .updates-live-note { font-family: var(--mono); font-size: .72rem; color: var(--dim); margin-top: 1rem; text-align: center; }
+    .updates-live-note .dot-live { color: var(--green); }
+
+    /* ── VERTICAL BAND ───────────────────── */
+    .vertical-band {
+      background: linear-gradient(135deg,
+        rgba(255,215,0,.07) 0%, rgba(189,147,249,.06) 35%,
+        rgba(0,255,255,.05) 70%, rgba(255,105,180,.05) 100%);
+      border-top: 1px solid rgba(255,215,0,.18);
+      border-bottom: 1px solid rgba(255,215,0,.18);
+      position: relative; overflow: hidden;
+    }
+    .vertical-band::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255,215,0,.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .vertical-band-inner { max-width: 820px; margin: 0 auto; text-align: center; }
+    .vertical-kicker {
+      font-family: var(--mono); font-size: .8rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.25rem; display: inline-block;
+    }
+    .vertical-headline {
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.25rem;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--pink) 40%, var(--cyan) 80%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .vertical-manifesto { font-size: 1.05rem; color: rgba(255,255,255,.75); line-height: 1.75; max-width: 680px; margin: 0 auto 2rem; }
+    .vertical-manifesto strong { color: var(--gold); }
+
+    /* ── ECOSYSTEM ───────────────────────── */
+    .eco-grid { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2rem; }
+    .eco-link {
+      display: inline-flex; align-items: center; gap: .45rem;
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,215,0,.18);
+      border-radius: 24px; padding: .55rem 1.2rem;
+      font-size: .875rem; font-weight: 500;
+      color: rgba(255,255,255,.75); text-decoration: none; transition: all .25s;
+    }
+    .eco-link:hover { border-color: var(--gold); color: var(--gold); background: rgba(255,215,0,.07); transform: translateY(-2px); }
+
+    /* ── FOOTER ──────────────────────────── */
+    .site-footer { padding: 2.5rem 0; border-top: 1px solid rgba(255,215,0,.12); background: rgba(0,0,0,.4); }
+    .footer-inner { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem 1.5rem; }
+    .footer-links a { color: var(--dim); text-decoration: none; font-size: .875rem; transition: color .2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy { font-family: var(--mono); font-size: .8rem; color: rgba(255,255,255,.3); text-align: center; }
+    .footer-copy span { color: var(--gold); }
+
+    /* ── Responsive ──────────────────────── */
+    @media (max-width: 640px) {
+      section { padding: 3.5rem 0; }
+      .container { padding: 0 1rem; }
+      .hero { padding: 4.5rem 0 3rem; }
+    }
+
+    /* ── Scroll reveal ───────────────────── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
 </head>
 <body>
-<div class="box">
-<div class="icon">🐧</div>
-<h1>Redirecting to skstacks.io…</h1>
-<p>This is the SKWorld subdomain alias for <strong>skstacks</strong>.</p>
-<a href="https://skstacks.io/">Continue to skstacks.io →</a>
-<div class="brand">🐧 part of the SKWorld ecosystem · <a style="border:none;padding:0;font-size:.8rem;" href="https://skworld.io">skworld.io</a></div>
-</div>
-<script>location.replace("https://skstacks.io/"+location.pathname.replace(/^\//,'')+location.search+location.hash);</script>
+
+  <!-- Starfield -->
+  <div class="starfield" aria-hidden="true">
+    <div class="stars"></div>
+    <div class="stars"></div>
+    <div class="stars"></div>
+  </div>
+
+  <!-- Floating decorations -->
+  <div class="float-deco" style="top:18%;left:4%;animation-delay:0s">🐧</div>
+  <div class="float-deco" style="top:35%;right:5%;animation-delay:4s">📦</div>
+  <div class="float-deco" style="top:65%;left:2.5%;animation-delay:8s">☸️</div>
+  <div class="float-deco" style="top:80%;right:9%;animation-delay:6s">✨</div>
+
+  <!-- ── NAV ───────────────────────────────── -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="https://skstacks.skworld.io/" class="nav-logo">🐧 <span>sk</span>stacks</a>
+      <ul class="nav-links">
+        <li><a href="#completion">Completion</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#updates">Updates</a></li>
+        <li><a href="#vertical">Vertical</a></li>
+        <li><a href="https://skworld.io">SKWorld</a></li>
+        <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/docs" target="_blank" rel="noopener">Docs</a></li>
+        <li><a href="https://github.com/smilinTux/skstacks" class="nav-cta" target="_blank" rel="noopener">GitHub ↗</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── HERO ──────────────────────────────── -->
+  <header class="hero" id="top">
+    <div class="container">
+      <div class="hero-eyebrow" id="hero-eyebrow">AI-first sovereign infrastructure · v2</div>
+
+      <h1 class="hero-title">SKStacks</h1>
+      <div class="hero-version" id="hero-version">skstacks-v2.8.0</div>
+
+      <p class="hero-tagline">
+        <strong>One descriptor. Any cluster.</strong><br>
+        An AI-first sovereign infrastructure framework — 31 best-of-breed sk* services, deployed your way.
+      </p>
+
+      <p class="hero-sub">
+        Declare your stack once. SKStacks renders it to Docker Swarm, Kubernetes, or RKE2 —
+        across core, comms, compute, cloud, and apps. Own the full vertical. No rented clouds.
+      </p>
+
+      <div class="hero-pipeline" role="img" aria-label="descriptor to Swarm, K8s, or RKE2">
+        <span class="pp-desc">descriptor.yaml</span>
+        <span class="pp-arrow">→</span>
+        <span class="pp-target">Swarm</span>
+        <span class="pp-arrow">/</span>
+        <span class="pp-target">K8s</span>
+        <span class="pp-arrow">/</span>
+        <span class="pp-target">RKE2</span>
+      </div>
+
+      <div class="hero-ctas">
+        <a href="https://github.com/smilinTux/skstacks" class="btn btn-primary" target="_blank" rel="noopener">⭐ GitHub repo</a>
+        <a href="https://github.com/smilinTux/skstacks/tree/main/v2/docs" class="btn btn-outline" target="_blank" rel="noopener">📖 Read the docs</a>
+        <a href="https://github.com/smilinTux/skstacks/releases/latest" class="btn btn-ghost" target="_blank" rel="noopener" id="release-cta">⬇ skstacks-v2.8.0</a>
+      </div>
+
+      <div class="hero-trust" role="list" aria-label="Key properties">
+        <span role="listitem"><span aria-hidden="true">☸️</span> <strong>RKE2 · K8s · Swarm</strong> · one descriptor</span>
+        <span role="listitem"><span aria-hidden="true">✅</span> <strong>15 of 31 live</strong> · verified on RKE2</span>
+        <span role="listitem"><span aria-hidden="true">🔐</span> <strong>Sovereign</strong> · your hardware, your keys</span>
+        <span role="listitem"><span aria-hidden="true">📜</span> <strong>GPL-3.0</strong> · open forever</span>
+      </div>
+    </div>
+  </header>
+
+  <hr class="section-divider">
+
+  <!-- ── COMPLETION COUNTER ────────────────── -->
+  <section id="completion" aria-labelledby="completion-heading">
+    <div class="container completion-wrap">
+      <div class="reveal">
+        <div class="section-eyebrow">Build status</div>
+        <h2 class="section-title" id="completion-heading">How far is the stack?</h2>
+        <div class="completion-big" id="completion-counter" data-target="48">0<span class="pct-sign">%</span></div>
+        <p class="completion-caption" id="completion-caption">
+          <strong>15 of 31</strong> services verified live on RKE2
+        </p>
+      </div>
+
+      <div class="progress-track reveal" role="progressbar" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100" aria-label="Stack completion">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+
+      <div class="completion-breakdown reveal">
+        <div class="breakdown-card live">
+          <div class="breakdown-num" id="bd-live" data-target="15">0</div>
+          <div class="breakdown-label">✅ live-proven on RKE2</div>
+        </div>
+        <div class="breakdown-card ready">
+          <div class="breakdown-num" id="bd-ready" data-target="2">0</div>
+          <div class="breakdown-label">🟡 deploy-ready</div>
+        </div>
+        <div class="breakdown-card planned">
+          <div class="breakdown-num" id="bd-stub" data-target="14">0</div>
+          <div class="breakdown-label">⬜ planned / stub</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ── SERVICE GRID ──────────────────────── -->
+  <section id="services" class="gradient-section" aria-labelledby="services-heading">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-eyebrow">The catalog</div>
+        <h2 class="section-title" id="services-heading">31 services. 5 layers. All yours.</h2>
+        <p class="section-sub">
+          Each sk* service wraps a best-of-breed open-source provider behind a stable descriptor seam.
+          Filter by layer. Every card links to its repo and its own SKWorld site.
+        </p>
+      </div>
+
+      <div class="filter-bar reveal" id="filter-bar" role="group" aria-label="Filter services by layer">
+        <!-- filter buttons injected by script.js -->
+      </div>
+
+      <div class="services-grid" id="services-grid" aria-live="polite">
+        <!-- cards injected by script.js; noscript fallback below -->
+        <noscript>
+          <p style="color:var(--dim)">Enable JavaScript to browse the service catalog, or view
+          <a href="data/services-catalog.json" style="color:var(--cyan)">services-catalog.json</a>.</p>
+        </noscript>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ── LATEST UPDATES ────────────────────── -->
+  <section id="updates" aria-labelledby="updates-heading">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-eyebrow">Live from GitHub</div>
+        <h2 class="section-title" id="updates-heading">Latest updates.</h2>
+        <p class="section-sub">
+          Pulled live from the <a href="https://github.com/smilinTux/skstacks" style="color:var(--cyan)" target="_blank" rel="noopener">skstacks</a> repo at page load —
+          newest release and recent commits. Falls back to the last committed snapshot if GitHub is rate-limited.
+        </p>
+      </div>
+
+      <div class="updates-grid">
+        <div class="release-card reveal" id="release-card">
+          <!-- release injected by script.js -->
+        </div>
+        <div class="reveal" style="transition-delay:.1s">
+          <div class="commits-list" id="commits-list">
+            <!-- commits injected by script.js -->
+          </div>
+          <p class="updates-live-note" id="updates-note"><span class="dot-live">●</span> loading live data…</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ── OWN THE FULL VERTICAL ─────────────── -->
+  <section id="vertical" class="vertical-band" aria-labelledby="vertical-heading">
+    <div class="container">
+      <div class="vertical-band-inner reveal">
+        <span class="vertical-kicker">Own the full vertical</span>
+        <h2 class="vertical-headline" id="vertical-heading">SKStacks is the deploy plane.</h2>
+        <p class="vertical-manifesto">
+          <strong>Get back to first principles.</strong><br>
+          The modern stack is rented — your services live on someone else's cluster, behind someone else's bill.
+          We rebuilt it. SKStacks renders one declarative descriptor into the whole sovereign stack:
+          silicon, OS, identity, data, models, security, comms, apps, soul.
+          Every layer open. Every layer swappable. Every layer <strong>yours</strong>.
+        </p>
+        <div class="hero-ctas">
+          <a href="https://skworld.io" class="btn btn-outline">🌍 Explore the full vertical</a>
+          <a href="https://skos.skworld.io" class="btn btn-ghost">skos — the sovereign OS</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ── ECOSYSTEM ──────────────────────────── -->
+  <section class="gradient-section" aria-labelledby="eco-heading">
+    <div class="container" style="text-align:center">
+      <div class="reveal">
+        <div class="section-eyebrow">The SKWorld family</div>
+        <h2 class="section-title" id="eco-heading">Every sk* is a layer you own.</h2>
+        <p class="section-sub" style="margin:0 auto">
+          SKStacks deploys them. Everything around it is yours too.
+        </p>
+      </div>
+      <div class="eco-grid">
+        <a href="https://skworld.io" class="eco-link">🌍 skworld.io — the vertical hub</a>
+        <a href="https://skos.skworld.io" class="eco-link">🐧 skos — sovereign agent OS</a>
+        <a href="https://skmemory.skworld.io" class="eco-link">🧠 skmemory — agent memory</a>
+        <a href="https://capauth.skworld.io" class="eco-link">🔐 capauth — identity</a>
+        <a href="https://sksecurity.skworld.io" class="eco-link">🛡️ sksecurity — perimeter</a>
+        <a href="https://skcomms.skworld.io" class="eco-link">📡 skcomms — comms</a>
+        <a href="https://github.com/smilinTux" class="eco-link" target="_blank" rel="noopener">📂 All repos on GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FINAL CTA ───────────────────────────── -->
+  <section style="text-align:center;background:radial-gradient(ellipse at 50% 100%,rgba(0,255,255,.05) 0%,transparent 65%)">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-eyebrow">Get started</div>
+        <h2 class="section-title">Declare it once. Deploy it anywhere.</h2>
+        <p class="section-sub" style="margin:0 auto 2.5rem">
+          One descriptor. Swarm, K8s, or RKE2. 31 sovereign services. Own the full stack — today.
+        </p>
+        <div class="hero-ctas">
+          <a href="https://github.com/smilinTux/skstacks" class="btn btn-primary" target="_blank" rel="noopener">⭐ View on GitHub</a>
+          <a href="https://github.com/smilinTux/skstacks/tree/main/v2/docs" class="btn btn-outline" target="_blank" rel="noopener">📖 Read the v2 docs</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a href="https://skstacks.skworld.io/" class="nav-logo" style="font-size:1.1rem">
+          🐧 <span>sk</span>stacks
+        </a>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="https://github.com/smilinTux/skstacks" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/smilinTux/skstacks/tree/main/v2/docs" target="_blank" rel="noopener">Docs</a>
+          <a href="https://github.com/smilinTux/skstacks/releases/latest" target="_blank" rel="noopener">Releases</a>
+          <a href="https://skworld.io">SKWorld</a>
+          <a href="https://skos.skworld.io">skos</a>
+          <a href="/sitemap.xml">Sitemap</a>
+          <a href="/llms.txt">llms.txt</a>
+        </nav>
+        <p class="footer-copy">
+          🐧 part of the SKWorld ecosystem · <span><a href="https://skworld.io" style="color:var(--gold);text-decoration:none">skworld.io</a></span><br>
+          &copy; 2026 smilinTux · GPL-3.0 · Built with 🐧 by King Divad &amp; Lumina
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
 </body>
 </html>

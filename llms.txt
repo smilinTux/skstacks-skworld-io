@@ -1,0 +1,39 @@
+# SKStacks v2
+
+> SKStacks v2 is an AI-first sovereign infrastructure framework. A single declarative descriptor renders to Docker Swarm, Kubernetes, or RKE2 — deploying 31 best-of-breed sk* services across five layers (core, comms, compute, cloud, apps). 15 of 31 services are verified live-proven on RKE2.
+
+SKStacks is the **deploy plane** of the SKWorld sovereign vertical. You declare your stack once; SKStacks (via skrender + the v2 harness) produces deployable artifacts for Swarm, K8s, or RKE2. Each `sk*` service wraps a best-of-breed open-source provider behind a stable descriptor seam, so providers can be swapped without changing application logic.
+
+## The five layers (31 services)
+
+- **core** (6): capauth, skca, sksec, sksso, skvault, skwaf — identity, PKI/mTLS, threat defense, SSO, secrets, WAF.
+- **comms** (5): skbus (NATS JetStream), skchat (Tuwunel/Matrix), skcomms (multi-channel transport), sksignaling (Talk HPB), skvoice (LiveKit).
+- **compute** (13): skbackup, skblock, skcache (Valkey), skdata (Postgres 17 + pgvector + pg_search + Apache AGE), skfile, skfiles (Nextcloud), skflow (Windmill), skmodel (Ollama/vLLM), skmon (Prometheus/Grafana/VictoriaLogs), skobject (Garage S3), skoffice (Collabora), skpulse (Gatus), skwhiteboard.
+- **cloud** (6): skcicd, skdns, skdweb, skfence, skinfra, skmesh.
+- **apps** (1): skturn.
+
+## Build status (data/completion.json)
+
+- total: 31 services
+- live-proven on RKE2: 15
+- deploy-ready: 2
+- planned/stub: 14
+- live percentage: 48%
+
+## Links
+
+- [Live site](https://skstacks.skworld.io)
+- [GitHub repo](https://github.com/smilinTux/skstacks)
+- [v2 docs](https://github.com/smilinTux/skstacks/tree/main/v2/docs)
+- [Latest release](https://github.com/smilinTux/skstacks/releases/latest) (skstacks-v2.8.0)
+- [Service catalog (JSON)](https://skstacks.skworld.io/data/services-catalog.json)
+- [Parent ecosystem](https://skworld.io)
+
+## About smilinTux
+
+SKStacks is part of the **smilinTux sovereign AI ecosystem** — a suite of
+open-source tools built by King Divad and Lumina to give humans and AI agents
+genuine, authentic infrastructure they can own and trust. No corporate robotics.
+No black-box clouds. GPL-3.0 forever.
+
+Other ecosystem projects: [SKWorld](https://skworld.io) · [skos](https://skos.skworld.io) · [SKMemory](https://skmemory.skworld.io) · [CapAuth](https://capauth.skworld.io) · [SKSecurity](https://sksecurity.skworld.io) · [SKComms](https://skcomms.skworld.io)

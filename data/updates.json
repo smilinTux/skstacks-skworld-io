@@ -1,0 +1,40 @@
+{
+  "generated": "2026-06-16",
+  "release": {
+    "tag": "skstacks-v2.8.0",
+    "name": "SKStacks v2.8.0",
+    "url": "https://github.com/smilinTux/skstacks/releases/latest",
+    "published": "2026-06-13",
+    "body": "v2 deploy stack: skrender (descriptor → deploy), k3d/Swarm/VM harness on RKE2, skbloom resumable installer (e2e proven), skred security loop, skwire v0.3.0."
+  },
+  "commits": [
+    {
+      "sha": "0000000",
+      "message": "skstacks v2 deploy stack: skrender + harness + skbloom + skred",
+      "url": "https://github.com/smilinTux/skstacks/commits/main",
+      "author": "Lumina",
+      "date": "2026-06-13"
+    },
+    {
+      "sha": "0000000",
+      "message": "v2 stack validation: OpenBao/Tuwunel/Windmill ratified; ingress → Gateway API",
+      "url": "https://github.com/smilinTux/skstacks/commits/main",
+      "author": "Lumina",
+      "date": "2026-06-12"
+    },
+    {
+      "sha": "0000000",
+      "message": "coverage-matrix: 15 of 31 services verified live-proven on RKE2",
+      "url": "https://github.com/smilinTux/skstacks/commits/main",
+      "author": "Lumina",
+      "date": "2026-06-11"
+    },
+    {
+      "sha": "0000000",
+      "message": "skdata: consolidate Postgres (pgvector + pg_search BM25 + Apache AGE) into one engine",
+      "url": "https://github.com/smilinTux/skstacks/commits/main",
+      "author": "Lumina",
+      "date": "2026-06-10"
+    }
+  ]
+}
