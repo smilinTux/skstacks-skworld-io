@@ -1,17 +1,19 @@
 name: refresh-data
 
-# Regenerate the service catalog + completion stats from the upstream
-# smilinTux/skstacks repo and commit them back if anything changed.
+# Regenerate the service catalog, release and counts from the public
+# smilinTux/skstacks repo (scripts/gen-data.py), rewrite the generated blocks in
+# index.html and llms.txt, and commit if anything changed. The output depends
+# only on the upstream commit, so an unchanged upstream commits nothing.
 #
 # Triggers:
-#   - schedule: once a day (06:17 UTC)
+#   - schedule: once a day (06:37 UTC)
 #   - workflow_dispatch: manual run from the Actions tab
-#   - push: when the generator or workflow itself changes (verifies the run)
+#   - push to main: when the generator or this workflow changes
 
 on:
   schedule:
-    - cron: "17 6 * * *"
-  workflow_dispatch:
+    - cron: "37 6 * * *"
+  workflow_dispatch: {}
   push:
     branches: [main]
     paths:
@@ -32,28 +34,22 @@ jobs:
       - name: Checkout site repo
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
       - name: Regenerate data from upstream skstacks
         run: python3 scripts/gen-data.py
 
-      - name: Update sitemap lastmod
+      - name: Update sitemap lastmod to the upstream commit date
         run: |
-          today="$(date -u +%Y-%m-%d)"
-          sed -i "s|<lastmod>.*</lastmod>|<lastmod>${today}</lastmod>|" sitemap.xml || true
+          d="$(python3 -c 'import json; print(json.load(open("data/summary.json"))["generated"])')"
+          sed -i "s|<lastmod>.*</lastmod>|<lastmod>${d}</lastmod>|" sitemap.xml
 
       - name: Commit if changed
         run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          if [ -n "$(git status --porcelain data/ sitemap.xml)" ]; then
-            git add data/ sitemap.xml
-            git commit -m "data: refresh services-catalog + completion from upstream skstacks"
-            git push
-            echo "Changes committed and pushed."
-          else
-            echo "No changes — data already up to date."
+          if [ -z "$(git status --porcelain data/ index.html llms.txt sitemap.xml)" ]; then
+            echo "No changes: data already matches upstream."
+            exit 0
           fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/ index.html llms.txt sitemap.xml
+          git commit -m "data: refresh service catalog and release from upstream skstacks"
+          git push

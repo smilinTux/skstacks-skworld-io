@@ -1,771 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SKStacks v2 — AI-first sovereign infrastructure framework</title>
-  <meta name="description" content="SKStacks v2 — an AI-first sovereign infrastructure framework. One descriptor deploys to Docker Swarm, K8s, or RKE2. 31 sk* services across core, comms, compute, cloud, and apps — 15 verified live on RKE2.">
-
-  <!-- Canonical: this is now the PRIMARY indexed site -->
-  <link rel="canonical" href="https://skstacks.skworld.io/">
-  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="SKStacks v2 — AI-first sovereign infrastructure framework">
-  <meta property="og:description" content="One descriptor → Swarm / K8s / RKE2. 31 sovereign sk* services across 5 layers, 15 verified live on RKE2. Own the full vertical.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://skstacks.skworld.io/">
-  <meta property="og:site_name" content="SKStacks · SKWorld">
-  <meta property="og:locale" content="en_US">
-  <meta property="og:image" content="https://skstacks.skworld.io/assets/og-card.png">
-  <meta property="og:image:secure_url" content="https://skstacks.skworld.io/assets/og-card.png">
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="SKStacks v2 — descriptor to Swarm / K8s / RKE2. 31 sovereign services.">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@smilinTux">
-  <meta name="twitter:title" content="SKStacks v2 — AI-first sovereign infrastructure framework">
-  <meta name="twitter:description" content="One descriptor → Swarm / K8s / RKE2. 31 sovereign sk* services, 15 verified live on RKE2.">
-  <meta name="twitter:image" content="https://skstacks.skworld.io/assets/og-card.png">
-  <meta name="twitter:image:alt" content="SKStacks v2 — sovereign infrastructure framework">
-  <meta name="twitter:creator" content="@smilinTux">
-
-  <!-- Theme -->
-  <meta name="theme-color" content="#0a0a1a">
-  <meta name="robots" content="index, follow">
-
-  <!-- Favicon: inline-SVG penguin -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐧</text></svg>">
-
-  <!-- Schema.org JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://smilintux.github.io/#organization",
-        "name": "smilinTux",
-        "url": "https://smilintux.github.io",
-        "sameAs": ["https://github.com/smilinTux"],
-        "description": "Sovereign AI infrastructure — building open, authentic, human-first technology. Home of the Pengu Empire.",
-        "foundingDate": "2024",
-        "knowsAbout": ["Sovereign AI", "AI agent infrastructure", "Self-hosted infrastructure", "Kubernetes", "RKE2", "Infrastructure as code"]
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://skstacks.skworld.io/#website",
-        "name": "SKStacks",
-        "url": "https://skstacks.skworld.io",
-        "publisher": {"@id": "https://smilintux.github.io/#organization"},
-        "inLanguage": "en-US"
-      },
-      {
-        "@type": "SoftwareApplication",
-        "@id": "https://skstacks.skworld.io/#app",
-        "name": "SKStacks v2",
-        "alternateName": "AI-first sovereign infrastructure framework",
-        "description": "SKStacks v2 is an AI-first sovereign infrastructure framework. A single declarative descriptor deploys 31 best-of-breed sk* services to Docker Swarm, Kubernetes, or RKE2 — across core, comms, compute, cloud, and apps layers. 15 of 31 services are verified live-proven on RKE2.",
-        "url": "https://skstacks.skworld.io",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Linux",
-        "softwareVersion": "2.8.0",
-        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-        "license": "https://www.gnu.org/licenses/gpl-3.0.en.html",
-        "codeRepository": "https://github.com/smilinTux/skstacks",
-        "isPartOf": {"@type": "SoftwareApplication", "name": "SKWorld", "url": "https://skworld.io"},
-        "publisher": {"@id": "https://smilintux.github.io/#organization"}
-      }
-    ]
-  }
-  </script>
-
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
-
-    /* ── Reset + tokens ───────────────────── */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    :root {
-      --gold:   #FFD700;
-      --pink:   #FF69B4;
-      --cyan:   #00FFFF;
-      --green:  #50fa7b;
-      --amber:  #f59e0b;
-      --purple: #bd93f9;
-      --bg:     #0a0a0f;
-      --bg2:    #0f1020;
-      --card:   rgba(15, 16, 40, 0.7);
-      --border: rgba(255,215,0,0.15);
-      --text:   rgba(255,255,255,0.88);
-      --dim:    rgba(255,255,255,0.55);
-      --mono:   'JetBrains Mono', 'Fira Code', monospace;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-      overflow-x: hidden;
-    }
-
-    /* ── Starfield background ─────────────── */
-    .starfield {
-      position: fixed; inset: 0; z-index: -1;
-      background: radial-gradient(ellipse at 50% -10%, #1a1a3e 0%, #0d0d1f 40%, #0a0a0f 100%);
-    }
-    .stars {
-      position: absolute; inset: 0;
-      background-image:
-        radial-gradient(2px 2px at 20px 30px,  rgba(255,215,0,0.9),  transparent),
-        radial-gradient(2px 2px at 40px 70px,  rgba(0,255,255,0.7),  transparent),
-        radial-gradient(1px 1px at 90px 40px,  rgba(255,255,255,0.9),transparent),
-        radial-gradient(1px 1px at 130px 80px, rgba(255,105,180,0.8),transparent),
-        radial-gradient(2px 2px at 160px 30px, rgba(255,255,255,0.6),transparent),
-        radial-gradient(1px 1px at 70px 55px,  rgba(189,147,249,0.7),transparent);
-      background-repeat: repeat;
-      background-size: 200px 100px;
-      animation: starscroll 100s linear infinite;
-    }
-    .stars:nth-child(2) { background-size: 270px 130px; animation-duration: 145s; animation-direction: reverse; opacity: .7; }
-    .stars:nth-child(3) { background-size: 340px 165px; animation-duration: 190s; opacity: .45; }
-    @keyframes starscroll {
-      from { transform: translateX(0)      translateY(0); }
-      to   { transform: translateX(-200px) translateY(-100px); }
-    }
-
-    /* ── Floating deco ────────────────────── */
-    .float-deco {
-      position: fixed; font-size: 1.6rem; z-index: 0; pointer-events: none;
-      animation: floatDeco 18s infinite ease-in-out;
-      opacity: .35;
-    }
-    @keyframes floatDeco {
-      0%,100% { transform: translateY(0) rotate(-4deg); opacity: .3; }
-      33%  { transform: translateY(-28px) rotate(6deg); opacity: .6; }
-      66%  { transform: translateY(-48px) rotate(-2deg); opacity: .45; }
-    }
-
-    /* ── Layout helpers ───────────────────── */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
-    section { padding: 5rem 0; }
-
-    /* ── Sticky nav ───────────────────────── */
-    .site-nav {
-      position: sticky; top: 0; z-index: 200;
-      background: rgba(10, 10, 20, 0.88);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(255,215,0,0.12);
-    }
-    .nav-inner {
-      display: flex; justify-content: space-between; align-items: center;
-      max-width: 1200px; margin: 0 auto; padding: .75rem 2rem;
-    }
-    .nav-logo {
-      font-family: var(--mono); font-weight: 700; font-size: 1.25rem;
-      color: var(--gold); text-decoration: none; letter-spacing: -.5px;
-    }
-    .nav-logo span { color: var(--cyan); }
-    .nav-links { display: flex; list-style: none; gap: 1.4rem; align-items: center; }
-    .nav-links a {
-      color: var(--dim); text-decoration: none; font-size: .875rem;
-      font-weight: 500; transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--gold); }
-    .nav-cta {
-      background: linear-gradient(135deg, var(--gold), var(--pink));
-      color: #000 !important; padding: .45rem 1.2rem; border-radius: 6px;
-      font-weight: 700 !important; font-size: .85rem !important;
-    }
-    .nav-cta:hover { opacity: .85; }
-    @media (max-width: 880px) { .nav-links { display: none; } }
-
-    /* ── HERO ─────────────────────────────── */
-    .hero {
-      padding: 7rem 0 5rem;
-      text-align: center;
-      position: relative;
-    }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 50% 50%, rgba(0,255,255,.07) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .hero-eyebrow {
-      font-family: var(--mono); font-size: .9rem; color: var(--cyan);
-      letter-spacing: .15em; text-transform: uppercase; margin-bottom: 1.5rem;
-      display: inline-block;
-      animation: eyebrowPulse 4s ease-in-out infinite;
-    }
-    @keyframes eyebrowPulse {
-      0%,100% { text-shadow: 0 0 8px rgba(0,255,255,.4); }
-      50%      { text-shadow: 0 0 18px rgba(0,255,255,.8), 0 0 35px rgba(0,255,255,.3); }
-    }
-    .hero-title {
-      font-size: clamp(3.5rem, 9vw, 7.5rem);
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: -2px;
-      margin-bottom: .75rem;
-      background: linear-gradient(140deg, var(--gold) 0%, var(--pink) 35%, var(--cyan) 65%, var(--gold) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: titleShimmer 5s ease-in-out infinite;
-    }
-    @keyframes titleShimmer {
-      0%,100% { filter: hue-rotate(0deg); }
-      40%      { filter: hue-rotate(25deg); }
-      70%      { filter: hue-rotate(-15deg); }
-    }
-    .hero-version {
-      display: inline-block; font-family: var(--mono); font-size: .8rem;
-      color: var(--gold); border: 1px solid rgba(255,215,0,.3);
-      border-radius: 20px; padding: .25rem .9rem; margin-bottom: 1.25rem;
-      background: rgba(255,215,0,.05);
-    }
-    .hero-tagline {
-      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-      color: rgba(255,255,255,.8);
-      font-weight: 300;
-      max-width: 760px;
-      margin: 0 auto 1rem;
-      line-height: 1.5;
-    }
-    .hero-tagline strong { color: var(--gold); font-weight: 600; }
-    .hero-sub {
-      font-size: 1rem; color: var(--dim);
-      max-width: 620px; margin: 0 auto 2rem;
-    }
-    .hero-pipeline {
-      display: inline-flex; align-items: center; gap: .6rem; flex-wrap: wrap;
-      font-family: var(--mono); font-size: .95rem;
-      background: rgba(0,0,0,.5); border: 1.5px solid rgba(0,255,255,.3);
-      border-radius: 12px; padding: .8rem 1.4rem; margin-bottom: 2.5rem;
-    }
-    .hero-pipeline .pp-desc { color: var(--gold); font-weight: 600; }
-    .hero-pipeline .pp-arrow { color: var(--dim); }
-    .hero-pipeline .pp-target { color: var(--cyan); }
-
-    /* Hero CTAs */
-    .hero-ctas {
-      display: flex; justify-content: center; gap: 1rem;
-      flex-wrap: wrap; margin-top: .5rem;
-    }
-    .btn {
-      display: inline-flex; align-items: center; gap: .45rem;
-      padding: .8rem 1.8rem; border-radius: 10px;
-      font-weight: 600; font-size: .95rem; text-decoration: none;
-      transition: all .25s; position: relative; overflow: hidden;
-      border: none; cursor: pointer;
-    }
-    .btn::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent);
-      transform: translateX(-100%); transition: transform .5s;
-    }
-    .btn:hover::after { transform: translateX(100%); }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--gold) 0%, var(--pink) 60%);
-      color: #000;
-      box-shadow: 0 4px 20px rgba(255,215,0,.35);
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,215,0,.5); }
-    .btn-outline {
-      background: rgba(255,255,255,.04);
-      border: 1.5px solid rgba(0,255,255,.3);
-      color: rgba(255,255,255,.85);
-    }
-    .btn-outline:hover { border-color: var(--cyan); background: rgba(0,255,255,.07); transform: translateY(-2px); }
-    .btn-ghost {
-      background: transparent; border: 1.5px solid rgba(255,255,255,.15);
-      color: var(--dim);
-    }
-    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
-
-    /* Trust badges */
-    .hero-trust {
-      display: flex; justify-content: center; gap: 2rem;
-      flex-wrap: wrap; margin-top: 3rem;
-      font-size: .82rem; color: var(--dim);
-    }
-    .hero-trust span { display: flex; align-items: center; gap: .4rem; }
-    .hero-trust strong { color: rgba(255,255,255,.7); }
-
-    /* ── Section helpers ──────────────────── */
-    .section-eyebrow {
-      font-family: var(--mono); font-size: .8rem; color: var(--cyan);
-      letter-spacing: .15em; text-transform: uppercase; margin-bottom: .75rem;
-    }
-    .section-title {
-      font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 800;
-      margin-bottom: .75rem; line-height: 1.15;
-    }
-    .section-sub { color: var(--dim); max-width: 640px; font-size: 1rem; line-height: 1.7; }
-    .section-divider { border: none; border-top: 1px solid rgba(255,215,0,.08); margin: 0; }
-    .gradient-section {
-      background: linear-gradient(135deg, rgba(0,255,255,.04) 0%, rgba(189,147,249,.04) 50%, rgba(255,105,180,.03) 100%);
-      border-top: 1px solid rgba(255,215,0,.08);
-      border-bottom: 1px solid rgba(255,215,0,.08);
-    }
-
-    /* ── COMPLETION COUNTER ──────────────── */
-    .completion-wrap { text-align: center; }
-    .completion-big {
-      font-size: clamp(5rem, 16vw, 11rem);
-      font-weight: 800; line-height: 1;
-      background: linear-gradient(135deg, var(--green) 0%, var(--cyan) 50%, var(--gold) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      letter-spacing: -3px;
-    }
-    .completion-big .pct-sign { font-size: .5em; -webkit-text-fill-color: var(--dim); color: var(--dim); }
-    .completion-caption {
-      font-size: 1.1rem; color: rgba(255,255,255,.8); margin-bottom: 2rem;
-    }
-    .completion-caption strong { color: var(--gold); }
-    .progress-track {
-      max-width: 720px; margin: 0 auto 2.5rem;
-      height: 18px; border-radius: 12px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,215,0,.18);
-      overflow: hidden; position: relative;
-    }
-    .progress-fill {
-      height: 100%; width: 0%;
-      background: linear-gradient(90deg, var(--green), var(--cyan), var(--gold));
-      border-radius: 12px;
-      transition: width 1.6s cubic-bezier(.22,1,.36,1);
-      box-shadow: 0 0 20px rgba(0,255,255,.35);
-    }
-    .completion-breakdown {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem; max-width: 720px; margin: 0 auto;
-    }
-    @media (max-width: 560px) { .completion-breakdown { grid-template-columns: 1fr; } }
-    .breakdown-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 14px; padding: 1.5rem 1rem; backdrop-filter: blur(12px);
-    }
-    .breakdown-num { font-size: 2.6rem; font-weight: 800; line-height: 1; }
-    .breakdown-card.live   .breakdown-num { color: var(--green); }
-    .breakdown-card.ready  .breakdown-num { color: var(--gold); }
-    .breakdown-card.planned .breakdown-num { color: var(--dim); }
-    .breakdown-label { font-size: .85rem; color: var(--dim); margin-top: .4rem; }
-
-    /* ── SERVICE GRID ────────────────────── */
-    .filter-bar {
-      display: flex; justify-content: center; gap: .6rem; flex-wrap: wrap; margin: 2.5rem 0 2rem;
-    }
-    .filter-btn {
-      font-family: var(--mono); font-size: .8rem;
-      padding: .45rem 1rem; border-radius: 20px; cursor: pointer;
-      background: rgba(255,255,255,.04); border: 1px solid rgba(255,215,0,.18);
-      color: var(--dim); transition: all .2s;
-    }
-    .filter-btn:hover { border-color: var(--gold); color: var(--gold); }
-    .filter-btn.active {
-      background: linear-gradient(135deg, var(--gold), var(--pink));
-      color: #000; font-weight: 700; border-color: transparent;
-    }
-    .filter-btn .fb-count { opacity: .6; margin-left: .35rem; }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 1.25rem;
-    }
-    .svc-card {
-      background: var(--card); border: 1.5px solid var(--border);
-      border-radius: 16px; padding: 1.5rem;
-      backdrop-filter: blur(12px); transition: all .3s;
-      position: relative; overflow: hidden; display: flex; flex-direction: column;
-    }
-    .svc-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    }
-    .svc-card[data-layer="core"]::before    { background: linear-gradient(90deg, var(--gold), var(--pink)); }
-    .svc-card[data-layer="comms"]::before    { background: linear-gradient(90deg, var(--cyan), var(--purple)); }
-    .svc-card[data-layer="compute"]::before  { background: linear-gradient(90deg, var(--green), var(--cyan)); }
-    .svc-card[data-layer="cloud"]::before    { background: linear-gradient(90deg, var(--purple), var(--pink)); }
-    .svc-card[data-layer="apps"]::before     { background: linear-gradient(90deg, var(--pink), var(--gold)); }
-    .svc-card:hover { transform: translateY(-5px); box-shadow: 0 18px 45px rgba(0,0,0,.4); border-color: rgba(255,215,0,.35); }
-    .svc-head { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-bottom: .4rem; }
-    .svc-name { font-family: var(--mono); font-size: 1.2rem; font-weight: 700; color: #fff; }
-    .svc-name span { color: var(--cyan); }
-    .svc-badges { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .75rem; }
-    .layer-badge {
-      font-family: var(--mono); font-size: .65rem; text-transform: uppercase; letter-spacing: .06em;
-      padding: .18rem .55rem; border-radius: 5px; font-weight: 700;
-    }
-    .layer-badge[data-layer="core"]    { background: rgba(255,215,0,.12); color: var(--gold); border: 1px solid rgba(255,215,0,.3); }
-    .layer-badge[data-layer="comms"]   { background: rgba(0,255,255,.1); color: var(--cyan); border: 1px solid rgba(0,255,255,.3); }
-    .layer-badge[data-layer="compute"] { background: rgba(80,250,123,.1); color: var(--green); border: 1px solid rgba(80,250,123,.3); }
-    .layer-badge[data-layer="cloud"]   { background: rgba(189,147,249,.12); color: var(--purple); border: 1px solid rgba(189,147,249,.3); }
-    .layer-badge[data-layer="apps"]    { background: rgba(255,105,180,.1); color: var(--pink); border: 1px solid rgba(255,105,180,.3); }
-    .status-badge {
-      font-family: var(--mono); font-size: .65rem; letter-spacing: .04em;
-      padding: .18rem .55rem; border-radius: 5px; font-weight: 700;
-    }
-    .status-badge.live    { background: rgba(80,250,123,.1); color: var(--green); border: 1px solid rgba(80,250,123,.3); }
-    .status-badge.ready   { background: rgba(255,215,0,.1); color: var(--gold); border: 1px solid rgba(255,215,0,.3); }
-    .status-badge.planned { background: rgba(255,255,255,.05); color: var(--dim); border: 1px solid rgba(255,255,255,.15); }
-    .svc-brief { font-size: .875rem; color: var(--dim); line-height: 1.6; flex: 1; margin-bottom: .9rem; }
-    .svc-provider { font-size: .72rem; color: rgba(255,255,255,.4); font-family: var(--mono); margin-bottom: .9rem; line-height: 1.45; }
-    .svc-links { display: flex; gap: .5rem; flex-wrap: wrap; }
-    .svc-link {
-      font-family: var(--mono); font-size: .72rem; text-decoration: none;
-      color: var(--dim); border: 1px solid rgba(255,255,255,.14);
-      border-radius: 6px; padding: .3rem .65rem; transition: all .2s;
-    }
-    .svc-link:hover { border-color: var(--gold); color: var(--gold); }
-
-    /* ── LATEST UPDATES ──────────────────── */
-    .updates-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 2rem; margin-top: 2.5rem; align-items: start; }
-    @media (max-width: 860px) { .updates-grid { grid-template-columns: 1fr; } }
-    .release-card {
-      background: var(--card); border: 1.5px solid rgba(255,215,0,.25);
-      border-radius: 16px; padding: 1.75rem; backdrop-filter: blur(12px);
-    }
-    .release-tag {
-      display: inline-block; font-family: var(--mono); font-weight: 700;
-      font-size: 1.1rem; color: var(--gold);
-      background: rgba(255,215,0,.08); border: 1px solid rgba(255,215,0,.3);
-      border-radius: 8px; padding: .35rem .8rem; margin-bottom: .9rem;
-    }
-    .release-name { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: .5rem; }
-    .release-body { font-size: .85rem; color: var(--dim); line-height: 1.6; margin-bottom: 1rem; white-space: pre-wrap; }
-    .release-meta { font-family: var(--mono); font-size: .72rem; color: rgba(255,255,255,.4); margin-bottom: 1rem; }
-    .commits-list { display: flex; flex-direction: column; gap: .6rem; }
-    .commit-row {
-      display: flex; gap: .8rem; align-items: baseline;
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 10px; padding: .8rem 1rem; backdrop-filter: blur(12px);
-      transition: border-color .2s; text-decoration: none;
-    }
-    .commit-row:hover { border-color: rgba(255,215,0,.35); }
-    .commit-sha { font-family: var(--mono); font-size: .72rem; color: var(--cyan); flex-shrink: 0; }
-    .commit-msg { font-size: .82rem; color: var(--text); flex: 1; line-height: 1.45; }
-    .commit-date { font-family: var(--mono); font-size: .68rem; color: rgba(255,255,255,.35); flex-shrink: 0; }
-    .updates-live-note { font-family: var(--mono); font-size: .72rem; color: var(--dim); margin-top: 1rem; text-align: center; }
-    .updates-live-note .dot-live { color: var(--green); }
-
-    /* ── VERTICAL BAND ───────────────────── */
-    .vertical-band {
-      background: linear-gradient(135deg,
-        rgba(255,215,0,.07) 0%, rgba(189,147,249,.06) 35%,
-        rgba(0,255,255,.05) 70%, rgba(255,105,180,.05) 100%);
-      border-top: 1px solid rgba(255,215,0,.18);
-      border-bottom: 1px solid rgba(255,215,0,.18);
-      position: relative; overflow: hidden;
-    }
-    .vertical-band::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(255,215,0,.08) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .vertical-band-inner { max-width: 820px; margin: 0 auto; text-align: center; }
-    .vertical-kicker {
-      font-family: var(--mono); font-size: .8rem; letter-spacing: .18em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 1.25rem; display: inline-block;
-    }
-    .vertical-headline {
-      font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.25rem;
-      background: linear-gradient(135deg, var(--gold) 0%, var(--pink) 40%, var(--cyan) 80%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .vertical-manifesto { font-size: 1.05rem; color: rgba(255,255,255,.75); line-height: 1.75; max-width: 680px; margin: 0 auto 2rem; }
-    .vertical-manifesto strong { color: var(--gold); }
-
-    /* ── ECOSYSTEM ───────────────────────── */
-    .eco-grid { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2rem; }
-    .eco-link {
-      display: inline-flex; align-items: center; gap: .45rem;
-      background: rgba(255,255,255,.04); border: 1px solid rgba(255,215,0,.18);
-      border-radius: 24px; padding: .55rem 1.2rem;
-      font-size: .875rem; font-weight: 500;
-      color: rgba(255,255,255,.75); text-decoration: none; transition: all .25s;
-    }
-    .eco-link:hover { border-color: var(--gold); color: var(--gold); background: rgba(255,215,0,.07); transform: translateY(-2px); }
-
-    /* ── FOOTER ──────────────────────────── */
-    .site-footer { padding: 2.5rem 0; border-top: 1px solid rgba(255,215,0,.12); background: rgba(0,0,0,.4); }
-    .footer-inner { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
-    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem 1.5rem; }
-    .footer-links a { color: var(--dim); text-decoration: none; font-size: .875rem; transition: color .2s; }
-    .footer-links a:hover { color: var(--gold); }
-    .footer-copy { font-family: var(--mono); font-size: .8rem; color: rgba(255,255,255,.3); text-align: center; }
-    .footer-copy span { color: var(--gold); }
-
-    /* ── Responsive ──────────────────────── */
-    @media (max-width: 640px) {
-      section { padding: 3.5rem 0; }
-      .container { padding: 0 1rem; }
-      .hero { padding: 4.5rem 0 3rem; }
-    }
-
-    /* ── Scroll reveal ───────────────────── */
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SKStacks: sovereign infrastructure, one service at a time</title>
+<meta name="description" content="SKStacks is the public SKWorld infrastructure framework: Ansible playbooks for Docker Swarm that deploy pinned, open-source services (Traefik, CrowdSec, Authentik, Nextcloud, Forgejo, Grafana and more) into your own cluster. A private instance repo pins the framework at a release tag and keeps every secret.">
+<meta name="keywords" content="SKStacks, sovereign infrastructure, self-hosted, Docker Swarm, Ansible, infrastructure as code, Traefik, CrowdSec, Authentik, Nextcloud, Forgejo, framework instance model, SKWorld">
+<meta name="theme-color" content="#14171c">
+<link rel="canonical" href="https://skstacks.skworld.io/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skstacks.skworld.io/">
+<meta property="og:title" content="SKStacks: sovereign infrastructure, one service at a time">
+<meta property="og:description" content="A public framework of pinned, self-hosted services for Docker Swarm. Your private instance pins a release tag and keeps the secrets. Pick the services you want and deploy them to metal you own.">
+<meta property="og:image" content="https://skstacks.skworld.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SKStacks, sovereign infrastructure by SKWorld">
+<meta property="og:site_name" content="SKWorld">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@smilinTux">
+<meta name="twitter:title" content="SKStacks: sovereign infrastructure, one service at a time">
+<meta name="twitter:description" content="Pinned, self-hosted services for Docker Swarm, deployed from a public framework into a private instance you control.">
+<meta name="twitter:image" content="https://skstacks.skworld.io/og.png">
+<meta name="twitter:image:alt" content="SKStacks, sovereign infrastructure by SKWorld">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%A7%B1</text></svg>">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>
+(function(){try{var t=localStorage.getItem('skstacks-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "SKStacks",
+  "description": "Public infrastructure framework for self-hosted, sovereign stacks: Ansible playbooks for Docker Swarm (v1) and a multi-platform descriptor track (v2). A private instance repo pins the framework at a release tag and supplies the inventory and encrypted secrets.",
+  "url": "https://skstacks.skworld.io/",
+  "codeRepository": "https://github.com/smilinTux/skstacks",
+  "programmingLanguage": ["YAML", "Jinja", "Python"],
+  "runtimePlatform": "Docker Swarm",
+  "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+  "keywords": "self-hosted, sovereign, Docker Swarm, Ansible, infrastructure as code",
+  "publisher": { "@type": "Organization", "name": "SKWorld", "url": "https://skworld.io/" }
+}
+</script>
 </head>
 <body>
 
-  <!-- Starfield -->
-  <div class="starfield" aria-hidden="true">
-    <div class="stars"></div>
-    <div class="stars"></div>
-    <div class="stars"></div>
+<header class="hero">
+  <div class="inner">
+    <div class="topbar">
+      <span class="brand"><a href="https://skworld.io/">&#128039; SKWORLD</a> <span class="sub-brand">/ stacks</span></span>
+      <nav class="topnav" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#model">How it works</a>
+        <a href="#release">Releases</a>
+        <a href="#v2">v2</a>
+        <a href="diagrams/skstacks.architecture.html" target="_blank" rel="noopener">Architecture &#8599;</a>
+        <a href="docs.html">Docs</a>
+        <a href="https://github.com/smilinTux/skstacks">GitHub &#8599;</a>
+        <button type="button" class="theme-btn" id="theme-btn" aria-label="Switch between light and dark theme">theme</button>
+      </nav>
+    </div>
+    <span class="eyebrow">SKWorld &middot; Sovereign infrastructure &middot; <!-- gen:inline:release -->skstacks-v2.26.32<!-- /gen:inline:release --> &middot; AGPL-3.0</span>
+    <h1>Your services, on metal you own.</h1>
+    <p class="sub"><strong>SKStacks</strong> is the public framework production SKWorld clusters run on: <!-- gen:inline:v1_total -->46<!-- /gen:inline:v1_total --> self-hosted services for Docker Swarm, each one a pinned open-source upstream. Your private instance pins a release tag, keeps the secrets, and deploys only what you pick.</p>
+    <div class="cta">
+      <a class="btn primary" href="#services">Browse the services</a>
+      <a class="btn ghost" href="docs.html">Read the docs</a>
+    </div>
   </div>
+</header>
 
-  <!-- Floating decorations -->
-  <div class="float-deco" style="top:18%;left:4%;animation-delay:0s">🐧</div>
-  <div class="float-deco" style="top:35%;right:5%;animation-delay:4s">📦</div>
-  <div class="float-deco" style="top:65%;left:2.5%;animation-delay:8s">☸️</div>
-  <div class="float-deco" style="top:80%;right:9%;animation-delay:6s">✨</div>
+<div class="inner">
 
-  <!-- ── NAV ───────────────────────────────── -->
-  <nav class="site-nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="https://skstacks.skworld.io/" class="nav-logo">🐧 <span>sk</span>stacks</a>
-      <ul class="nav-links">
-        <li><a href="#completion">Completion</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#updates">Updates</a></li>
-        <li><a href="#vertical">Vertical</a></li>
-        <li><a href="https://skworld.io">SKWorld</a></li>
-        <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/docs" target="_blank" rel="noopener">Docs</a></li>
-        <li><a href="https://github.com/smilinTux/skstacks" class="nav-cta" target="_blank" rel="noopener">GitHub ↗</a></li>
-      </ul>
+  <section id="pillars" class="pillars" aria-label="What SKStacks guarantees">
+    <div class="pill">
+      <span class="nlabel">Framework</span>
+      <h3 style="margin-top:.7rem">No estate values, ever</h3>
+      <p>The framework defines every service with <code>*.example</code> templates only. Your inventory, per-environment values and encrypted secrets live in a private instance repo that pins the framework as a submodule.</p>
     </div>
-  </nav>
-
-  <!-- ── HERO ──────────────────────────────── -->
-  <header class="hero" id="top">
-    <div class="container">
-      <div class="hero-eyebrow" id="hero-eyebrow">AI-first sovereign infrastructure · v2</div>
-
-      <h1 class="hero-title">SKStacks</h1>
-      <div class="hero-version" id="hero-version">skstacks-v2.8.0</div>
-
-      <p class="hero-tagline">
-        <strong>One descriptor. Any cluster.</strong><br>
-        An AI-first sovereign infrastructure framework — 31 best-of-breed sk* services, deployed your way.
-      </p>
-
-      <p class="hero-sub">
-        Declare your stack once. SKStacks renders it to Docker Swarm, Kubernetes, or RKE2 —
-        across core, comms, compute, cloud, and apps. Own the full vertical. No rented clouds.
-      </p>
-
-      <div class="hero-pipeline" role="img" aria-label="descriptor to Swarm, K8s, or RKE2">
-        <span class="pp-desc">descriptor.yaml</span>
-        <span class="pp-arrow">→</span>
-        <span class="pp-target">Swarm</span>
-        <span class="pp-arrow">/</span>
-        <span class="pp-target">K8s</span>
-        <span class="pp-arrow">/</span>
-        <span class="pp-target">RKE2</span>
-      </div>
-
-      <div class="hero-ctas">
-        <a href="https://github.com/smilinTux/skstacks" class="btn btn-primary" target="_blank" rel="noopener">⭐ GitHub repo</a>
-        <a href="https://github.com/smilinTux/skstacks/tree/main/v2/docs" class="btn btn-outline" target="_blank" rel="noopener">📖 Read the docs</a>
-        <a href="https://github.com/smilinTux/skstacks/releases/latest" class="btn btn-ghost" target="_blank" rel="noopener" id="release-cta">⬇ skstacks-v2.8.0</a>
-      </div>
-
-      <div class="hero-trust" role="list" aria-label="Key properties">
-        <span role="listitem"><span aria-hidden="true">☸️</span> <strong>RKE2 · K8s · Swarm</strong> · one descriptor</span>
-        <span role="listitem"><span aria-hidden="true">✅</span> <strong>15 of 31 live</strong> · verified on RKE2</span>
-        <span role="listitem"><span aria-hidden="true">🔐</span> <strong>Sovereign</strong> · your hardware, your keys</span>
-        <span role="listitem"><span aria-hidden="true">📜</span> <strong>GPL-3.0</strong> · open forever</span>
-      </div>
+    <div class="pill">
+      <span class="nlabel">Pinned</span>
+      <h3 style="margin-top:.7rem">No floating image tags</h3>
+      <p>A test fails any image that is not an explicit tag or a <code>@sha256</code> digest, so a redeploy months later pulls what was tested. Renovate keeps the pins current in reviewed, grouped pull requests.</p>
     </div>
-  </header>
+    <div class="pill">
+      <span class="nlabel">Gated</span>
+      <h3 style="margin-top:.7rem">Tested before it is tagged</h3>
+      <p>Every change renders all templates through real Jinja and runs the <code>skred</code> security gate (gitleaks, trivy, semgrep). A release is an annotated tag with a CHANGELOG entry that names any instance action.</p>
+    </div>
+  </section>
 
-  <hr class="section-divider">
+  <section class="sec" id="status">
+    <div class="spot-eyebrow">Generated from the framework repo</div>
+    <div class="stat-grid">
+<!-- gen:stats -->
+<div class="stat-tile"><span class="stat-label">Latest release</span><span class="stat-value">v2.26.32</span><span class="stat-sub">2026-11-23</span></div>
+<div class="stat-tile"><span class="stat-label">v1 services</span><span class="stat-value">46</span><span class="stat-sub">4 core, 42 optional</span></div>
+<div class="stat-tile"><span class="stat-label">Categories</span><span class="stat-value">8</span><span class="stat-sub">grouped below</span></div>
+<div class="stat-tile"><span class="stat-label">v2 descriptors</span><span class="stat-value">28</span><span class="stat-sub">in development</span></div>
+<!-- /gen:stats -->
+    </div>
+    <p class="meta">Counts and the release are read from <a href="https://github.com/smilinTux/skstacks">smilinTux/skstacks</a> by <a href="https://github.com/smilinTux/skstacks-skworld-io/blob/main/scripts/gen-data.py"><code>scripts/gen-data.py</code></a> at upstream commit <code><!-- gen:inline:upstream_commit -->549efa87<!-- /gen:inline:upstream_commit --></code> (<!-- gen:inline:generated -->2026-11-26<!-- /gen:inline:generated -->). Raw data: <a href="data/services-catalog.json">services-catalog.json</a>.</p>
+  </section>
 
-  <!-- ── COMPLETION COUNTER ────────────────── -->
-  <section id="completion" aria-labelledby="completion-heading">
-    <div class="container completion-wrap">
-      <div class="reveal">
-        <div class="section-eyebrow">Build status</div>
-        <h2 class="section-title" id="completion-heading">How far is the stack?</h2>
-        <div class="completion-big" id="completion-counter" data-target="48">0<span class="pct-sign">%</span></div>
-        <p class="completion-caption" id="completion-caption">
-          <strong>15 of 31</strong> services verified live on RKE2
-        </p>
+  <section class="sec" id="services">
+    <div class="spot-eyebrow">The service catalog</div>
+    <h2>Pick what you run</h2>
+    <p>Each card is one Ansible role under <code>v1/ansible/</code>. <strong>Core</strong> services are one per cluster (the edge, its VIP, threat blocking); everything else is <strong>optional</strong> and only renders when your instance deploys it. Each card links to the role and lists the upstream it pins.</p>
+    <ul class="catnav" aria-label="Jump to a category">
+      <li><a href="#cat-edge">Edge and security</a></li>
+      <li><a href="#cat-identity">Identity and access</a></li>
+      <li><a href="#cat-ops">Observability</a></li>
+      <li><a href="#cat-data">Data and storage</a></li>
+      <li><a href="#cat-collab">Collaboration</a></li>
+      <li><a href="#cat-automation">Automation</a></li>
+      <li><a href="#cat-search">Search and AI</a></li>
+      <li><a href="#cat-media">Media and home</a></li>
+    </ul>
+<!-- gen:catalog -->
+<div class="cat" id="cat-edge">
+  <div class="cat-head"><h3>Edge and security</h3><span class="cat-count">8</span></div>
+  <p class="cat-blurb">Ingress, TLS, floating VIPs, threat blocking, CVE detection and patching.</p>
+  <div class="pgrid">
+    <a class="pcard k" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/core/skfence"><span class="pname">skfence <span class="tier">core</span></span><span class="pblurb">Single-node Traefik edge (reverse proxy/TLS)</span><span class="phost">Traefik <code>v3.7.19</code></span></a>
+    <a class="pcard k" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/core/skfenceha"><span class="pname">skfenceha <span class="tier">core</span></span><span class="pblurb">HA multi-manager Traefik edge</span><span class="phost">Traefik <code>v3.7.19</code></span></a>
+    <a class="pcard k" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/core/skha"><span class="pname">skha <span class="tier">core</span></span><span class="pblurb">Keepalived VRRP floating VIP</span><span class="phost">keepalived (apt, unpinned)</span></a>
+    <a class="pcard k" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/core/sksec"><span class="pname">sksec <span class="tier">core</span></span><span class="pblurb">CrowdSec agent + Traefik bouncer</span><span class="phost">crowdsec <code>v1.6.11</code> + bouncer <code>0.5.0</code></span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skaegis"><span class="pname">skaegis <span class="tier">optional</span></span><span class="pblurb">Continuous CVE detection: the Detect step of the suite (Defend sksec, Detect skaegis, Remediate skpatch)</span><span class="phost">Wazuh <code>4.14.10</code> indexer + manager + dashboard (upstream, digest-pinned)</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skbom"><span class="pname">skbom <span class="tier">optional</span></span><span class="pblurb">OWASP Dependency-Track (SBOM store + CVE matching), the image-patching half of the skpatch program</span><span class="phost">Dependency-Track <code>4.14.7</code> apiserver + frontend, Postgres <code>17.7</code> (all digest-pinned)</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skpatch-hosts"><span class="pname">skpatch-hosts <span class="tier">optional</span></span><span class="pblurb">Linux update/patch dashboard (SSH, holds a key per estate); host half of the skpatch program</span><span class="phost">linux-update-dashboard <code>2026.11.6</code> (upstream, digest-pinned)</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/sksec-web"><span class="pname">sksec-web <span class="tier">optional</span></span><span class="pblurb">CrowdSec Web UI</span><span class="phost">ghcr.io/theduffman85/crowdsec-web-ui:2026.11.12</span></a>
+  </div>
+</div>
+<div class="cat" id="cat-identity">
+  <div class="cat-head"><h3>Identity and access</h3><span class="cat-count">4</span></div>
+  <p class="cat-blurb">Single sign-on, mesh VPN and remote access.</p>
+  <div class="pgrid">
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skdesk"><span class="pname">skdesk <span class="tier">optional</span></span><span class="pblurb">RustDesk relay (hbbs/hbbr)</span><span class="phost">rustdesk-server (digest-pinned)</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skmesh"><span class="pname">skmesh <span class="tier">optional</span></span><span class="pblurb">Netbird self-hosted WireGuard mesh VPN</span><span class="phost">netbird <code>0.83.2</code> (mgmt/signal/relay), dashboard <code>v2.98.0</code></span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skrac"><span class="pname">skrac <span class="tier">optional</span></span><span class="pblurb">MeshCentral on the swarm: remote access and device management</span><span class="phost">ghcr.io/ylianst/meshcentral:1.3.1</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/sksso"><span class="pname">sksso <span class="tier">optional</span></span><span class="pblurb">Authentik OIDC identity provider</span><span class="phost">Authentik <code>2024.4.2</code></span></a>
+  </div>
+</div>
+<div class="cat" id="cat-ops">
+  <div class="cat-head"><h3>Observability and operations</h3><span class="cat-count">7</span></div>
+  <p class="cat-blurb">Metrics, logs, alerts, uptime, flow visibility, health checks and cluster UIs.</p>
+  <div class="pgrid">
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skdash"><span class="pname">skdash <span class="tier">optional</span></span><span class="pblurb">Dashy service dashboard, Traefik-API discovery</span><span class="phost">Dashy <code>4.7.10</code></span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skhealth"><span class="pname">skhealth <span class="tier">optional</span></span><span class="pblurb">Lightweight infrastructure health checks with alerts</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skmon"><span class="pname">skmon <span class="tier">optional</span></span><span class="pblurb">Observability stack (metrics, logs, alerts, optional profiles)</span><span class="phost">VictoriaMetrics <code>v1.155.0</code>, Grafana Alloy <code>v1.21.3</code>, Loki <code>3.7.9</code>, Grafana <code>13.3.0</code>, Alertmanager <code>v0.35.0</code> (all digest-pinned, <code>pins.yml</code>)</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/sknet"><span class="pname">sknet <span class="tier">optional</span></span><span class="pblurb">Network flow visibility: Akvorado flow collector and console (Kafka + ClickHouse), optional live view</span><span class="phost">Akvorado <code>2026.10.1</code>, Kafka <code>4.3.1</code>, ClickHouse <code>26.8</code>, Caddy <code>2.11.9</code> (tag-pinned)</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skport"><span class="pname">skport <span class="tier">optional</span></span><span class="pblurb">Portainer CE (Swarm web UI)</span><span class="phost">Portainer CE <code>2.45.4</code></span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skpulse"><span class="pname">skpulse <span class="tier">optional</span></span><span class="pblurb">Uptime Kuma status monitoring</span><span class="phost">Uptime Kuma <code>2.5.5</code></span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skwhoami"><span class="pname">skwhoami <span class="tier">optional</span></span><span class="pblurb">traefik/whoami echo/test service</span><span class="phost">traefik/whoami <code>v1.12.0</code></span></a>
+  </div>
+</div>
+<div class="cat" id="cat-data">
+  <div class="cat-head"><h3>Data and storage</h3><span class="cat-count">7</span></div>
+  <p class="cat-blurb">Object storage, databases, vectors, graphs, registries, sync and backup.</p>
+  <div class="pgrid">
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skbackup"><span class="pname">skbackup <span class="tier">optional</span></span><span class="pblurb">Snapshots, per-app copies, dump hooks, restic offsite, restore tests, alerts on the storage host</span><span class="phost">sanoid + rsync + restic (host packages)</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skgraph"><span class="pname">skgraph <span class="tier">optional</span></span><span class="pblurb">FalkorDB graph database (Redis protocol)</span><span class="phost">FalkorDB <code>v4.18.8</code></span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skmem-pg"><span class="pname">skmem-pg <span class="tier">optional</span></span><span class="pblurb">Postgres 17 + pgvector + pg_search + AGE</span><span class="phost">Postgres 17 custom image <code>pg17-bm25-age</code></span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skreg"><span class="pname">skreg <span class="tier">optional</span></span><span class="pblurb">Docker Registry v2</span><span class="phost"><code>registry:2</code> (floating)</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skstor"><span class="pname">skstor <span class="tier">optional</span></span><span class="pblurb">Garage S3-compatible object storage</span><span class="phost">Garage <code>v2.4.1</code> (digest-pinned)</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/sksync"><span class="pname">sksync <span class="tier">optional</span></span><span class="pblurb">Syncthing continuous file sync</span><span class="phost">Syncthing <code>2.0.13</code> (hardcoded)</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skvector"><span class="pname">skvector <span class="tier">optional</span></span><span class="pblurb">Qdrant vector database</span><span class="phost">Qdrant <code>v1.17.0</code></span></a>
+  </div>
+</div>
+<div class="cat" id="cat-collab">
+  <div class="cat-head"><h3>Collaboration and productivity</h3><span class="cat-count">7</span></div>
+  <p class="cat-blurb">Files, wiki, tasks, mail, PDFs, Solid pods and published pages.</p>
+  <div class="pgrid">
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skboard"><span class="pname">skboard <span class="tier">optional</span></span><span class="pblurb">Vikunja task board (sqlite)</span><span class="phost">Vikunja <code>2.8.0</code></span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skbook"><span class="pname">skbook <span class="tier">optional</span></span><span class="pblurb">BookStack wiki + MariaDB</span><span class="phost">BookStack <code>v26.09-ls285</code>, MariaDB <code>10.11</code></span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skhub"><span class="pname">skhub <span class="tier">optional</span></span><span class="pblurb">Nextcloud file sync/collaboration</span><span class="phost">Nextcloud <code>31.0.14</code>, MariaDB <code>10.11.7</code></span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skmail"><span class="pname">skmail <span class="tier">optional</span></span><span class="pblurb">Full SMTP/IMAP mail server</span><span class="phost">docker-mailserver <code>16.0.1</code></span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skpages"><span class="pname">skpages <span class="tier">optional</span></span><span class="pblurb">Agent-published HTML pages</span><span class="phost">caddy:2.11.9-alpine</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skpdf"><span class="pname">skpdf <span class="tier">optional</span></span><span class="pblurb">Stirling-PDF toolkit</span><span class="phost">Stirling-PDF <code>3.5.0</code></span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skpods"><span class="pname">skpods <span class="tier">optional</span></span><span class="pblurb">Solid pod hosting (WebID + storage per user); engine <code>nextcloud</code>: a slim standalone Nextcloud with only the Solid app</span><span class="phost">instance-built engine image (official Nextcloud + Solid app, digest-pinned), Postgres <code>17.7</code>, Redis <code>8.10.3</code></span></a>
+  </div>
+</div>
+<div class="cat" id="cat-automation">
+  <div class="cat-head"><h3>Automation and development</h3><span class="cat-count">6</span></div>
+  <p class="cat-blurb">Git and CI, workflow engines, infrastructure as code and service workers.</p>
+  <div class="pgrid">
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skflow"><span class="pname">skflow <span class="tier">optional</span></span><span class="pblurb">Windmill workflow engine shared by tenant stacks (flows, schedules, webhooks, approvals)</span><span class="phost">Windmill <code>1.882.0</code> + Postgres <code>17.12</code> (digest-pinned)</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skform"><span class="pname">skform <span class="tier">optional</span></span><span class="pblurb">OpenTofu CLI container (idle, <code>docker exec</code>-driven)</span><span class="phost">OpenTofu <code>1.10.7</code></span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skgit"><span class="pname">skgit <span class="tier">optional</span></span><span class="pblurb">Forgejo git + CI runners</span><span class="phost">Forgejo <code>17.0.2</code>, runner <code>11.1.2</code></span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skorch"><span class="pname">skorch <span class="tier">optional</span></span><span class="pblurb">n8n workflow automation</span><span class="phost">n8n (digest-pinned) + pgvector Postgres</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skpayment"><span class="pname">skpayment <span class="tier">optional</span></span><span class="pblurb">Multi-app Stripe subscription gateway (FastAPI on uvicorn)</span><span class="phost">smilintux/skpayment-runtime:py3.11-20261123</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skwrit"><span class="pname">skwrit <span class="tier">optional</span></span><span class="pblurb">Matter engine worker (drafting with gates, release, publishing to Nextcloud)</span><span class="phost">per-site image, digest-pinned; optional nextcloud-mcp <code>0.218.0</code></span></a>
+  </div>
+</div>
+<div class="cat" id="cat-search">
+  <div class="cat-head"><h3>Search and AI</h3><span class="cat-count">2</span></div>
+  <p class="cat-blurb">Private metasearch and an AI search front end.</p>
+  <div class="pgrid">
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skpeek"><span class="pname">skpeek <span class="tier">optional</span></span><span class="pblurb">SearXNG metasearch engine</span><span class="phost">SearXNG (digest-pinned) + Valkey <code>8-alpine</code></span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skseek"><span class="pname">skseek <span class="tier">optional</span></span><span class="pblurb">Perplexica AI search UI</span><span class="phost">Perplexica (digest-pinned)</span></a>
+  </div>
+</div>
+<div class="cat" id="cat-media">
+  <div class="cat-head"><h3>Media and home</h3><span class="cat-count">5</span></div>
+  <p class="cat-blurb">Photos, streaming, media fetching, home and fitness tracking.</p>
+  <div class="pgrid">
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skfetch"><span class="pname">skfetch <span class="tier">optional</span></span><span class="pblurb">Sonarr, Radarr, Lidarr, Prowlarr and qBittorrent behind a VPN</span><span class="phost">qmcgaw/gluetun, lscr.io/linuxserver/qbittorrent, lscr.io/linuxserver/prowlarr, lscr.io/linuxserver/sonarr and more</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skgallery"><span class="pname">skgallery <span class="tier">optional</span></span><span class="pblurb">Immich photo/video management</span><span class="phost">Immich <code>v3.4.2</code> + pgvector/vectorchord Postgres</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skgym"><span class="pname">skgym <span class="tier">optional</span></span><span class="pblurb">openGym gym and body-weight tracker (passkeys, PWA)</span><span class="phost">openGym <code>1.4.5</code> api + web (upstream, digest-pinned)</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skhome"><span class="pname">skhome <span class="tier">optional</span></span><span class="pblurb">HomeCenter home/property/vehicle/health manager</span><span class="phost">HomeCenter <code>3.3.0</code> app (upstream, digest-pinned)</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skstream"><span class="pname">skstream <span class="tier">optional</span></span><span class="pblurb">Plex + Real-Debrid (DUMB)</span><span class="phost">plexinc/pms-docker:1.43.5.11079-b3b13e506, kometateam/kometa:v2.5.5</span></a>
+  </div>
+</div>
+<!-- /gen:catalog -->
+    <p class="meta">Full detail per service (dependencies, exposed hostnames, storage, required vault keys, opt-in flags): <a href="https://github.com/smilinTux/skstacks/blob/main/docs/v1-service-catalog.md">docs/v1-service-catalog.md</a>.</p>
+  </section>
+
+  <section class="sec" id="model">
+    <div class="spot-eyebrow">How it works</div>
+    <h2>A public framework, a private instance</h2>
+    <p>The framework is the playbooks, stacks and secret backends, with no estate-specific values baked in. An instance repo pins it as <code>framework/</code> at an exact release tag and supplies everything specific to one estate. Upgrading means bumping the submodule to a newer tag, never editing framework code in place.</p>
+    <figure class="figure">
+      <a href="diagrams/skstacks.architecture.html" target="_blank" rel="noopener"><img src="img/diagram-architecture.png" width="1280" height="800" alt="Architecture: the public skstacks framework ships playbooks, example templates and release tags. A private instance repo pins a tag as its framework submodule, holds its envs and encrypted secrets, and runs ansible-playbook against its cluster. A secret backend decrypts values at deploy time." loading="lazy"></a>
+      <figcaption>Framework and instance model, from <a href="https://github.com/smilinTux/skstacks/blob/main/v2/docs/INSTANCE-MODEL.md">INSTANCE-MODEL.md</a>. <a href="diagrams/skstacks.architecture.html" target="_blank" rel="noopener">Open the interactive diagram &#8599;</a></figcaption>
+    </figure>
+    <div class="two" style="margin-top:1.4rem">
+      <div>
+        <h3>Deploy one service</h3>
+        <p>Every v1 service deploys the same way, from the instance repo:</p>
+<pre><code>ansible-playbook -i envs/&lt;env&gt;/inventory.ini \
+  framework/v1/ansible/&lt;tier&gt;/&lt;service&gt;/deploy_&lt;service&gt;-&lt;env&gt;.yml \
+  -e target_manager_group=&lt;manager-group&gt; \
+  --vault-password-file &lt;your vault password file&gt;</code></pre>
       </div>
-
-      <div class="progress-track reveal" role="progressbar" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100" aria-label="Stack completion">
-        <div class="progress-fill" id="progress-fill"></div>
-      </div>
-
-      <div class="completion-breakdown reveal">
-        <div class="breakdown-card live">
-          <div class="breakdown-num" id="bd-live" data-target="15">0</div>
-          <div class="breakdown-label">✅ live-proven on RKE2</div>
-        </div>
-        <div class="breakdown-card ready">
-          <div class="breakdown-num" id="bd-ready" data-target="2">0</div>
-          <div class="breakdown-label">🟡 deploy-ready</div>
-        </div>
-        <div class="breakdown-card planned">
-          <div class="breakdown-num" id="bd-stub" data-target="14">0</div>
-          <div class="breakdown-label">⬜ planned / stub</div>
-        </div>
+      <div>
+        <h3>What your instance supplies</h3>
+        <ul class="plist">
+          <li>An inventory whose hosts carry <code>domain</code> and <code>cluster_name</code>, and a manager group.</li>
+          <li><code>skstacks_vault_dir</code>: one vault file per service and environment.</li>
+          <li><code>/var/data</code> shared by every Swarm node (NFS or equivalent).</li>
+          <li>Which optional services to deploy. Nothing else changes.</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <hr class="section-divider">
-
-  <!-- ── SERVICE GRID ──────────────────────── -->
-  <section id="services" class="gradient-section" aria-labelledby="services-heading">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-eyebrow">The catalog</div>
-        <h2 class="section-title" id="services-heading">31 services. 5 layers. All yours.</h2>
-        <p class="section-sub">
-          Each sk* service wraps a best-of-breed open-source provider behind a stable descriptor seam.
-          Filter by layer. Every card links to its repo and its own SKWorld site.
-        </p>
-      </div>
-
-      <div class="filter-bar reveal" id="filter-bar" role="group" aria-label="Filter services by layer">
-        <!-- filter buttons injected by script.js -->
-      </div>
-
-      <div class="services-grid" id="services-grid" aria-live="polite">
-        <!-- cards injected by script.js; noscript fallback below -->
-        <noscript>
-          <p style="color:var(--dim)">Enable JavaScript to browse the service catalog, or view
-          <a href="data/services-catalog.json" style="color:var(--cyan)">services-catalog.json</a>.</p>
-        </noscript>
-      </div>
+  <section class="sec" id="release">
+    <div class="spot-eyebrow">Releases</div>
+    <h2>The latest tag</h2>
+    <p>Instances pin tags, not branches. Each <code>skstacks-v2.X.Y</code> tag points at the exact commit that was tested, and its CHANGELOG section says what an instance has to do, if anything, before it rolls.</p>
+    <div class="panel">
+<!-- gen:release -->
+<p class="rel-tag"><a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.32"><code>skstacks-v2.26.32</code></a> <span class="rel-date">2026-11-23</span></p>
+<ul class="plist">
+  <li>skpayment: its own minimal runtime image</li>
+  <li>skmem-pg: image rebuilt on a pinned Debian 12 base</li>
+  <li>sksso: the <code>authentik@file</code> catch-all, created as code and bound to <code>skadmin</code> only</li>
+  <li>skfenceha: the ACME master label stays where it is</li>
+  <li>Image bumps for open CVEs</li>
+</ul>
+<p class="meta">Earlier: <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.31">v2.26.31</a> (2026-11-21) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.30">v2.26.30</a> (2026-11-20) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.29">v2.26.29</a> (2026-11-19) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.28">v2.26.28</a> (2026-11-18) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.27">v2.26.27</a> (2026-11-18)</p>
+<!-- /gen:release -->
+      <p class="meta" style="margin-top:.6rem"><a href="https://github.com/smilinTux/skstacks/blob/main/CHANGELOG.md">Full CHANGELOG</a> &middot; <a href="https://github.com/smilinTux/skstacks/blob/main/docs/testing.md">How a release is tested</a> &middot; <a href="https://github.com/smilinTux/skstacks/blob/main/docs/dependency-updates.md">Dependency updates</a></p>
     </div>
   </section>
 
-  <hr class="section-divider">
+  <section class="sec" id="v2">
+    <div class="spot-eyebrow">In development</div>
+    <h2>v2: one descriptor, several platforms</h2>
+    <p>The v2 track describes each service once in an <code>app.yaml</code> descriptor and renders it for Docker Swarm, Kubernetes, RKE2 or k3d, with a pluggable secret backend (vault-file, HashiCorp Vault, or CapAuth/PGP) and an External Secrets Operator bridge on Kubernetes. It is under active development; production clusters run v1. <!-- gen:inline:v2_total -->28<!-- /gen:inline:v2_total --> descriptors so far, by layer:</p>
+<!-- gen:v2 -->
+<div class="v2row"><span class="v2layer">core</span><ul class="mcp-list">
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/core/capauth" title="Sovereign machine-to-machine auth: PGP-based CapAuth for agent identity and secret access without OAuth.">capauth</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/core/skca" title="Internal PKI / mTLS: step-ca for ACME internal cert issuance, X.509 mTLS service identity, and SSH CA.">skca</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/core/sksec" title="Threat defense: CrowdSec (reputation + bouncer) + Falco (runtime/eBPF) + Wazuh (HIDS/FIM/SIEM) + Suricata (NIDS).">sksec</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/core/sksso" title="Identity / SSO: Authentik for human SSO (OIDC/SAML/LDAP); Zitadel path for agent/M2M service auth.">sksso</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/core/skvault" title="Secrets management: the SKSecretBackend port; vault-file / HashiCorp Vault / CapAuth adapters, all sharing the same interface.">skvault</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/core/skwaf" title="Web application firewall: Coraza + OWASP CRS v4 as Traefik WASM plugin (zero new processes, config change only).">skwaf</a></li>
+</ul></div>
+<div class="v2row"><span class="v2layer">comms</span><ul class="mcp-list">
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/comms/skbus" title="Machine A2A event bus: NATS JetStream for sovereign agent-to-agent messaging (subjects: skos.agent.*.events).">skbus</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/comms/skchat" title="Human/agent chat + federation: Tuwunel (Apache-2.0 Rust Matrix homeserver, single binary, low-RAM). Keeps the Matrix protocol; swaps the homeserver off Synapse.">skchat</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/comms/skcomms" title="Multi-channel outbound transport (17 paths): subscribes to skbus and routes messages to Telegram, email, SMS, etc.">skcomms</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/comms/skvoice" title="Voice/video RTC: LiveKit SFU with Agents framework wiring STT+TTS+LLM as room participants.">skvoice</a></li>
+</ul></div>
+<div class="v2row"><span class="v2layer">compute</span><ul class="mcp-list">
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/compute/skbackup" title="Backup: Restic to Garage S3 backend (replaces Duplicati which has corruption-bug history).">skbackup</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/compute/skblock" title="HA replicated block storage (RWO) for databases / StatefulSets.">skblock</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/compute/skcache" title="Cache / KV store: Valkey (BSD-3 Redis drop-in; Redis 8 went AGPLv3 May 2025: swap is 1 config change).">skcache</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/compute/skdata" title="Relational + vector + graph + search: Postgres 17 with pgvector, pg_search (BM25), and Apache AGE (graph).">skdata</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/compute/skfile" title="HA shared POSIX file storage (RWX): JuiceFS over the object layer.">skfile</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/compute/skfiles" title="File sync and collaboration: Nextcloud for web/team collaboration + Syncthing for sovereign p2p device sync.">skfiles</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/compute/skflow" title="Automation / workflow: visual and code-first automation with human-in-the-loop support for agent pipelines.">skflow</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/compute/skmodel" title="LLM / inference serving: stable seam for model-serving; Ollama for simplicity, vLLM for throughput at scale.">skmodel</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/compute/skmon" title="Observability (metrics + logs + traces): Prometheus + Grafana + Loki + Tempo + Grafana Alloy (OTel collector).">skmon</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/compute/skobject" title="Object / S3 storage: Garage (replaces archived MinIO Apr 2026; single binary, AGPLv3, S3-compatible).">skobject</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/compute/skpulse" title="Uptime / status monitoring: Uptime-Kuma with Blackbox Exporter for internal endpoint probing.">skpulse</a></li>
+</ul></div>
+<div class="v2row"><span class="v2layer">cloud</span><ul class="mcp-list">
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/cloud/skcicd" title="CI/CD: Forgejo Actions (CI) + Ansible (Swarm/node CD) + ArgoCD (Kubernetes GitOps).">skcicd</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/cloud/skdns" title="Sovereign DNS: internal authoritative DNS + resolver/filter with split-horizon and DNS-01 ACME support.">skdns</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/cloud/skdweb" title="Decentralized availability + sovereign naming: IPFS content pinning and HNS/ENS seizure-proof names.">skdweb</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/cloud/skfence" title="Traefik v3 reverse proxy with ACME TLS, rate limiting, and socket proxy.">skfence</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/cloud/skinfra" title="Infrastructure provisioning: OpenTofu modules for Hetzner, Proxmox, and Cloudflare targets.">skinfra</a></li>
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/cloud/skmesh" title="Overlay mesh / tunnel: sovereign WireGuard-based networking across nodes.">skmesh</a></li>
+</ul></div>
+<div class="v2row"><span class="v2layer">apps</span><ul class="mcp-list">
+  <li><a href="https://github.com/smilinTux/skstacks/tree/main/v2/apps/skturn" title="WebRTC TURN/STUN media relay (coturn). Host-published edge service; the media plane that cannot traverse Traefik/cloudflared.">skturn</a></li>
+</ul></div>
+<!-- /gen:v2 -->
+    <p class="meta" style="margin-top:.8rem"><a href="https://github.com/smilinTux/skstacks/blob/main/v2/README.md">v2 README</a> &middot; <a href="https://github.com/smilinTux/skstacks/blob/main/v2/docs/APP-DESCRIPTOR.md">App descriptor</a> &middot; <a href="https://github.com/smilinTux/skstacks/blob/main/v2/docs/STACK-MAP.md">Stack map</a></p>
+  </section>
 
-  <!-- ── LATEST UPDATES ────────────────────── -->
-  <section id="updates" aria-labelledby="updates-heading">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-eyebrow">Live from GitHub</div>
-        <h2 class="section-title" id="updates-heading">Latest updates.</h2>
-        <p class="section-sub">
-          Pulled live from the <a href="https://github.com/smilinTux/skstacks" style="color:var(--cyan)" target="_blank" rel="noopener">skstacks</a> repo at page load —
-          newest release and recent commits. Falls back to the last committed snapshot if GitHub is rate-limited.
-        </p>
-      </div>
-
-      <div class="updates-grid">
-        <div class="release-card reveal" id="release-card">
-          <!-- release injected by script.js -->
-        </div>
-        <div class="reveal" style="transition-delay:.1s">
-          <div class="commits-list" id="commits-list">
-            <!-- commits injected by script.js -->
-          </div>
-          <p class="updates-live-note" id="updates-note"><span class="dot-live">●</span> loading live data…</p>
-        </div>
-      </div>
+  <section class="closing">
+    <h2>Own the whole stack.</h2>
+    <p>Start an instance repo, pin the latest tag, fill in the example values, and deploy one service. Add the next one when you need it.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/smilinTux/skstacks">Read the source</a>
+      <a class="btn ghost" href="docs.html">Read the docs</a>
     </div>
   </section>
 
-  <hr class="section-divider">
-
-  <!-- ── OWN THE FULL VERTICAL ─────────────── -->
-  <section id="vertical" class="vertical-band" aria-labelledby="vertical-heading">
-    <div class="container">
-      <div class="vertical-band-inner reveal">
-        <span class="vertical-kicker">Own the full vertical</span>
-        <h2 class="vertical-headline" id="vertical-heading">SKStacks is the deploy plane.</h2>
-        <p class="vertical-manifesto">
-          <strong>Get back to first principles.</strong><br>
-          The modern stack is rented — your services live on someone else's cluster, behind someone else's bill.
-          We rebuilt it. SKStacks renders one declarative descriptor into the whole sovereign stack:
-          silicon, OS, identity, data, models, security, comms, apps, soul.
-          Every layer open. Every layer swappable. Every layer <strong>yours</strong>.
-        </p>
-        <div class="hero-ctas">
-          <a href="https://skworld.io" class="btn btn-outline">🌍 Explore the full vertical</a>
-          <a href="https://skos.skworld.io" class="btn btn-ghost">skos — the sovereign OS</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- ── ECOSYSTEM ──────────────────────────── -->
-  <section class="gradient-section" aria-labelledby="eco-heading">
-    <div class="container" style="text-align:center">
-      <div class="reveal">
-        <div class="section-eyebrow">The SKWorld family</div>
-        <h2 class="section-title" id="eco-heading">Every sk* is a layer you own.</h2>
-        <p class="section-sub" style="margin:0 auto">
-          SKStacks deploys them. Everything around it is yours too.
-        </p>
-      </div>
-      <div class="eco-grid">
-        <a href="https://skworld.io" class="eco-link">🌍 skworld.io — the vertical hub</a>
-        <a href="https://skos.skworld.io" class="eco-link">🐧 skos — sovereign agent OS</a>
-        <a href="https://skmemory.skworld.io" class="eco-link">🧠 skmemory — agent memory</a>
-        <a href="https://capauth.skworld.io" class="eco-link">🔐 capauth — identity</a>
-        <a href="https://sksecurity.skworld.io" class="eco-link">🛡️ sksecurity — perimeter</a>
-        <a href="https://skcomms.skworld.io" class="eco-link">📡 skcomms — comms</a>
-        <a href="https://github.com/smilinTux" class="eco-link" target="_blank" rel="noopener">📂 All repos on GitHub ↗</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── FINAL CTA ───────────────────────────── -->
-  <section style="text-align:center;background:radial-gradient(ellipse at 50% 100%,rgba(0,255,255,.05) 0%,transparent 65%)">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-eyebrow">Get started</div>
-        <h2 class="section-title">Declare it once. Deploy it anywhere.</h2>
-        <p class="section-sub" style="margin:0 auto 2.5rem">
-          One descriptor. Swarm, K8s, or RKE2. 31 sovereign services. Own the full stack — today.
-        </p>
-        <div class="hero-ctas">
-          <a href="https://github.com/smilinTux/skstacks" class="btn btn-primary" target="_blank" rel="noopener">⭐ View on GitHub</a>
-          <a href="https://github.com/smilinTux/skstacks/tree/main/v2/docs" class="btn btn-outline" target="_blank" rel="noopener">📖 Read the v2 docs</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── FOOTER ────────────────────────────── -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-inner">
-        <a href="https://skstacks.skworld.io/" class="nav-logo" style="font-size:1.1rem">
-          🐧 <span>sk</span>stacks
-        </a>
-        <nav class="footer-links" aria-label="Footer navigation">
-          <a href="https://github.com/smilinTux/skstacks" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://github.com/smilinTux/skstacks/tree/main/v2/docs" target="_blank" rel="noopener">Docs</a>
-          <a href="https://github.com/smilinTux/skstacks/releases/latest" target="_blank" rel="noopener">Releases</a>
-          <a href="https://skworld.io">SKWorld</a>
-          <a href="https://skos.skworld.io">skos</a>
-          <a href="/sitemap.xml">Sitemap</a>
-          <a href="/llms.txt">llms.txt</a>
-        </nav>
-        <p class="footer-copy">
-          🐧 part of the SKWorld ecosystem · <span><a href="https://skworld.io" style="color:var(--gold);text-decoration:none">skworld.io</a></span><br>
-          &copy; 2026 smilinTux · GPL-3.0 · Built with 🐧 by King Divad &amp; Lumina
-        </p>
-      </div>
-    </div>
+  <footer>
+    <p class="fmain">SKStacks is built in the open by <a href="https://github.com/smilinTux">smilinTux</a> as part of SKWorld. The framework holds no secrets and no estate values; those stay in your instance.</p>
+    <p class="fmeta"><a href="https://github.com/smilinTux/skstacks">github.com/smilinTux/skstacks</a> &middot; <a href="https://skworld.io/">SKWorld</a> &middot; <a href="https://skpatch.skworld.io/">SKPatch</a> &middot; <a href="https://skaegis.skworld.io/">SKAegis</a> &middot; <a href="https://sksecurity.skworld.io/">SKSecurity</a> &middot; <a href="https://skmemory.skworld.io/">SKMemory</a> &middot; <a href="docs.html">Docs</a> &middot; <a href="llms.txt">llms.txt</a> &middot; AGPL-3.0</p>
   </footer>
 
-  <script src="script.js" defer></script>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('theme-btn');if(!b)return;
+  var root=document.documentElement;
+  function effective(){
+    var t=root.getAttribute('data-theme');if(t)return t;
+    return window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+  }
+  function label(){b.textContent=effective()==='dark'?'light mode':'dark mode';}
+  b.addEventListener('click',function(){
+    var n=effective()==='dark'?'light':'dark';
+    root.setAttribute('data-theme',n);
+    try{localStorage.setItem('skstacks-theme',n);}catch(e){}
+    label();
+  });
+  label();
+})();
+</script>
 </body>
 </html>

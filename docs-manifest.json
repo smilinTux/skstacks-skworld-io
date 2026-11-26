@@ -1,0 +1,41 @@
+{
+  "repo": "smilinTux/skstacks",
+  "branch": "main",
+  "path": "docs",
+  "generated": "2026-11-25",
+  "note": "Committed fallback for the /docs viewer when the GitHub Contents API is unavailable or rate-limited. Regenerate from: python docs-manifest-gen.py smilinTux/skstacks --out docs-manifest.json",
+  "docs": [
+    {
+      "name": "ROLE_AUTHORING_CHECKLIST.md",
+      "title": "Role-authoring checklist"
+    },
+    {
+      "name": "VERSION_LIFECYCLE.md",
+      "title": "VERSION LIFECYCLE"
+    },
+    {
+      "name": "dependency-updates.md",
+      "title": "Dependency updates (image pins)"
+    },
+    {
+      "name": "forgejo_setup.md",
+      "title": "1. Create repo"
+    },
+    {
+      "name": "future_refactor-v2-to-v3.md",
+      "title": "1. Freeze v2"
+    },
+    {
+      "name": "skpatch-program.md",
+      "title": "The skpatch program: patching hosts and images across the fleet"
+    },
+    {
+      "name": "testing.md",
+      "title": "Testing SKStacks"
+    },
+    {
+      "name": "v1-service-catalog.md",
+      "title": "SKStacks v1 Service Catalog"
+    }
+  ]
+}
