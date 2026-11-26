@@ -1,18 +1,36 @@
 {
   "generated": "2026-11-26",
   "release": {
-    "tag": "skstacks-v2.26.32",
+    "tag": "skstacks-v2.26.33",
     "date": "2026-11-23",
-    "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.32",
+    "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.33",
     "highlights": [
-      "skpayment: its own minimal runtime image",
-      "skmem-pg: image rebuilt on a pinned Debian 12 base",
-      "sksso: the `authentik@file` catch-all, created as code and bound to `skadmin` only",
-      "skfenceha: the ACME master label stays where it is",
-      "Image bumps for open CVEs"
+      "sknet: network flow visibility (Akvorado), new optional role",
+      "skha: node labels follow the VIP (`skha.vip_node_labels`)",
+      "skmail: mail through Traefik with PROXY protocol v2 (`skmail.VIA_TRAEFIK`)",
+      "skgit: `ENABLE_INTERNAL_SIGNIN` knob (SSO-only web sign-in)",
+      "skpods: skpods.id branding (`THEME`)",
+      "templates: skpods-only instance config",
+      "skpods: new optional service for Solid pod hosting",
+      "skpayment: idna 3.15 (security)"
     ]
   },
   "recent_releases": [
+    {
+      "tag": "skstacks-v2.26.33",
+      "date": "2026-11-23",
+      "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.33",
+      "highlights": [
+        "sknet: network flow visibility (Akvorado), new optional role",
+        "skha: node labels follow the VIP (`skha.vip_node_labels`)",
+        "skmail: mail through Traefik with PROXY protocol v2 (`skmail.VIA_TRAEFIK`)",
+        "skgit: `ENABLE_INTERNAL_SIGNIN` knob (SSO-only web sign-in)",
+        "skpods: skpods.id branding (`THEME`)",
+        "templates: skpods-only instance config",
+        "skpods: new optional service for Solid pod hosting",
+        "skpayment: idna 3.15 (security)"
+      ]
+    },
     {
       "tag": "skstacks-v2.26.32",
       "date": "2026-11-23",
@@ -73,25 +91,28 @@
         "skhub: the talk-hpb healthcheck in `TALK_TURN_EXTERNAL` mode (#458, #459)",
         "skfence: `FORWARDING_TIMEOUTS` and `RESPONDING_TIMEOUTS` (#460)"
       ]
-    },
-    {
-      "tag": "skstacks-v2.26.27",
-      "date": "2026-11-18",
-      "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.27",
-      "highlights": [
-        "skmon v2: the stack starts (healthchecks, Grafana provisioning)",
-        "skhub: the Talk HPB can use an external TURN (`TALK_TURN_EXTERNAL`)",
-        "skrac: agent watchdog for stale MeshCentral agent sessions",
-        "skgit: Forgejo pulls from code.forgejo.org (codeberg.org is NXDOMAIN)",
-        "skrac, skmesh: portal tiles open in a new tab",
-        "skmesh: the bundled coturn is reachable; skhub: Talk without the HPB",
-        "skpatch-hosts: the swarm upgrade gate covers workers and repairs stale vxlan devices",
-        "skpatch-hosts: single-manager swarm holds docker engine upgrades"
-      ]
     }
   ],
   "changelog_url": "https://github.com/smilinTux/skstacks/blob/main/CHANGELOG.md",
   "commits": [
+    {
+      "sha": "d850b8f7",
+      "date": "2026-11-26",
+      "message": "docs(release): skstacks-v2.26.34 release notes heading, skfenceha #540 entry (#542)",
+      "url": "https://github.com/smilinTux/skstacks/commit/d850b8f753bf44156f5c94592073b27207c97948"
+    },
+    {
+      "sha": "c4e054ac",
+      "date": "2026-11-26",
+      "message": "fix(sknet): pass softflowd -N only where the binary has it (1.0.0 on 22.04 refuses it) (#541)",
+      "url": "https://github.com/smilinTux/skstacks/commit/c4e054ac8a19afc104083f5486f888217e65a115"
+    },
+    {
+      "sha": "b752d4b8",
+      "date": "2026-11-25",
+      "message": "fix(skfenceha): keep NFS client source ports off host-mode 993 (#540)",
+      "url": "https://github.com/smilinTux/skstacks/commit/b752d4b8d5af75f9247b33bd0f0aa27809db11c4"
+    },
     {
       "sha": "549efa87",
       "date": "2026-11-26",
@@ -121,24 +142,6 @@
       "date": "2026-11-25",
       "message": "feat(skmail): mail through Traefik TCP with PROXY protocol v2 (failover) (#536)",
       "url": "https://github.com/smilinTux/skstacks/commit/d93d31599ea345ca79e2530ec91d06f95756b657"
-    },
-    {
-      "sha": "01e30441",
-      "date": "2026-11-25",
-      "message": "feat(templates): skpods-only path in the instance config template (#534)",
-      "url": "https://github.com/smilinTux/skstacks/commit/01e3044163bae8242d5c67b2f233d067427a5d84"
-    },
-    {
-      "sha": "698c4da4",
-      "date": "2026-11-25",
-      "message": "fix(skha): move node labels with the VIP so host-port services follow it (#535)",
-      "url": "https://github.com/smilinTux/skstacks/commit/698c4da4abf457263fe9880dd18bba953f9b8782"
-    },
-    {
-      "sha": "80eadb31",
-      "date": "2026-11-25",
-      "message": "feat(skpods): account hardening (antivirus, DB dumps, mail, quota, owner-only roots, Readme) (#533)",
-      "url": "https://github.com/smilinTux/skstacks/commit/80eadb318458e8f0d1bd50eadcd4e7d1abab8254"
     }
   ]
 }
