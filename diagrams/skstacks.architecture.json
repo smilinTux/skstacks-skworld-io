@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "SKStacks Architecture",
+    "subtitle": "Framework and instance model: a public framework pinned by tag into a private instance, decrypted secrets applied at deploy time",
+    "output": "skstacks.architecture.html",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    { "id": "fw-code", "type": "backend", "label": "Playbooks, stacks, secret backends", "sublabel": "v1/ansible, v2 descriptors", "pos": [60, 70], "size": [230, 70] },
+    { "id": "fw-templates", "type": "backend", "label": "*.example templates", "sublabel": "placeholders only, no real values", "pos": [60, 190], "size": [230, 70] },
+    { "id": "fw-tags", "type": "backend", "label": "Release tags", "sublabel": "skstacks-v2.X.Y + CHANGELOG", "pos": [60, 310], "size": [230, 70] },
+    { "id": "in-framework", "type": "backend", "label": "framework/ submodule", "sublabel": "pinned to an exact tag", "pos": [420, 310], "size": [220, 70] },
+    { "id": "in-envs", "type": "backend", "label": "instance.env + envs/", "sublabel": "prod, staging: inventory and values", "pos": [420, 190], "size": [220, 70] },
+    { "id": "in-secrets", "type": "security", "label": "secrets/", "sublabel": "encrypted only", "pos": [420, 70], "size": [220, 70] },
+    { "id": "backend", "type": "security", "label": "Secret backend", "sublabel": "vault-file, sops-age, HashiCorp, capauth", "pos": [760, 70], "size": [220, 70] },
+    { "id": "cluster", "type": "cloud", "label": "Your cluster", "sublabel": "the services you chose to deploy", "pos": [760, 250], "size": [220, 80] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Public: smilinTux/skstacks (framework)", "wraps": ["fw-code", "fw-templates", "fw-tags"] },
+    { "kind": "security-group", "label": "Private: your instance repo", "wraps": ["in-framework", "in-envs", "in-secrets"] }
+  ],
+  "connections": [
+    { "id": "tags-pin", "from": "fw-tags", "to": "in-framework", "label": "pin exact tag", "variant": "emphasis" },
+    { "id": "instance-deploy", "from": "in-envs", "to": "cluster", "label": "ansible-playbook -i envs/prod/...", "variant": "emphasis" },
+    { "id": "backend-decrypt", "from": "backend", "to": "cluster", "label": "decrypt at deploy time", "variant": "security" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Framework (public)", "items": ["Defines every service with no estate-specific values baked in", "Ships *.example templates only, never a real secret", "Every release is an annotated skstacks-v2.X.Y tag with a CHANGELOG entry"] },
+    { "dot": "rose", "title": "Instance (private)", "items": ["Pins the framework as a framework/ submodule at a released tag", "Holds the inventory, per-environment values and encrypted secrets", "Upgrades by bumping the submodule to a newer tag, never by editing framework code in place"] },
+    { "dot": "emerald", "title": "Deploy", "items": ["The instance runs ansible-playbook against its own inventory", "The secret backend decrypts values only at deploy time"] }
+  ]
+}
