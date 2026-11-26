@@ -1,0 +1,27 @@
+name: archify
+
+# THE CALLER SNIPPET a `-skworld-io` site repo drops into its own
+# .github/workflows/archify.yml. The reusable build lives once, in
+# archify-build.yml in THIS repo (smilinTux/.github); every site repo calls it
+# rather than copying it, so the pin and the regeneration logic live in one
+# place. Full rule: smilinTux/sk-standards standards/ARCHITECTURE_AND_DATAFLOW_STANDARD.md
+# "Required for every -skworld-io site repo"; authoring guide:
+# standards/archify-diagrams.md in that same repo.
+#
+# Pin: smilinTux/.github/.github/workflows/archify-build.yml@08ab9987405f0aced0d72343f9773976fae6f1ea
+# (verified commit on smilinTux/.github's default branch, master, that carries
+# archify-build.yml; find/refresh with `gh api repos/smilinTux/.github/commits --jq '.[0].sha'`
+# and re-pin deliberately in a reviewed PR, never silently).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  archify:
+    uses: smilinTux/.github/.github/workflows/archify-build.yml@08ab9987405f0aced0d72343f9773976fae6f1ea

@@ -1,343 +1,738 @@
-[
-  {
-    "name": "capauth",
-    "layer": "core",
-    "capability": "Sovereign M2M auth \u2014 PGP-based identity and secret access without OAuth",
-    "provider": "CapAuth (sovereign PGP-based; skcapstone MCP integration)",
-    "brief": "Sovereign PGP-based machine-to-machine auth that lets agents prove identity and fetch secrets without OAuth.",
-    "status": "stub",
-    "image": "ghcr.io/smilintux/capauth:latest",
-    "repo": "https://github.com/smilinTux/capauth",
-    "skworld_site": "https://capauth.skworld.io"
+{
+  "generated": "2026-11-26",
+  "source": {
+    "repo": "https://github.com/smilinTux/skstacks",
+    "commit": "549efa87",
+    "release": "skstacks-v2.26.32"
   },
-  {
-    "name": "skca",
-    "layer": "core",
-    "capability": "Internal PKI / mTLS \u2014 ACME for internal certs, X.509 mTLS service identity, SSH CA",
-    "provider": "step-ca (ACME for internal endpoints, X.509 mTLS, SSH certificate authority)",
-    "brief": "Internal certificate authority issuing TLS/SSH certs for service-to-service mTLS via ACME.",
-    "status": "live-proven",
-    "image": "smallstep/step-ca:0.27.4",
-    "repo": "https://github.com/smilinTux/skca",
-    "skworld_site": "https://skca.skworld.io"
-  },
-  {
-    "name": "sksec",
-    "layer": "core",
-    "capability": "Threat defense \u2014 reputation, runtime, host, and network intrusion detection",
-    "provider": "CrowdSec (reputation/bouncer) + Falco (runtime eBPF) + Wazuh (HIDS/FIM/SIEM) + Suricata (NIDS)",
-    "brief": "Layered threat defense combining reputation blocking, runtime eBPF detection, and intrusion monitoring.",
-    "status": "live-proven",
-    "image": "crowdsecurity/crowdsec:latest",
-    "repo": "https://github.com/smilinTux/sksec",
-    "skworld_site": "https://sksec.skworld.io"
-  },
-  {
-    "name": "sksso",
-    "layer": "core",
-    "capability": "Identity / SSO \u2014 human SSO (OIDC/SAML/LDAP) + agent service-auth upgrade path",
-    "provider": "Authentik (human SSO, OIDC/SAML/LDAP); Zitadel as M2M/agent service-auth upgrade path",
-    "brief": "Single sign-on for humans (OIDC/SAML/LDAP) plus service-account identity for agents.",
-    "status": "live-proven",
-    "image": "ghcr.io/goauthentik/server:2024.10",
-    "repo": "https://github.com/smilinTux/sksso",
-    "skworld_site": "https://sksso.skworld.io"
-  },
-  {
-    "name": "skvault",
-    "layer": "core",
-    "capability": "Secrets management \u2014 pluggable backend: vault-file / HashiCorp Vault / CapAuth",
-    "provider": "SKSecretBackend interface (secrets/interface.py): OpenBao (HA Raft, default) / vault-file (AES-256) / SOPS+age / CapAuth (PGP); HashiCorp Vault = compatible alt",
-    "brief": "Pluggable secrets manager that stores and rotates credentials behind a single interface.",
-    "status": "live-proven",
-    "image": "openbao/openbao:2.5.4",
-    "repo": "https://github.com/smilinTux/skvault",
-    "skworld_site": "https://skvault.skworld.io"
-  },
-  {
-    "name": "skwaf",
-    "layer": "core",
-    "capability": "Web application firewall \u2014 OWASP Top 10 protection at the ingress layer",
-    "provider": "Coraza WAF + OWASP CRS v4 (Traefik WASM plugin; BunkerWeb as GUI alternative)",
-    "brief": "Web application firewall enforcing OWASP Top-10 protection at the edge (descriptor-only policy).",
-    "status": "live-proven",
-    "image": null,
-    "repo": "https://github.com/smilinTux/skwaf",
-    "skworld_site": "https://skwaf.skworld.io"
-  },
-  {
-    "name": "skbus",
-    "layer": "comms",
-    "capability": "Machine A2A event bus \u2014 durable pub/sub for agent-to-agent messaging",
-    "provider": "NATS JetStream (10 MB binary, sub-millisecond latency, built-in persistence)",
-    "brief": "Durable NATS JetStream event bus carrying agent-to-agent and service messages.",
-    "status": "live-proven",
-    "image": "nats:2.10-alpine",
-    "repo": "https://github.com/smilinTux/skbus",
-    "skworld_site": "https://skbus.skworld.io"
-  },
-  {
-    "name": "skchat",
-    "layer": "comms",
-    "capability": "Human/agent chat + federation \u2014 Matrix E2EE with federation bridge",
-    "provider": "Tuwunel (Apache-2.0, Rust single-binary Matrix homeserver; conduwuit successor)",
-    "brief": "Self-hosted Matrix chat homeserver with end-to-end encryption and federation for humans and agents.",
-    "status": "live-proven",
-    "image": "ghcr.io/matrix-construct/tuwunel:latest",
-    "repo": "https://github.com/smilinTux/skchat",
-    "skworld_site": "https://skchat.skworld.io"
-  },
-  {
-    "name": "skcomms",
-    "layer": "comms",
-    "capability": "Multi-channel outbound transport \u2014 subscribes to skbus, routes to external channels",
-    "provider": "skcomms (sovereign, custom) \u2014 subscribes to NATS JetStream skbus",
-    "brief": "Multi-channel outbound transport that subscribes to the bus and routes messages to email, Telegram, and more.",
-    "status": "stub",
-    "image": "ghcr.io/smilintux/skcomms:latest",
-    "repo": "https://github.com/smilinTux/skcomms",
-    "skworld_site": "https://skcomms.skworld.io"
-  },
-  {
-    "name": "sksignaling",
-    "layer": "comms",
-    "capability": "Talk HPB \u2014 WebRTC signaling for scaled calls",
-    "provider": "nextcloud-spreed-signaling (struktur)",
-    "brief": "WebRTC signaling backend (Talk HPB) that scales group voice and video calls.",
-    "status": "deploy-ready",
-    "image": "ghcr.io/strukturag/nextcloud-spreed-signaling:2.1.1",
-    "repo": "https://github.com/smilinTux/sksignaling",
-    "skworld_site": "https://sksignaling.skworld.io"
-  },
-  {
-    "name": "skvoice",
-    "layer": "comms",
-    "capability": "Voice/video RTC \u2014 SFU for agent-in-call (STT+TTS+LLM room participants)",
-    "provider": "LiveKit (SFU + Agents framework: STT=Whisper, TTS=Chatterbox, LLM=Ollama)",
-    "brief": "LiveKit SFU for real-time voice/video rooms, including agents joining calls with STT/TTS/LLM.",
-    "status": "stub",
-    "image": "livekit/livekit-server:v1.8",
-    "repo": "https://github.com/smilinTux/skvoice",
-    "skworld_site": "https://skvoice.skworld.io"
-  },
-  {
-    "name": "skbackup",
-    "layer": "compute",
-    "capability": "Backup \u2014 cluster state + persistent-volume data to sovereign object storage",
-    "provider": "Velero (\u2192 skobject S3; restic/kopia node-agent for filesystem PV data)",
-    "brief": "Cluster and persistent-volume backup to sovereign S3 object storage via Velero.",
-    "status": "stub",
-    "image": null,
-    "repo": "https://github.com/smilinTux/skbackup",
-    "skworld_site": "https://skbackup.skworld.io"
-  },
-  {
-    "name": "skblock",
-    "layer": "compute",
-    "capability": "Block storage \u2014 replicated persistent volumes (RWO)",
-    "provider": "Longhorn (Apache-2.0, K8s-native synchronous replication + S3 backup)",
-    "brief": "Replicated block storage providing durable read-write-once persistent volumes (Longhorn).",
-    "status": "stub",
-    "image": null,
-    "repo": "https://github.com/smilinTux/skblock",
-    "skworld_site": "https://skblock.skworld.io"
-  },
-  {
-    "name": "skcache",
-    "layer": "compute",
-    "capability": "Cache / KV store \u2014 ephemeral data, session state, pub/sub",
-    "provider": "Valkey (BSD-3, drop-in Redis replacement); DragonflyDB as scale alternative",
-    "brief": "In-memory key/value cache and pub/sub for sessions and ephemeral state (Valkey).",
-    "status": "live-proven",
-    "image": "valkey/valkey:8-alpine",
-    "repo": "https://github.com/smilinTux/skcache",
-    "skworld_site": "https://skcache.skworld.io"
-  },
-  {
-    "name": "skdata",
-    "layer": "compute",
-    "capability": "Relational + vector + graph + full-text search \u2014 consolidated Postgres multitool",
-    "provider": "PostgreSQL 17 (skmem-pg:pg17-bm25-age image: pgvector + ParadeDB pg_search + Apache AGE \u2014 one engine)",
-    "brief": "Consolidated Postgres providing relational, vector, graph, and full-text search in one engine.",
-    "status": "live-proven",
-    "image": "postgres:17-alpine",
-    "repo": "https://github.com/smilinTux/skdata",
-    "skworld_site": "https://skdata.skworld.io"
-  },
-  {
-    "name": "skfile",
-    "layer": "compute",
-    "capability": "Shared file storage \u2014 POSIX RWX, many concurrent writers",
-    "provider": "JuiceFS CE (Apache-2.0; data=skobject S3, metadata=PostgreSQL/skdata)",
-    "brief": "Shared POSIX file storage allowing many concurrent writers over object-backed JuiceFS.",
-    "status": "stub",
-    "image": null,
-    "repo": "https://github.com/smilinTux/skfile",
-    "skworld_site": "https://skfile.skworld.io"
-  },
-  {
-    "name": "skfiles",
-    "layer": "compute",
-    "capability": "File sync and collaboration \u2014 web UI + peer-to-peer device sync + rich collaboration plane (Office, Talk, notify_push, Whiteboard)",
-    "provider": "Nextcloud (collaboration/WebDAV) + Syncthing (p2p sync)",
-    "brief": "Nextcloud-based file sync and collaboration with a web UI and peer-to-peer device sync.",
-    "status": "stub",
-    "image": null,
-    "repo": "https://github.com/smilinTux/skfiles",
-    "skworld_site": "https://skfiles.skworld.io"
-  },
-  {
-    "name": "skflow",
-    "layer": "compute",
-    "capability": "Automation / workflow \u2014 visual and code-first agent + human-in-loop pipelines",
-    "provider": "Windmill (AGPLv3, OSI-open, code-first; visual + scripts)",
-    "brief": "Code-first and visual automation/workflow engine for agent and human jobs (Windmill).",
-    "status": "stub",
-    "image": null,
-    "repo": "https://github.com/smilinTux/skflow",
-    "skworld_site": "https://skflow.skworld.io"
-  },
-  {
-    "name": "skmodel",
-    "layer": "compute",
-    "capability": "LLM / inference serving \u2014 stable seam for local and remote model serving",
-    "provider": "Ollama (simple, wide model support); vLLM (high-throughput production serving)",
-    "brief": "LLM inference serving layer giving a stable seam for local and remote models (Ollama/vLLM).",
-    "status": "stub",
-    "image": "ollama/ollama:latest",
-    "repo": "https://github.com/smilinTux/skmodel",
-    "skworld_site": "https://skmodel.skworld.io"
-  },
-  {
-    "name": "skmon",
-    "layer": "compute",
-    "capability": "Observability \u2014 metrics, logs, traces with OTel standard",
-    "provider": "Prometheus (metrics) + Grafana (dashboards) + VictoriaLogs (logs, Apache-2.0, replaces Loki) + Tempo (traces) + Grafana Alloy (OTel)",
-    "brief": "Observability stack for metrics, logs, and traces using the OpenTelemetry standard.",
-    "status": "stub",
-    "image": null,
-    "repo": "https://github.com/smilinTux/skmon",
-    "skworld_site": "https://skmon.skworld.io"
-  },
-  {
-    "name": "skobject",
-    "layer": "compute",
-    "capability": "Object / S3 storage \u2014 blob storage with S3-compatible API",
-    "provider": "Garage (AGPLv3, single binary, S3-compatible); SeaweedFS for Object-Lock / large scale",
-    "brief": "S3-compatible object/blob storage from a single Garage binary.",
-    "status": "live-proven",
-    "image": "dxflrs/garage:v1.0.1",
-    "repo": "https://github.com/smilinTux/skobject",
-    "skworld_site": "https://skobject.skworld.io"
-  },
-  {
-    "name": "skoffice",
-    "layer": "compute",
-    "capability": "Online office (WOPI) \u2014 collaborative document editing",
-    "provider": "Collabora Online (CODE)",
-    "brief": "Collaborative online document editing via Collabora Online (WOPI).",
-    "status": "live-proven",
-    "image": "collabora/code:24.04.10.1.1",
-    "repo": "https://github.com/smilinTux/skoffice",
-    "skworld_site": "https://skoffice.skworld.io"
-  },
-  {
-    "name": "skpulse",
-    "layer": "compute",
-    "capability": "Uptime / external status monitoring \u2014 endpoint probing and public status page",
-    "provider": "Gatus (config-as-code uptime, feeds skops ITIL) + Prometheus Blackbox Exporter (internal probing)",
-    "brief": "External uptime monitoring that probes endpoints and feeds status into ITIL ops.",
-    "status": "live-proven",
-    "image": "ghcr.io/twin/gatus:v5.36.0",
-    "repo": "https://github.com/smilinTux/skpulse",
-    "skworld_site": "https://skpulse.skworld.io"
-  },
-  {
-    "name": "skwhiteboard",
-    "layer": "compute",
-    "capability": "Collaborative whiteboard backend (ws)",
-    "provider": "Nextcloud Whiteboard server (Node ws)",
-    "brief": "Real-time collaborative whiteboard backend over websockets.",
-    "status": "live-proven",
-    "image": "ghcr.io/nextcloud-releases/whiteboard:v1.5.9",
-    "repo": "https://github.com/smilinTux/skwhiteboard",
-    "skworld_site": "https://skwhiteboard.skworld.io"
-  },
-  {
-    "name": "skcicd",
-    "layer": "cloud",
-    "capability": "CI/CD \u2014 container image build + GitOps deployment pipeline",
-    "provider": "Forgejo Actions (CI) + Ansible (node/Swarm CD) + ArgoCD (K8s GitOps)",
-    "brief": "CI/CD pipeline building container images and deploying via GitOps (Forgejo Actions + Ansible).",
-    "status": "stub",
-    "image": "codeberg.org/forgejo/forgejo:10",
-    "repo": "https://github.com/smilinTux/skcicd",
-    "skworld_site": "https://skcicd.skworld.io"
-  },
-  {
-    "name": "skdns",
-    "layer": "cloud",
-    "capability": "Sovereign DNS \u2014 internal authoritative + resolver/filter, split-horizon, DNS-01 ACME",
-    "provider": "Technitium (self-host: authoritative + recursive + filtering + DoH/DoT/DoQ, one binary)",
-    "brief": "Sovereign DNS server providing internal authoritative records plus a filtering resolver.",
-    "status": "deploy-ready",
-    "image": "technitium/dns-server:13.6.0",
-    "repo": "https://github.com/smilinTux/skdns",
-    "skworld_site": "https://skdns.skworld.io"
-  },
-  {
-    "name": "skdweb",
-    "layer": "cloud",
-    "capability": "Decentralized availability + sovereign naming \u2014 IPFS pinning + seizure-proof names",
-    "provider": "IPFS + IPFS-Cluster (content availability) + Handshake HNS / ENS (sovereign naming)",
-    "brief": "Decentralized content availability and sovereign naming over IPFS pinning.",
-    "status": "stub",
-    "image": "ipfs/kubo:v0.33.2",
-    "repo": "https://github.com/smilinTux/skdweb",
-    "skworld_site": "https://skdweb.skworld.io"
-  },
-  {
-    "name": "skfence",
-    "layer": "cloud",
-    "capability": "Edge / ingress \u2014 TLS termination, rate limiting, socket proxy",
-    "provider": "Traefik v3 + Coraza WAF (Traefik WASM plugin; Keepalived for Swarm HA / kube-vip for K8s)",
-    "brief": "Edge ingress/reverse proxy handling TLS termination, rate limiting, and WAF (Traefik v3).",
-    "status": "live-proven",
-    "image": "traefik:v3.3",
-    "repo": "https://github.com/smilinTux/skfence",
-    "skworld_site": "https://skfence.skworld.io"
-  },
-  {
-    "name": "skinfra",
-    "layer": "cloud",
-    "capability": "Infrastructure provisioning \u2014 cloud/on-prem VM and network lifecycle via IaC",
-    "provider": "OpenTofu (Terraform-compatible, BSL-free)",
-    "brief": "Infrastructure-as-code provisioning of VMs and networks via OpenTofu.",
-    "status": "stub",
-    "image": null,
-    "repo": "https://github.com/smilinTux/skinfra",
-    "skworld_site": "https://skinfra.skworld.io"
-  },
-  {
-    "name": "skmesh",
-    "layer": "cloud",
-    "capability": "Overlay mesh / tunnels \u2014 sovereign WireGuard networking across nodes",
-    "provider": "Netbird (self-hosted, sovereign target); Tailscale for ease + bootstrap; Pangolin as sovereign cloudflared replacement",
-    "brief": "Sovereign WireGuard overlay mesh connecting nodes across networks (Netbird).",
-    "status": "stub",
-    "image": "netbirdio/netbird:0.36.7",
-    "repo": "https://github.com/smilinTux/skmesh",
-    "skworld_site": "https://skmesh.skworld.io"
-  },
-  {
-    "name": "skturn",
-    "layer": "apps",
-    "capability": "WebRTC media relay \u2014 TURN/STUN for NAT traversal",
-    "provider": "coturn 4.6 (host-published edge node; DNS grey-cloud / DNS-only)",
-    "brief": "TURN/STUN media relay enabling WebRTC NAT traversal (coturn).",
-    "status": "live-proven",
-    "image": "coturn/coturn:4.6",
-    "repo": "https://github.com/smilinTux/skturn",
-    "skworld_site": "https://skturn.skworld.io"
-  }
-]
+  "categories": [
+    {
+      "id": "edge",
+      "label": "Edge and security",
+      "blurb": "Ingress, TLS, floating VIPs, threat blocking, CVE detection and patching."
+    },
+    {
+      "id": "identity",
+      "label": "Identity and access",
+      "blurb": "Single sign-on, mesh VPN and remote access."
+    },
+    {
+      "id": "ops",
+      "label": "Observability and operations",
+      "blurb": "Metrics, logs, alerts, uptime, flow visibility, health checks and cluster UIs."
+    },
+    {
+      "id": "data",
+      "label": "Data and storage",
+      "blurb": "Object storage, databases, vectors, graphs, registries, sync and backup."
+    },
+    {
+      "id": "collab",
+      "label": "Collaboration and productivity",
+      "blurb": "Files, wiki, tasks, mail, PDFs, Solid pods and published pages."
+    },
+    {
+      "id": "automation",
+      "label": "Automation and development",
+      "blurb": "Git and CI, workflow engines, infrastructure as code and service workers."
+    },
+    {
+      "id": "search",
+      "label": "Search and AI",
+      "blurb": "Private metasearch and an AI search front end."
+    },
+    {
+      "id": "media",
+      "label": "Media and home",
+      "blurb": "Photos, streaming, media fetching, home and fitness tracking."
+    }
+  ],
+  "services": [
+    {
+      "name": "skfence",
+      "tier": "core",
+      "category": "edge",
+      "purpose": "Single-node Traefik edge (reverse proxy/TLS)",
+      "upstream": "Traefik `v3.7.19`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/core/skfence",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/core/skfence"
+    },
+    {
+      "name": "skfenceha",
+      "tier": "core",
+      "category": "edge",
+      "purpose": "HA multi-manager Traefik edge",
+      "upstream": "Traefik `v3.7.19`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/core/skfenceha",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/core/skfenceha"
+    },
+    {
+      "name": "skha",
+      "tier": "core",
+      "category": "edge",
+      "purpose": "Keepalived VRRP floating VIP",
+      "upstream": "keepalived (apt, unpinned)",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/core/skha",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/core/skha"
+    },
+    {
+      "name": "sksec",
+      "tier": "core",
+      "category": "edge",
+      "purpose": "CrowdSec agent + Traefik bouncer",
+      "upstream": "crowdsec `v1.6.11` + bouncer `0.5.0`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/core/sksec",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/core/sksec"
+    },
+    {
+      "name": "skaegis",
+      "tier": "optional",
+      "category": "edge",
+      "purpose": "Continuous CVE detection: the Detect step of the suite (Defend sksec, Detect skaegis, Remediate skpatch)",
+      "upstream": "Wazuh `4.14.10` indexer + manager + dashboard (upstream, digest-pinned)",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skaegis",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skaegis"
+    },
+    {
+      "name": "skbackup",
+      "tier": "optional",
+      "category": "data",
+      "purpose": "Snapshots, per-app copies, dump hooks, restic offsite, restore tests, alerts on the storage host",
+      "upstream": "sanoid + rsync + restic (host packages)",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skbackup",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skbackup"
+    },
+    {
+      "name": "skboard",
+      "tier": "optional",
+      "category": "collab",
+      "purpose": "Vikunja task board (sqlite)",
+      "upstream": "Vikunja `2.8.0`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skboard",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skboard"
+    },
+    {
+      "name": "skbom",
+      "tier": "optional",
+      "category": "edge",
+      "purpose": "OWASP Dependency-Track (SBOM store + CVE matching), the image-patching half of the skpatch program",
+      "upstream": "Dependency-Track `4.14.7` apiserver + frontend, Postgres `17.7` (all digest-pinned)",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skbom",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skbom"
+    },
+    {
+      "name": "skbook",
+      "tier": "optional",
+      "category": "collab",
+      "purpose": "BookStack wiki + MariaDB",
+      "upstream": "BookStack `v26.09-ls285`, MariaDB `10.11`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skbook",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skbook"
+    },
+    {
+      "name": "skdash",
+      "tier": "optional",
+      "category": "ops",
+      "purpose": "Dashy service dashboard, Traefik-API discovery",
+      "upstream": "Dashy `4.7.10`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skdash",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skdash"
+    },
+    {
+      "name": "skdesk",
+      "tier": "optional",
+      "category": "identity",
+      "purpose": "RustDesk relay (hbbs/hbbr)",
+      "upstream": "rustdesk-server (digest-pinned)",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skdesk",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skdesk"
+    },
+    {
+      "name": "skfetch",
+      "tier": "optional",
+      "category": "media",
+      "purpose": "Sonarr, Radarr, Lidarr, Prowlarr and qBittorrent behind a VPN",
+      "upstream": "qmcgaw/gluetun, lscr.io/linuxserver/qbittorrent, lscr.io/linuxserver/prowlarr, lscr.io/linuxserver/sonarr and more",
+      "in_catalog_doc": false,
+      "path": "v1/ansible/optional/skfetch",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skfetch"
+    },
+    {
+      "name": "skflow",
+      "tier": "optional",
+      "category": "automation",
+      "purpose": "Windmill workflow engine shared by tenant stacks (flows, schedules, webhooks, approvals)",
+      "upstream": "Windmill `1.882.0` + Postgres `17.12` (digest-pinned)",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skflow",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skflow"
+    },
+    {
+      "name": "skform",
+      "tier": "optional",
+      "category": "automation",
+      "purpose": "OpenTofu CLI container (idle, `docker exec`-driven)",
+      "upstream": "OpenTofu `1.10.7`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skform",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skform"
+    },
+    {
+      "name": "skgallery",
+      "tier": "optional",
+      "category": "media",
+      "purpose": "Immich photo/video management",
+      "upstream": "Immich `v3.4.2` + pgvector/vectorchord Postgres",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skgallery",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skgallery"
+    },
+    {
+      "name": "skgit",
+      "tier": "optional",
+      "category": "automation",
+      "purpose": "Forgejo git + CI runners",
+      "upstream": "Forgejo `17.0.2`, runner `11.1.2`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skgit",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skgit"
+    },
+    {
+      "name": "skgraph",
+      "tier": "optional",
+      "category": "data",
+      "purpose": "FalkorDB graph database (Redis protocol)",
+      "upstream": "FalkorDB `v4.18.8`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skgraph",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skgraph"
+    },
+    {
+      "name": "skgym",
+      "tier": "optional",
+      "category": "media",
+      "purpose": "openGym gym and body-weight tracker (passkeys, PWA)",
+      "upstream": "openGym `1.4.5` api + web (upstream, digest-pinned)",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skgym",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skgym"
+    },
+    {
+      "name": "skhealth",
+      "tier": "optional",
+      "category": "ops",
+      "purpose": "Lightweight infrastructure health checks with alerts",
+      "upstream": "",
+      "in_catalog_doc": false,
+      "path": "v1/ansible/optional/skhealth",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skhealth"
+    },
+    {
+      "name": "skhome",
+      "tier": "optional",
+      "category": "media",
+      "purpose": "HomeCenter home/property/vehicle/health manager",
+      "upstream": "HomeCenter `3.3.0` app (upstream, digest-pinned)",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skhome",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skhome"
+    },
+    {
+      "name": "skhub",
+      "tier": "optional",
+      "category": "collab",
+      "purpose": "Nextcloud file sync/collaboration",
+      "upstream": "Nextcloud `31.0.14`, MariaDB `10.11.7`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skhub",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skhub"
+    },
+    {
+      "name": "skmail",
+      "tier": "optional",
+      "category": "collab",
+      "purpose": "Full SMTP/IMAP mail server",
+      "upstream": "docker-mailserver `16.0.1`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skmail",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skmail"
+    },
+    {
+      "name": "skmem-pg",
+      "tier": "optional",
+      "category": "data",
+      "purpose": "Postgres 17 + pgvector + pg_search + AGE",
+      "upstream": "Postgres 17 custom image `pg17-bm25-age`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skmem-pg",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skmem-pg"
+    },
+    {
+      "name": "skmesh",
+      "tier": "optional",
+      "category": "identity",
+      "purpose": "Netbird self-hosted WireGuard mesh VPN",
+      "upstream": "netbird `0.83.2` (mgmt/signal/relay), dashboard `v2.98.0`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skmesh",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skmesh"
+    },
+    {
+      "name": "skmon",
+      "tier": "optional",
+      "category": "ops",
+      "purpose": "Observability stack (metrics, logs, alerts, optional profiles)",
+      "upstream": "VictoriaMetrics `v1.155.0`, Grafana Alloy `v1.21.3`, Loki `3.7.9`, Grafana `13.3.0`, Alertmanager `v0.35.0` (all digest-pinned, `pins.yml`)",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skmon",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skmon"
+    },
+    {
+      "name": "sknet",
+      "tier": "optional",
+      "category": "ops",
+      "purpose": "Network flow visibility: Akvorado flow collector and console (Kafka + ClickHouse), optional live view",
+      "upstream": "Akvorado `2026.10.1`, Kafka `4.3.1`, ClickHouse `26.8`, Caddy `2.11.9` (tag-pinned)",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/sknet",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/sknet"
+    },
+    {
+      "name": "skorch",
+      "tier": "optional",
+      "category": "automation",
+      "purpose": "n8n workflow automation",
+      "upstream": "n8n (digest-pinned) + pgvector Postgres",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skorch",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skorch"
+    },
+    {
+      "name": "skpages",
+      "tier": "optional",
+      "category": "collab",
+      "purpose": "Agent-published HTML pages",
+      "upstream": "caddy:2.11.9-alpine",
+      "in_catalog_doc": false,
+      "path": "v1/ansible/optional/skpages",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skpages"
+    },
+    {
+      "name": "skpatch-hosts",
+      "tier": "optional",
+      "category": "edge",
+      "purpose": "Linux update/patch dashboard (SSH, holds a key per estate); host half of the skpatch program",
+      "upstream": "linux-update-dashboard `2026.11.6` (upstream, digest-pinned)",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skpatch-hosts",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skpatch-hosts"
+    },
+    {
+      "name": "skpayment",
+      "tier": "optional",
+      "category": "automation",
+      "purpose": "Multi-app Stripe subscription gateway (FastAPI on uvicorn)",
+      "upstream": "smilintux/skpayment-runtime:py3.11-20261123",
+      "in_catalog_doc": false,
+      "path": "v1/ansible/optional/skpayment",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skpayment"
+    },
+    {
+      "name": "skpdf",
+      "tier": "optional",
+      "category": "collab",
+      "purpose": "Stirling-PDF toolkit",
+      "upstream": "Stirling-PDF `3.5.0`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skpdf",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skpdf"
+    },
+    {
+      "name": "skpeek",
+      "tier": "optional",
+      "category": "search",
+      "purpose": "SearXNG metasearch engine",
+      "upstream": "SearXNG (digest-pinned) + Valkey `8-alpine`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skpeek",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skpeek"
+    },
+    {
+      "name": "skpods",
+      "tier": "optional",
+      "category": "collab",
+      "purpose": "Solid pod hosting (WebID + storage per user); engine `nextcloud`: a slim standalone Nextcloud with only the Solid app",
+      "upstream": "instance-built engine image (official Nextcloud + Solid app, digest-pinned), Postgres `17.7`, Redis `8.10.3`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skpods",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skpods"
+    },
+    {
+      "name": "skport",
+      "tier": "optional",
+      "category": "ops",
+      "purpose": "Portainer CE (Swarm web UI)",
+      "upstream": "Portainer CE `2.45.4`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skport",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skport"
+    },
+    {
+      "name": "skpulse",
+      "tier": "optional",
+      "category": "ops",
+      "purpose": "Uptime Kuma status monitoring",
+      "upstream": "Uptime Kuma `2.5.5`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skpulse",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skpulse"
+    },
+    {
+      "name": "skrac",
+      "tier": "optional",
+      "category": "identity",
+      "purpose": "MeshCentral on the swarm: remote access and device management",
+      "upstream": "ghcr.io/ylianst/meshcentral:1.3.1",
+      "in_catalog_doc": false,
+      "path": "v1/ansible/optional/skrac",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skrac"
+    },
+    {
+      "name": "skreg",
+      "tier": "optional",
+      "category": "data",
+      "purpose": "Docker Registry v2",
+      "upstream": "`registry:2` (floating)",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skreg",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skreg"
+    },
+    {
+      "name": "sksec-web",
+      "tier": "optional",
+      "category": "edge",
+      "purpose": "CrowdSec Web UI",
+      "upstream": "ghcr.io/theduffman85/crowdsec-web-ui:2026.11.12",
+      "in_catalog_doc": false,
+      "path": "v1/ansible/optional/sksec-web",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/sksec-web"
+    },
+    {
+      "name": "skseek",
+      "tier": "optional",
+      "category": "search",
+      "purpose": "Perplexica AI search UI",
+      "upstream": "Perplexica (digest-pinned)",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skseek",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skseek"
+    },
+    {
+      "name": "sksso",
+      "tier": "optional",
+      "category": "identity",
+      "purpose": "Authentik OIDC identity provider",
+      "upstream": "Authentik `2024.4.2`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/sksso",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/sksso"
+    },
+    {
+      "name": "skstor",
+      "tier": "optional",
+      "category": "data",
+      "purpose": "Garage S3-compatible object storage",
+      "upstream": "Garage `v2.4.1` (digest-pinned)",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skstor",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skstor"
+    },
+    {
+      "name": "skstream",
+      "tier": "optional",
+      "category": "media",
+      "purpose": "Plex + Real-Debrid (DUMB)",
+      "upstream": "plexinc/pms-docker:1.43.5.11079-b3b13e506, kometateam/kometa:v2.5.5",
+      "in_catalog_doc": false,
+      "path": "v1/ansible/optional/skstream",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skstream"
+    },
+    {
+      "name": "sksync",
+      "tier": "optional",
+      "category": "data",
+      "purpose": "Syncthing continuous file sync",
+      "upstream": "Syncthing `2.0.13` (hardcoded)",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/sksync",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/sksync"
+    },
+    {
+      "name": "skvector",
+      "tier": "optional",
+      "category": "data",
+      "purpose": "Qdrant vector database",
+      "upstream": "Qdrant `v1.17.0`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skvector",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skvector"
+    },
+    {
+      "name": "skwhoami",
+      "tier": "optional",
+      "category": "ops",
+      "purpose": "traefik/whoami echo/test service",
+      "upstream": "traefik/whoami `v1.12.0`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skwhoami",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skwhoami"
+    },
+    {
+      "name": "skwrit",
+      "tier": "optional",
+      "category": "automation",
+      "purpose": "Matter engine worker (drafting with gates, release, publishing to Nextcloud)",
+      "upstream": "per-site image, digest-pinned; optional nextcloud-mcp `0.218.0`",
+      "in_catalog_doc": true,
+      "path": "v1/ansible/optional/skwrit",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skwrit"
+    }
+  ],
+  "v2_descriptors": [
+    {
+      "name": "capauth",
+      "layer": "core",
+      "purpose": "Sovereign machine-to-machine auth: PGP-based CapAuth for agent identity and secret access without OAuth.",
+      "provider": "CapAuth (sovereign PGP-based; skcapstone MCP integration)",
+      "image": "ghcr.io/smilintux/capauth:latest",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/core/capauth"
+    },
+    {
+      "name": "skca",
+      "layer": "core",
+      "purpose": "Internal PKI / mTLS: step-ca for ACME internal cert issuance, X.509 mTLS service identity, and SSH CA.",
+      "provider": "step-ca (ACME for internal endpoints, X.509 mTLS, SSH certificate authority)",
+      "image": "smallstep/step-ca:0.30.2",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/core/skca"
+    },
+    {
+      "name": "sksec",
+      "layer": "core",
+      "purpose": "Threat defense: CrowdSec (reputation + bouncer) + Falco (runtime/eBPF) + Wazuh (HIDS/FIM/SIEM) + Suricata (NIDS).",
+      "provider": "CrowdSec (reputation/bouncer) + Falco (runtime eBPF) + Wazuh (HIDS/FIM/SIEM) + Suricata (NIDS)",
+      "image": "crowdsecurity/crowdsec:latest",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/core/sksec"
+    },
+    {
+      "name": "sksso",
+      "layer": "core",
+      "purpose": "Identity / SSO: Authentik for human SSO (OIDC/SAML/LDAP); Zitadel path for agent/M2M service auth.",
+      "provider": "Authentik (human SSO, OIDC/SAML/LDAP); Zitadel as M2M/agent service-auth upgrade path",
+      "image": "ghcr.io/goauthentik/server:2026.8",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/core/sksso"
+    },
+    {
+      "name": "skvault",
+      "layer": "core",
+      "purpose": "Secrets management: the SKSecretBackend port; vault-file / HashiCorp Vault / CapAuth adapters, all sharing the same interface.",
+      "provider": "SKSecretBackend interface (secrets/interface.py): OpenBao (HA Raft, default) / vault-file (AES-256) / SOPS+age / CapAuth (PGP); HashiCorp Vault = compatible alt",
+      "image": "openbao/openbao:2.7.2",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/core/skvault"
+    },
+    {
+      "name": "skwaf",
+      "layer": "core",
+      "purpose": "Web application firewall: Coraza + OWASP CRS v4 as Traefik WASM plugin (zero new processes, config change only).",
+      "provider": "Coraza WAF + OWASP CRS v4 (Traefik WASM plugin; BunkerWeb as GUI alternative)",
+      "image": null,
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/core/skwaf"
+    },
+    {
+      "name": "skbus",
+      "layer": "comms",
+      "purpose": "Machine A2A event bus: NATS JetStream for sovereign agent-to-agent messaging (subjects: skos.agent.*.events).",
+      "provider": "NATS JetStream (10 MB binary, sub-millisecond latency, built-in persistence)",
+      "image": "nats:2.15-alpine",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/comms/skbus"
+    },
+    {
+      "name": "skchat",
+      "layer": "comms",
+      "purpose": "Human/agent chat + federation: Tuwunel (Apache-2.0 Rust Matrix homeserver, single binary, low-RAM). Keeps the Matrix protocol; swaps the homeserver off Synapse.",
+      "provider": "Tuwunel (Apache-2.0, Rust single-binary Matrix homeserver; conduwuit successor)",
+      "image": "ghcr.io/matrix-construct/tuwunel:latest",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/comms/skchat"
+    },
+    {
+      "name": "skcomms",
+      "layer": "comms",
+      "purpose": "Multi-channel outbound transport (17 paths): subscribes to skbus and routes messages to Telegram, email, SMS, etc.",
+      "provider": "skcomms (sovereign, custom): subscribes to NATS JetStream skbus",
+      "image": null,
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/comms/skcomms"
+    },
+    {
+      "name": "skvoice",
+      "layer": "comms",
+      "purpose": "Voice/video RTC: LiveKit SFU with Agents framework wiring STT+TTS+LLM as room participants.",
+      "provider": "LiveKit (SFU + Agents framework: STT=Whisper, TTS=Chatterbox, LLM=Ollama)",
+      "image": null,
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/comms/skvoice"
+    },
+    {
+      "name": "skbackup",
+      "layer": "compute",
+      "purpose": "Backup: Restic to Garage S3 backend (replaces Duplicati which has corruption-bug history).",
+      "provider": "Restic (→ Garage S3); Kopia (GUI alt) / Borg (fast local restore) as alternatives",
+      "image": null,
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/compute/skbackup"
+    },
+    {
+      "name": "skblock",
+      "layer": "compute",
+      "purpose": "HA replicated block storage (RWO) for databases / StatefulSets.",
+      "provider": "Longhorn (Apache-2.0, K8s-native synchronous replication + S3 backup)",
+      "image": null,
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/compute/skblock"
+    },
+    {
+      "name": "skcache",
+      "layer": "compute",
+      "purpose": "Cache / KV store: Valkey (BSD-3 Redis drop-in; Redis 8 went AGPLv3 May 2025: swap is 1 config change).",
+      "provider": "Valkey (BSD-3, drop-in Redis replacement); DragonflyDB as scale alternative",
+      "image": "valkey/valkey:9-alpine",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/compute/skcache"
+    },
+    {
+      "name": "skdata",
+      "layer": "compute",
+      "purpose": "Relational + vector + graph + search: Postgres 17 with pgvector, pg_search (BM25), and Apache AGE (graph).",
+      "provider": "PostgreSQL 17 (skmem-pg:pg17-bm25-age image: pgvector + ParadeDB pg_search + Apache AGE: one engine)",
+      "image": "postgres:17-alpine",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/compute/skdata"
+    },
+    {
+      "name": "skfile",
+      "layer": "compute",
+      "purpose": "HA shared POSIX file storage (RWX): JuiceFS over the object layer.",
+      "provider": "JuiceFS CE (Apache-2.0; data=skobject S3, metadata=PostgreSQL/skdata)",
+      "image": null,
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/compute/skfile"
+    },
+    {
+      "name": "skfiles",
+      "layer": "compute",
+      "purpose": "File sync and collaboration: Nextcloud for web/team collaboration + Syncthing for sovereign p2p device sync.",
+      "provider": "Nextcloud (collaboration/WebDAV) + Syncthing (p2p sync)",
+      "image": null,
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/compute/skfiles"
+    },
+    {
+      "name": "skflow",
+      "layer": "compute",
+      "purpose": "Automation / workflow: visual and code-first automation with human-in-the-loop support for agent pipelines.",
+      "provider": "Windmill (AGPLv3, OSI-open, code-first; visual + scripts)",
+      "image": "ghcr.io/windmill-labs/windmill:1.864.1@sha256:4ec428ad7e4e970e2e38b791fc9aaca658fa0b9142cd94b88c3112c0577e2836",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/compute/skflow"
+    },
+    {
+      "name": "skmodel",
+      "layer": "compute",
+      "purpose": "LLM / inference serving: stable seam for model-serving; Ollama for simplicity, vLLM for throughput at scale.",
+      "provider": "Ollama (simple, wide model support); vLLM (high-throughput production serving)",
+      "image": "ollama/ollama:latest",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/compute/skmodel"
+    },
+    {
+      "name": "skmon",
+      "layer": "compute",
+      "purpose": "Observability (metrics + logs + traces): Prometheus + Grafana + Loki + Tempo + Grafana Alloy (OTel collector).",
+      "provider": "Prometheus (metrics) + Grafana (dashboards) + Loki (logs; the strategic log store, Chef 2026-11-11) + Tempo (traces) + Grafana Alloy (OTel)",
+      "image": null,
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/compute/skmon"
+    },
+    {
+      "name": "skobject",
+      "layer": "compute",
+      "purpose": "Object / S3 storage: Garage (replaces archived MinIO Apr 2026; single binary, AGPLv3, S3-compatible).",
+      "provider": "Garage (AGPLv3, single binary, S3-compatible); SeaweedFS for Object-Lock / large scale",
+      "image": "dxflrs/garage:v2.5.0",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/compute/skobject"
+    },
+    {
+      "name": "skpulse",
+      "layer": "compute",
+      "purpose": "Uptime / status monitoring: Uptime-Kuma with Blackbox Exporter for internal endpoint probing.",
+      "provider": "Gatus (config-as-code uptime, feeds skops ITIL) + Prometheus Blackbox Exporter (internal probing)",
+      "image": null,
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/compute/skpulse"
+    },
+    {
+      "name": "skcicd",
+      "layer": "cloud",
+      "purpose": "CI/CD: Forgejo Actions (CI) + Ansible (Swarm/node CD) + ArgoCD (Kubernetes GitOps).",
+      "provider": "Forgejo Actions (CI) + Ansible (node/Swarm CD) + ArgoCD (K8s GitOps)",
+      "image": "codeberg.org/forgejo/forgejo:10",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/cloud/skcicd"
+    },
+    {
+      "name": "skdns",
+      "layer": "cloud",
+      "purpose": "Sovereign DNS: internal authoritative DNS + resolver/filter with split-horizon and DNS-01 ACME support.",
+      "provider": "Technitium (self-host: authoritative + recursive + filtering + DoH/DoT/DoQ, one binary)",
+      "image": null,
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/cloud/skdns"
+    },
+    {
+      "name": "skdweb",
+      "layer": "cloud",
+      "purpose": "Decentralized availability + sovereign naming: IPFS content pinning and HNS/ENS seizure-proof names.",
+      "provider": "IPFS + IPFS-Cluster (content availability) + Handshake HNS / ENS (sovereign naming)",
+      "image": null,
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/cloud/skdweb"
+    },
+    {
+      "name": "skfence",
+      "layer": "cloud",
+      "purpose": "Traefik v3 reverse proxy with ACME TLS, rate limiting, and socket proxy.",
+      "provider": "Traefik v3 + Coraza WAF (Traefik WASM plugin; Keepalived for Swarm HA / kube-vip for K8s)",
+      "image": "traefik:v3.6",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/cloud/skfence"
+    },
+    {
+      "name": "skinfra",
+      "layer": "cloud",
+      "purpose": "Infrastructure provisioning: OpenTofu modules for Hetzner, Proxmox, and Cloudflare targets.",
+      "provider": "OpenTofu (Terraform-compatible, BSL-free)",
+      "image": null,
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/cloud/skinfra"
+    },
+    {
+      "name": "skmesh",
+      "layer": "cloud",
+      "purpose": "Overlay mesh / tunnel: sovereign WireGuard-based networking across nodes.",
+      "provider": "Netbird (self-hosted, sovereign target); Tailscale for ease + bootstrap; Pangolin as sovereign cloudflared replacement",
+      "image": null,
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/cloud/skmesh"
+    },
+    {
+      "name": "skturn",
+      "layer": "apps",
+      "purpose": "WebRTC TURN/STUN media relay (coturn). Host-published edge service; the media plane that cannot traverse Traefik/cloudflared.",
+      "provider": "coturn 4.6 (host-published edge node; DNS grey-cloud / DNS-only)",
+      "image": null,
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v2/apps/skturn"
+    }
+  ]
+}

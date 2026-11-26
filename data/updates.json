@@ -1,40 +1,144 @@
 {
-  "generated": "2026-06-16",
+  "generated": "2026-11-26",
   "release": {
-    "tag": "skstacks-v2.8.0",
-    "name": "SKStacks v2.8.0",
-    "url": "https://github.com/smilinTux/skstacks/releases/latest",
-    "published": "2026-06-13",
-    "body": "v2 deploy stack: skrender (descriptor → deploy), k3d/Swarm/VM harness on RKE2, skbloom resumable installer (e2e proven), skred security loop, skwire v0.3.0."
+    "tag": "skstacks-v2.26.32",
+    "date": "2026-11-23",
+    "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.32",
+    "highlights": [
+      "skpayment: its own minimal runtime image",
+      "skmem-pg: image rebuilt on a pinned Debian 12 base",
+      "sksso: the `authentik@file` catch-all, created as code and bound to `skadmin` only",
+      "skfenceha: the ACME master label stays where it is",
+      "Image bumps for open CVEs"
+    ]
   },
+  "recent_releases": [
+    {
+      "tag": "skstacks-v2.26.32",
+      "date": "2026-11-23",
+      "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.32",
+      "highlights": [
+        "skpayment: its own minimal runtime image",
+        "skmem-pg: image rebuilt on a pinned Debian 12 base",
+        "sksso: the `authentik@file` catch-all, created as code and bound to `skadmin` only",
+        "skfenceha: the ACME master label stays where it is",
+        "Image bumps for open CVEs"
+      ]
+    },
+    {
+      "tag": "skstacks-v2.26.31",
+      "date": "2026-11-21",
+      "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.31",
+      "highlights": [
+        "skbom: web UI behind Authentik forward auth by default (`AUTH_MODE`)",
+        "skbom and skflow: Postgres first-init start period 300 s (#501)",
+        "skreg: the deployable role is back (#199, undone by #200)",
+        "skfenceha: traefik-certs-watch tasks no longer share one temp file",
+        "Portal tiles: bindings matched client-side, not by the list filter",
+        "skpatch-hosts: the registrar never registers a system twice (#503)",
+        "Dependency updates (Renovate, apps covered by the release gate)",
+        "libvirt-cluster: `apt_proxy` no longer sends https through the cache"
+      ]
+    },
+    {
+      "tag": "skstacks-v2.26.30",
+      "date": "2026-11-20",
+      "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.30",
+      "highlights": [
+        "Upgrade notes",
+        "skgit (#405, #469)",
+        "sksec-web (#470)",
+        "skbackup: a full pool can recover (#404)",
+        "skpatch-hosts (#401, #408, #476)",
+        "Machine and API traffic bypasses the error-pages middleware on every app (#410)",
+        "SSO access: conformance check and per-app resolver (#472, #475)",
+        "skgallery: Immich v3.4.2 by default (#485)"
+      ]
+    },
+    {
+      "tag": "skstacks-v2.26.29",
+      "date": "2026-11-19",
+      "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.29",
+      "highlights": [
+        "SKPages: agent-published HTML pages (new role, #461)",
+        "Traefik: no router names a TLS option (#463)",
+        "skha: the VIP fails over again, no ACME-master lock by default (#466)"
+      ]
+    },
+    {
+      "tag": "skstacks-v2.26.28",
+      "date": "2026-11-18",
+      "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.28",
+      "highlights": [
+        "skhub: the talk-hpb healthcheck in `TALK_TURN_EXTERNAL` mode (#458, #459)",
+        "skfence: `FORWARDING_TIMEOUTS` and `RESPONDING_TIMEOUTS` (#460)"
+      ]
+    },
+    {
+      "tag": "skstacks-v2.26.27",
+      "date": "2026-11-18",
+      "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.27",
+      "highlights": [
+        "skmon v2: the stack starts (healthchecks, Grafana provisioning)",
+        "skhub: the Talk HPB can use an external TURN (`TALK_TURN_EXTERNAL`)",
+        "skrac: agent watchdog for stale MeshCentral agent sessions",
+        "skgit: Forgejo pulls from code.forgejo.org (codeberg.org is NXDOMAIN)",
+        "skrac, skmesh: portal tiles open in a new tab",
+        "skmesh: the bundled coturn is reachable; skhub: Talk without the HPB",
+        "skpatch-hosts: the swarm upgrade gate covers workers and repairs stale vxlan devices",
+        "skpatch-hosts: single-manager swarm holds docker engine upgrades"
+      ]
+    }
+  ],
+  "changelog_url": "https://github.com/smilinTux/skstacks/blob/main/CHANGELOG.md",
   "commits": [
     {
-      "sha": "0000000",
-      "message": "skstacks v2 deploy stack: skrender + harness + skbloom + skred",
-      "url": "https://github.com/smilinTux/skstacks/commits/main",
-      "author": "Lumina",
-      "date": "2026-06-13"
+      "sha": "549efa87",
+      "date": "2026-11-26",
+      "message": "docs(skmesh): site isolation pattern (trusted core, one-way sites) (#538)",
+      "url": "https://github.com/smilinTux/skstacks/commit/549efa872f47b0c0e00d25c715dcbaca613e734c"
     },
     {
-      "sha": "0000000",
-      "message": "v2 stack validation: OpenBao/Tuwunel/Windmill ratified; ingress → Gateway API",
-      "url": "https://github.com/smilinTux/skstacks/commits/main",
-      "author": "Lumina",
-      "date": "2026-06-12"
+      "sha": "ff2be9ad",
+      "date": "2026-11-25",
+      "message": "feat(sknet): network flow visibility role (Akvorado, softflowd, ntopng) (#539)",
+      "url": "https://github.com/smilinTux/skstacks/commit/ff2be9ad1bd6cc71ea1a6967380df6f61528d775"
     },
     {
-      "sha": "0000000",
-      "message": "coverage-matrix: 15 of 31 services verified live-proven on RKE2",
-      "url": "https://github.com/smilinTux/skstacks/commits/main",
-      "author": "Lumina",
-      "date": "2026-06-11"
+      "sha": "842cd03e",
+      "date": "2026-11-25",
+      "message": "fix(skstream): hard-filter AUDIONEW and cam/telesync tags in cli_debrid (#532)",
+      "url": "https://github.com/smilinTux/skstacks/commit/842cd03e2aeb979d3b100826cb4211c808cefdf1"
     },
     {
-      "sha": "0000000",
-      "message": "skdata: consolidate Postgres (pgvector + pg_search BM25 + Apache AGE) into one engine",
-      "url": "https://github.com/smilinTux/skstacks/commits/main",
-      "author": "Lumina",
-      "date": "2026-06-10"
+      "sha": "4eb38600",
+      "date": "2026-11-25",
+      "message": "fix(skfetch): refresh the gluetun server list daily (#537)",
+      "url": "https://github.com/smilinTux/skstacks/commit/4eb386004d38aebfa441b579d3afdc8cc9000857"
+    },
+    {
+      "sha": "d93d3159",
+      "date": "2026-11-25",
+      "message": "feat(skmail): mail through Traefik TCP with PROXY protocol v2 (failover) (#536)",
+      "url": "https://github.com/smilinTux/skstacks/commit/d93d31599ea345ca79e2530ec91d06f95756b657"
+    },
+    {
+      "sha": "01e30441",
+      "date": "2026-11-25",
+      "message": "feat(templates): skpods-only path in the instance config template (#534)",
+      "url": "https://github.com/smilinTux/skstacks/commit/01e3044163bae8242d5c67b2f233d067427a5d84"
+    },
+    {
+      "sha": "698c4da4",
+      "date": "2026-11-25",
+      "message": "fix(skha): move node labels with the VIP so host-port services follow it (#535)",
+      "url": "https://github.com/smilinTux/skstacks/commit/698c4da4abf457263fe9880dd18bba953f9b8782"
+    },
+    {
+      "sha": "80eadb31",
+      "date": "2026-11-25",
+      "message": "feat(skpods): account hardening (antivirus, DB dumps, mail, quota, owner-only roots, Readme) (#533)",
+      "url": "https://github.com/smilinTux/skstacks/commit/80eadb318458e8f0d1bd50eadcd4e7d1abab8254"
     }
   ]
 }
