@@ -108,8 +108,8 @@ def clean(text: str) -> str:
     t = text.strip()
     t = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", t)
     t = re.sub(r"\*\*([^*]*)\*\*", r"\1", t)
-    t = t.replace(" — ", ": ").replace("—", ", ")
-    t = t.replace(" – ", " - ").replace("–", "-")
+    t = t.replace(" \u2014 ", ": ").replace("\u2014", ", ")
+    t = t.replace(" \u2013 ", " - ").replace("\u2013", "-")
     t = re.sub(r"\s+", " ", t)
     return t.strip()
 
@@ -332,7 +332,7 @@ def changelog_sections(repo: Path) -> dict[str, dict]:
         return out
     cur = None
     for line in cl.read_text(encoding="utf-8", errors="replace").splitlines():
-        m = re.match(r"^##\s+(skstacks-v[\d.]+)\s*(?:[-–—]\s*(\d{4}-\d{2}-\d{2}))?", line)
+        m = re.match(r"^##\s+(skstacks-v[\d.]+)\s*(?:[-\u2013\u2014]\s*(\d{4}-\d{2}-\d{2}))?", line)
         if m:
             cur = m.group(1)
             out[cur] = {"date": m.group(2), "highlights": []}
