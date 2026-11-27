@@ -1,9 +1,9 @@
 {
-  "generated": "2026-11-26",
+  "generated": "2026-11-27",
   "source": {
     "repo": "https://github.com/smilinTux/skstacks",
-    "commit": "d850b8f7",
-    "release": "skstacks-v2.26.33"
+    "commit": "b7435bea",
+    "release": "skstacks-v2.26.35"
   },
   "categories": [
     {
@@ -547,7 +547,7 @@
       "layer": "core",
       "purpose": "Secrets management: the SKSecretBackend port; vault-file / HashiCorp Vault / CapAuth adapters, all sharing the same interface.",
       "provider": "SKSecretBackend interface (secrets/interface.py): OpenBao (HA Raft, default) / vault-file (AES-256) / SOPS+age / CapAuth (PGP); HashiCorp Vault = compatible alt",
-      "image": "openbao/openbao:2.7.2",
+      "image": "openbao/openbao:2.7.3",
       "url": "https://github.com/smilinTux/skstacks/tree/main/v2/core/skvault"
     },
     {

@@ -1,21 +1,37 @@
 {
-  "generated": "2026-11-26",
+  "generated": "2026-11-27",
   "release": {
-    "tag": "skstacks-v2.26.33",
-    "date": "2026-11-23",
-    "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.33",
+    "tag": "skstacks-v2.26.35",
+    "date": "2026-11-27",
+    "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.35",
     "highlights": [
-      "sknet: network flow visibility (Akvorado), new optional role",
-      "skha: node labels follow the VIP (`skha.vip_node_labels`)",
-      "skmail: mail through Traefik with PROXY protocol v2 (`skmail.VIA_TRAEFIK`)",
-      "skgit: `ENABLE_INTERNAL_SIGNIN` knob (SSO-only web sign-in)",
-      "skpods: skpods.id branding (`THEME`)",
-      "templates: skpods-only instance config",
-      "skpods: new optional service for Solid pod hosting",
-      "skpayment: idna 3.15 (security)"
+      "sksso: one shared branded email set for every Authentik email (#467)",
+      "Image updates (Renovate)",
+      "sknet: views per estate",
+      "skmesh: the IdP manager keeps access once a tile binds the application"
     ]
   },
   "recent_releases": [
+    {
+      "tag": "skstacks-v2.26.35",
+      "date": "2026-11-27",
+      "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.35",
+      "highlights": [
+        "sksso: one shared branded email set for every Authentik email (#467)",
+        "Image updates (Renovate)",
+        "sknet: views per estate",
+        "skmesh: the IdP manager keeps access once a tile binds the application"
+      ]
+    },
+    {
+      "tag": "skstacks-v2.26.34",
+      "date": "2026-11-26",
+      "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.34",
+      "highlights": [
+        "skfenceha: NFS client source ports stay off host-mode 993 (#540)",
+        "sknet: exporters work with softflowd 1.0.0 (Ubuntu 22.04)"
+      ]
+    },
     {
       "tag": "skstacks-v2.26.33",
       "date": "2026-11-23",
@@ -72,76 +88,57 @@
         "SSO access: conformance check and per-app resolver (#472, #475)",
         "skgallery: Immich v3.4.2 by default (#485)"
       ]
-    },
-    {
-      "tag": "skstacks-v2.26.29",
-      "date": "2026-11-19",
-      "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.29",
-      "highlights": [
-        "SKPages: agent-published HTML pages (new role, #461)",
-        "Traefik: no router names a TLS option (#463)",
-        "skha: the VIP fails over again, no ACME-master lock by default (#466)"
-      ]
-    },
-    {
-      "tag": "skstacks-v2.26.28",
-      "date": "2026-11-18",
-      "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.28",
-      "highlights": [
-        "skhub: the talk-hpb healthcheck in `TALK_TURN_EXTERNAL` mode (#458, #459)",
-        "skfence: `FORWARDING_TIMEOUTS` and `RESPONDING_TIMEOUTS` (#460)"
-      ]
     }
   ],
   "changelog_url": "https://github.com/smilinTux/skstacks/blob/main/CHANGELOG.md",
   "commits": [
     {
-      "sha": "d850b8f7",
-      "date": "2026-11-26",
-      "message": "docs(release): skstacks-v2.26.34 release notes heading, skfenceha #540 entry (#542)",
-      "url": "https://github.com/smilinTux/skstacks/commit/d850b8f753bf44156f5c94592073b27207c97948"
+      "sha": "b7435bea",
+      "date": "2026-11-27",
+      "message": "fix(networks): register the skfenceha certs-watch internal subnets (#554 follow-up) (#555)",
+      "url": "https://github.com/smilinTux/skstacks/commit/b7435bea9ee838d8768af6b29efc4bf84f6e088a"
     },
     {
-      "sha": "c4e054ac",
-      "date": "2026-11-26",
-      "message": "fix(sknet): pass softflowd -N only where the binary has it (1.0.0 on 22.04 refuses it) (#541)",
-      "url": "https://github.com/smilinTux/skstacks/commit/c4e054ac8a19afc104083f5486f888217e65a115"
+      "sha": "8d1c340a",
+      "date": "2026-11-27",
+      "message": "fix(deploy): pre-pull stack images on the nodes before docker stack deploy (#548)",
+      "url": "https://github.com/smilinTux/skstacks/commit/8d1c340a19a41e02a010e34fe1ae41da9f289844"
     },
     {
-      "sha": "b752d4b8",
-      "date": "2026-11-25",
-      "message": "fix(skfenceha): keep NFS client source ports off host-mode 993 (#540)",
-      "url": "https://github.com/smilinTux/skstacks/commit/b752d4b8d5af75f9247b33bd0f0aa27809db11c4"
+      "sha": "ea2425e5",
+      "date": "2026-11-27",
+      "message": "fix(skmesh): answer 503, not the catch-all 403, while a backend is down; opt-in NetBird keep-up timer (#553)",
+      "url": "https://github.com/smilinTux/skstacks/commit/ea2425e50a5d539b8553f376e6026161c885932a"
     },
     {
-      "sha": "549efa87",
-      "date": "2026-11-26",
-      "message": "docs(skmesh): site isolation pattern (trusted core, one-way sites) (#538)",
-      "url": "https://github.com/smilinTux/skstacks/commit/549efa872f47b0c0e00d25c715dcbaca613e734c"
+      "sha": "15e97d45",
+      "date": "2026-11-27",
+      "message": "fix(overlays): no stack joins an implicit default network; new swarms use 10.200.0.0/16 (#554)",
+      "url": "https://github.com/smilinTux/skstacks/commit/15e97d45d12a05931b5fdc4f3feef4ad5d66dfef"
     },
     {
-      "sha": "ff2be9ad",
-      "date": "2026-11-25",
-      "message": "feat(sknet): network flow visibility role (Akvorado, softflowd, ntopng) (#539)",
-      "url": "https://github.com/smilinTux/skstacks/commit/ff2be9ad1bd6cc71ea1a6967380df6f61528d775"
+      "sha": "4c5bc1d7",
+      "date": "2026-11-27",
+      "message": "fix(skmesh): bind the IdP manager only when the application is already restricted (#547)",
+      "url": "https://github.com/smilinTux/skstacks/commit/4c5bc1d7c426b6d01dbf3cdf038c730ca00cc99c"
     },
     {
-      "sha": "842cd03e",
-      "date": "2026-11-25",
-      "message": "fix(skstream): hard-filter AUDIONEW and cam/telesync tags in cli_debrid (#532)",
-      "url": "https://github.com/smilinTux/skstacks/commit/842cd03e2aeb979d3b100826cb4211c808cefdf1"
+      "sha": "a1f7cc5f",
+      "date": "2026-11-27",
+      "message": "docs(release): skstacks-v2.26.35 release notes (sksso email set #467, skmesh #545, sknet #544, image bumps) (#546)",
+      "url": "https://github.com/smilinTux/skstacks/commit/a1f7cc5ff4d8440c3a9cf6ed1712f644d407b256"
     },
     {
-      "sha": "4eb38600",
-      "date": "2026-11-25",
-      "message": "fix(skfetch): refresh the gluetun server list daily (#537)",
-      "url": "https://github.com/smilinTux/skstacks/commit/4eb386004d38aebfa441b579d3afdc8cc9000857"
+      "sha": "ccaa6765",
+      "date": "2026-11-27",
+      "message": "fix(skmesh): bind the IdP manager service account to its application (carries #543) (#545)",
+      "url": "https://github.com/smilinTux/skstacks/commit/ccaa6765514323dbb3ea3b0152493a7a7dd1ae76"
     },
     {
-      "sha": "d93d3159",
-      "date": "2026-11-25",
-      "message": "feat(skmail): mail through Traefik TCP with PROXY protocol v2 (failover) (#536)",
-      "url": "https://github.com/smilinTux/skstacks/commit/d93d31599ea345ca79e2530ec91d06f95756b657"
+      "sha": "825a79a1",
+      "date": "2026-11-27",
+      "message": "chore(deps): update n8nio/n8n docker tag to v2.49.5 (v1/ansible/optional/skorch/src/config/skorch) (#518)",
+      "url": "https://github.com/smilinTux/skstacks/commit/825a79a1c4fc4e605adc1516da449a26455d7e30"
     }
   ]
 }

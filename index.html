@@ -66,7 +66,7 @@
         <button type="button" class="theme-btn" id="theme-btn" aria-label="Switch between light and dark theme">theme</button>
       </nav>
     </div>
-    <span class="eyebrow">SKWorld &middot; Sovereign infrastructure &middot; <!-- gen:inline:release -->skstacks-v2.26.33<!-- /gen:inline:release --> &middot; AGPL-3.0</span>
+    <span class="eyebrow">SKWorld &middot; Sovereign infrastructure &middot; <!-- gen:inline:release -->skstacks-v2.26.35<!-- /gen:inline:release --> &middot; AGPL-3.0</span>
     <h1>Your services, on metal you own.</h1>
     <p class="sub"><strong>SKStacks</strong> is the public framework production SKWorld clusters run on: <!-- gen:inline:v1_total -->46<!-- /gen:inline:v1_total --> self-hosted services for Docker Swarm, each one a pinned open-source upstream. Your private instance pins a release tag, keeps the secrets, and deploys only what you pick.</p>
     <div class="cta">
@@ -100,13 +100,13 @@
     <div class="spot-eyebrow">Generated from the framework repo</div>
     <div class="stat-grid">
 <!-- gen:stats -->
-<div class="stat-tile"><span class="stat-label">Latest release</span><span class="stat-value">v2.26.33</span><span class="stat-sub">2026-11-23</span></div>
+<div class="stat-tile"><span class="stat-label">Latest release</span><span class="stat-value">v2.26.35</span><span class="stat-sub">2026-11-27</span></div>
 <div class="stat-tile"><span class="stat-label">v1 services</span><span class="stat-value">46</span><span class="stat-sub">4 core, 42 optional</span></div>
 <div class="stat-tile"><span class="stat-label">Categories</span><span class="stat-value">8</span><span class="stat-sub">grouped below</span></div>
 <div class="stat-tile"><span class="stat-label">v2 descriptors</span><span class="stat-value">28</span><span class="stat-sub">in development</span></div>
 <!-- /gen:stats -->
     </div>
-    <p class="meta">Counts and the release are read from <a href="https://github.com/smilinTux/skstacks">smilinTux/skstacks</a> by <a href="https://github.com/smilinTux/skstacks-skworld-io/blob/main/scripts/gen-data.py"><code>scripts/gen-data.py</code></a> at upstream commit <code><!-- gen:inline:upstream_commit -->d850b8f7<!-- /gen:inline:upstream_commit --></code> (<!-- gen:inline:generated -->2026-11-26<!-- /gen:inline:generated -->). Raw data: <a href="data/services-catalog.json">services-catalog.json</a>.</p>
+    <p class="meta">Counts and the release are read from <a href="https://github.com/smilinTux/skstacks">smilinTux/skstacks</a> by <a href="https://github.com/smilinTux/skstacks-skworld-io/blob/main/scripts/gen-data.py"><code>scripts/gen-data.py</code></a> at upstream commit <code><!-- gen:inline:upstream_commit -->b7435bea<!-- /gen:inline:upstream_commit --></code> (<!-- gen:inline:generated -->2026-11-27<!-- /gen:inline:generated -->). Raw data: <a href="data/services-catalog.json">services-catalog.json</a>.</p>
   </section>
 
   <section class="sec" id="services">
@@ -257,18 +257,14 @@
     <p>Instances pin tags, not branches. Each <code>skstacks-v2.X.Y</code> tag points at the exact commit that was tested, and its CHANGELOG section says what an instance has to do, if anything, before it rolls.</p>
     <div class="panel">
 <!-- gen:release -->
-<p class="rel-tag"><a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.33"><code>skstacks-v2.26.33</code></a> <span class="rel-date">2026-11-23</span></p>
+<p class="rel-tag"><a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.35"><code>skstacks-v2.26.35</code></a> <span class="rel-date">2026-11-27</span></p>
 <ul class="plist">
-  <li>sknet: network flow visibility (Akvorado), new optional role</li>
-  <li>skha: node labels follow the VIP (<code>skha.vip_node_labels</code>)</li>
-  <li>skmail: mail through Traefik with PROXY protocol v2 (<code>skmail.VIA_TRAEFIK</code>)</li>
-  <li>skgit: <code>ENABLE_INTERNAL_SIGNIN</code> knob (SSO-only web sign-in)</li>
-  <li>skpods: skpods.id branding (<code>THEME</code>)</li>
-  <li>templates: skpods-only instance config</li>
-  <li>skpods: new optional service for Solid pod hosting</li>
-  <li>skpayment: idna 3.15 (security)</li>
+  <li>sksso: one shared branded email set for every Authentik email (#467)</li>
+  <li>Image updates (Renovate)</li>
+  <li>sknet: views per estate</li>
+  <li>skmesh: the IdP manager keeps access once a tile binds the application</li>
 </ul>
-<p class="meta">Earlier: <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.32">v2.26.32</a> (2026-11-23) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.31">v2.26.31</a> (2026-11-21) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.30">v2.26.30</a> (2026-11-20) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.29">v2.26.29</a> (2026-11-19) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.28">v2.26.28</a> (2026-11-18)</p>
+<p class="meta">Earlier: <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.34">v2.26.34</a> (2026-11-26) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.33">v2.26.33</a> (2026-11-23) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.32">v2.26.32</a> (2026-11-23) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.31">v2.26.31</a> (2026-11-21) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.30">v2.26.30</a> (2026-11-20)</p>
 <!-- /gen:release -->
       <p class="meta" style="margin-top:.6rem"><a href="https://github.com/smilinTux/skstacks/blob/main/CHANGELOG.md">Full CHANGELOG</a> &middot; <a href="https://github.com/smilinTux/skstacks/blob/main/docs/testing.md">How a release is tested</a> &middot; <a href="https://github.com/smilinTux/skstacks/blob/main/docs/dependency-updates.md">Dependency updates</a></p>
     </div>
