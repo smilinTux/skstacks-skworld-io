@@ -1,17 +1,50 @@
 {
-  "generated": "2026-11-27",
+  "generated": "2026-11-28",
   "release": {
-    "tag": "skstacks-v2.26.35",
-    "date": "2026-11-27",
-    "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.35",
+    "tag": "skstacks-v2.26.37",
+    "date": "2026-11-28",
+    "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.37",
     "highlights": [
-      "sksso: one shared branded email set for every Authentik email (#467)",
-      "Image updates (Renovate)",
-      "sknet: views per estate",
-      "skmesh: the IdP manager keeps access once a tile binds the application"
+      "skvector: optional web UI host behind SSO",
+      "skpods: no trash and no version history, so a delete really deletes (also on external storage)",
+      "skstor: optional node-local Garage metadata, with snapshots on the shared tree",
+      "skembed: CPU embedding service with an OpenAI-compatible API (new role)",
+      "skcorpus: read-only corpus search tool server (new role)",
+      "skcorpus: read-only pgvector backend",
+      "skai: answer engine with web search and corpus knowledge base (new role)",
+      "sksso: optional OIDC client for skai"
     ]
   },
   "recent_releases": [
+    {
+      "tag": "skstacks-v2.26.37",
+      "date": "2026-11-28",
+      "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.37",
+      "highlights": [
+        "skvector: optional web UI host behind SSO",
+        "skpods: no trash and no version history, so a delete really deletes (also on external storage)",
+        "skstor: optional node-local Garage metadata, with snapshots on the shared tree",
+        "skembed: CPU embedding service with an OpenAI-compatible API (new role)",
+        "skcorpus: read-only corpus search tool server (new role)",
+        "skcorpus: read-only pgvector backend",
+        "skai: answer engine with web search and corpus knowledge base (new role)",
+        "sksso: optional OIDC client for skai"
+      ]
+    },
+    {
+      "tag": "skstacks-v2.26.36",
+      "date": "2026-11-27",
+      "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.36",
+      "highlights": [
+        "deploy pre-pull: a refused image the node already holds no longer blocks the deploy; skfence error-pages pinned to its build node",
+        "skpods: optional identity domain for per-user WebID hosts",
+        "Stack deploys pre-pull their images and stop before `docker stack deploy` if one cannot be pulled",
+        "Overlays: no stack joins an implicit default network; new swarms use 10.200.0.0/16",
+        "skmesh: 503, not the catch-all 403, while a backend is down; skpatch-hosts NetBird keep-up timer",
+        "skbom: Dependency-Track enables the OSV vulnerability source",
+        "Image updates (skmon)"
+      ]
+    },
     {
       "tag": "skstacks-v2.26.35",
       "date": "2026-11-27",
@@ -58,87 +91,57 @@
         "skfenceha: the ACME master label stays where it is",
         "Image bumps for open CVEs"
       ]
-    },
-    {
-      "tag": "skstacks-v2.26.31",
-      "date": "2026-11-21",
-      "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.31",
-      "highlights": [
-        "skbom: web UI behind Authentik forward auth by default (`AUTH_MODE`)",
-        "skbom and skflow: Postgres first-init start period 300 s (#501)",
-        "skreg: the deployable role is back (#199, undone by #200)",
-        "skfenceha: traefik-certs-watch tasks no longer share one temp file",
-        "Portal tiles: bindings matched client-side, not by the list filter",
-        "skpatch-hosts: the registrar never registers a system twice (#503)",
-        "Dependency updates (Renovate, apps covered by the release gate)",
-        "libvirt-cluster: `apt_proxy` no longer sends https through the cache"
-      ]
-    },
-    {
-      "tag": "skstacks-v2.26.30",
-      "date": "2026-11-20",
-      "url": "https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.30",
-      "highlights": [
-        "Upgrade notes",
-        "skgit (#405, #469)",
-        "sksec-web (#470)",
-        "skbackup: a full pool can recover (#404)",
-        "skpatch-hosts (#401, #408, #476)",
-        "Machine and API traffic bypasses the error-pages middleware on every app (#410)",
-        "SSO access: conformance check and per-app resolver (#472, #475)",
-        "skgallery: Immich v3.4.2 by default (#485)"
-      ]
     }
   ],
   "changelog_url": "https://github.com/smilinTux/skstacks/blob/main/CHANGELOG.md",
   "commits": [
     {
-      "sha": "b7435bea",
-      "date": "2026-11-27",
-      "message": "fix(networks): register the skfenceha certs-watch internal subnets (#554 follow-up) (#555)",
-      "url": "https://github.com/smilinTux/skstacks/commit/b7435bea9ee838d8768af6b29efc4bf84f6e088a"
+      "sha": "2956b6fe",
+      "date": "2026-11-28",
+      "message": "feat(skpatch): deploy Copa-patched images for fixable OS-package CVEs (#567)",
+      "url": "https://github.com/smilinTux/skstacks/commit/2956b6fe8dade23db94c5e5e0feba90896a1fce6"
     },
     {
-      "sha": "8d1c340a",
-      "date": "2026-11-27",
-      "message": "fix(deploy): pre-pull stack images on the nodes before docker stack deploy (#548)",
-      "url": "https://github.com/smilinTux/skstacks/commit/8d1c340a19a41e02a010e34fe1ae41da9f289844"
+      "sha": "58128669",
+      "date": "2026-11-28",
+      "message": "docs(release): skstacks-v2.26.37 release heading (#566)",
+      "url": "https://github.com/smilinTux/skstacks/commit/5812866951e36417fdbc95d275cd1eac05d109a0"
     },
     {
-      "sha": "ea2425e5",
-      "date": "2026-11-27",
-      "message": "fix(skmesh): answer 503, not the catch-all 403, while a backend is down; opt-in NetBird keep-up timer (#553)",
-      "url": "https://github.com/smilinTux/skstacks/commit/ea2425e50a5d539b8553f376e6026161c885932a"
+      "sha": "0fed463d",
+      "date": "2026-11-28",
+      "message": "fix(skbom): the OSV provisioner logs in with Accept text/plain (#565)",
+      "url": "https://github.com/smilinTux/skstacks/commit/0fed463d38109eb21bd82d2524d9c59aa1635d45"
     },
     {
-      "sha": "15e97d45",
-      "date": "2026-11-27",
-      "message": "fix(overlays): no stack joins an implicit default network; new swarms use 10.200.0.0/16 (#554)",
-      "url": "https://github.com/smilinTux/skstacks/commit/15e97d45d12a05931b5fdc4f3feef4ad5d66dfef"
+      "sha": "d7a7771f",
+      "date": "2026-11-28",
+      "message": "fix(skpatch-hosts): one shared Trivy DB for every estate's image scan (#560)",
+      "url": "https://github.com/smilinTux/skstacks/commit/d7a7771f160733b3e778c0ed93246b32cef68758"
     },
     {
-      "sha": "4c5bc1d7",
-      "date": "2026-11-27",
-      "message": "fix(skmesh): bind the IdP manager only when the application is already restricted (#547)",
-      "url": "https://github.com/smilinTux/skstacks/commit/4c5bc1d7c426b6d01dbf3cdf038c730ca00cc99c"
+      "sha": "ede45d8f",
+      "date": "2026-11-28",
+      "message": "docs(changelog): skai, skcorpus, skembed entries belong to v2.26.37 (#564)",
+      "url": "https://github.com/smilinTux/skstacks/commit/ede45d8fd5c9adb7ee0e457794f6388d6ac66f71"
     },
     {
-      "sha": "a1f7cc5f",
-      "date": "2026-11-27",
-      "message": "docs(release): skstacks-v2.26.35 release notes (sksso email set #467, skmesh #545, sknet #544, image bumps) (#546)",
-      "url": "https://github.com/smilinTux/skstacks/commit/a1f7cc5ff4d8440c3a9cf6ed1712f644d407b256"
+      "sha": "aab24d7a",
+      "date": "2026-11-28",
+      "message": "fix(skstor): optional node-local Garage metadata (META_NODE, META_PATH, snapshots) (#563)",
+      "url": "https://github.com/smilinTux/skstacks/commit/aab24d7acebb1eef951aa94f8d63a33aa0659365"
     },
     {
-      "sha": "ccaa6765",
+      "sha": "31d67b8b",
       "date": "2026-11-27",
-      "message": "fix(skmesh): bind the IdP manager service account to its application (carries #543) (#545)",
-      "url": "https://github.com/smilinTux/skstacks/commit/ccaa6765514323dbb3ea3b0152493a7a7dd1ae76"
+      "message": "feat(skvector): optional web UI host behind SSO with the api-key injected by Traefik (#552)",
+      "url": "https://github.com/smilinTux/skstacks/commit/31d67b8b53a5f1f210fcfc98f9873be12388ded9"
     },
     {
-      "sha": "825a79a1",
+      "sha": "8fa01852",
       "date": "2026-11-27",
-      "message": "chore(deps): update n8nio/n8n docker tag to v2.49.5 (v1/ansible/optional/skorch/src/config/skorch) (#518)",
-      "url": "https://github.com/smilinTux/skstacks/commit/825a79a1c4fc4e605adc1516da449a26455d7e30"
+      "message": "chore(deps): update dependency idna to v3.15 [security] (#561)",
+      "url": "https://github.com/smilinTux/skstacks/commit/8fa01852872256fab32c2ba70bde2a0f702102f3"
     }
   ]
 }

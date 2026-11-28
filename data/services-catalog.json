@@ -1,9 +1,9 @@
 {
-  "generated": "2026-11-27",
+  "generated": "2026-11-28",
   "source": {
     "repo": "https://github.com/smilinTux/skstacks",
-    "commit": "b7435bea",
-    "release": "skstacks-v2.26.35"
+    "commit": "2956b6fe",
+    "release": "skstacks-v2.26.37"
   },
   "categories": [
     {
@@ -45,6 +45,11 @@
       "id": "media",
       "label": "Media and home",
       "blurb": "Photos, streaming, media fetching, home and fitness tracking."
+    },
+    {
+      "id": "other",
+      "label": "Other",
+      "blurb": "Services not yet sorted into a category."
     }
   ],
   "services": [
@@ -99,6 +104,16 @@
       "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skaegis"
     },
     {
+      "name": "skai",
+      "tier": "optional",
+      "category": "other",
+      "purpose": "SKAI is the estate's answer engine: fast chat with any model behind an OpenAI-compatible gateway",
+      "upstream": "ghcr.io/open-webui/open-webui:v0.13.4, pgvector/pgvector:0.8.7-pg17-bookworm, ghcr.io/speaches-ai/speaches:0.8.3-cpu",
+      "in_catalog_doc": false,
+      "path": "v1/ansible/optional/skai",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skai"
+    },
+    {
       "name": "skbackup",
       "tier": "optional",
       "category": "data",
@@ -139,6 +154,16 @@
       "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skbook"
     },
     {
+      "name": "skcorpus",
+      "tier": "optional",
+      "category": "other",
+      "purpose": "Small, read-only OpenAPI tool server (FastAPI) that lets the skai answer engine search our own knowledge corpora",
+      "upstream": "smilintux/skpayment-runtime:py3.11-20261123",
+      "in_catalog_doc": false,
+      "path": "v1/ansible/optional/skcorpus",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skcorpus"
+    },
+    {
       "name": "skdash",
       "tier": "optional",
       "category": "ops",
@@ -157,6 +182,16 @@
       "in_catalog_doc": true,
       "path": "v1/ansible/optional/skdesk",
       "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skdesk"
+    },
+    {
+      "name": "skembed",
+      "tier": "optional",
+      "category": "other",
+      "purpose": "SKEmbed serves one text embedding model on CPU as a swarm service with an OpenAI-compatible `POST /v1/embeddings`. It exists so that query embeddings for retrieval (skcorpus) and for uploaded documents (skai) do not need a GPU, and so that the model that built a vector collection is the same one that embeds the queries against it",
+      "upstream": "ghcr.io/huggingface/text-embeddings-inference:cpu-1.9.4",
+      "in_catalog_doc": false,
+      "path": "v1/ansible/optional/skembed",
+      "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skembed"
     },
     {
       "name": "skfetch",
@@ -293,7 +328,7 @@
       "tier": "optional",
       "category": "ops",
       "purpose": "Observability stack (metrics, logs, alerts, optional profiles)",
-      "upstream": "VictoriaMetrics `v1.155.0`, Grafana Alloy `v1.21.3`, Loki `3.7.9`, Grafana `13.3.0`, Alertmanager `v0.35.0` (all digest-pinned, `pins.yml`)",
+      "upstream": "VictoriaMetrics `v1.155.0`, Grafana Alloy `v1.21.3`, Loki `3.7.10`, Grafana `13.3.1`, Alertmanager `v0.35.0` (all digest-pinned, `pins.yml`)",
       "in_catalog_doc": true,
       "path": "v1/ansible/optional/skmon",
       "url": "https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skmon"

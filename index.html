@@ -66,9 +66,9 @@
         <button type="button" class="theme-btn" id="theme-btn" aria-label="Switch between light and dark theme">theme</button>
       </nav>
     </div>
-    <span class="eyebrow">SKWorld &middot; Sovereign infrastructure &middot; <!-- gen:inline:release -->skstacks-v2.26.35<!-- /gen:inline:release --> &middot; AGPL-3.0</span>
+    <span class="eyebrow">SKWorld &middot; Sovereign infrastructure &middot; <!-- gen:inline:release -->skstacks-v2.26.37<!-- /gen:inline:release --> &middot; AGPL-3.0</span>
     <h1>Your services, on metal you own.</h1>
-    <p class="sub"><strong>SKStacks</strong> is the public framework production SKWorld clusters run on: <!-- gen:inline:v1_total -->46<!-- /gen:inline:v1_total --> self-hosted services for Docker Swarm, each one a pinned open-source upstream. Your private instance pins a release tag, keeps the secrets, and deploys only what you pick.</p>
+    <p class="sub"><strong>SKStacks</strong> is the public framework production SKWorld clusters run on: <!-- gen:inline:v1_total -->49<!-- /gen:inline:v1_total --> self-hosted services for Docker Swarm, each one a pinned open-source upstream. Your private instance pins a release tag, keeps the secrets, and deploys only what you pick.</p>
     <div class="cta">
       <a class="btn primary" href="#services">Browse the services</a>
       <a class="btn ghost" href="docs.html">Read the docs</a>
@@ -100,13 +100,13 @@
     <div class="spot-eyebrow">Generated from the framework repo</div>
     <div class="stat-grid">
 <!-- gen:stats -->
-<div class="stat-tile"><span class="stat-label">Latest release</span><span class="stat-value">v2.26.35</span><span class="stat-sub">2026-11-27</span></div>
-<div class="stat-tile"><span class="stat-label">v1 services</span><span class="stat-value">46</span><span class="stat-sub">4 core, 42 optional</span></div>
-<div class="stat-tile"><span class="stat-label">Categories</span><span class="stat-value">8</span><span class="stat-sub">grouped below</span></div>
+<div class="stat-tile"><span class="stat-label">Latest release</span><span class="stat-value">v2.26.37</span><span class="stat-sub">2026-11-28</span></div>
+<div class="stat-tile"><span class="stat-label">v1 services</span><span class="stat-value">49</span><span class="stat-sub">4 core, 45 optional</span></div>
+<div class="stat-tile"><span class="stat-label">Categories</span><span class="stat-value">9</span><span class="stat-sub">grouped below</span></div>
 <div class="stat-tile"><span class="stat-label">v2 descriptors</span><span class="stat-value">28</span><span class="stat-sub">in development</span></div>
 <!-- /gen:stats -->
     </div>
-    <p class="meta">Counts and the release are read from <a href="https://github.com/smilinTux/skstacks">smilinTux/skstacks</a> by <a href="https://github.com/smilinTux/skstacks-skworld-io/blob/main/scripts/gen-data.py"><code>scripts/gen-data.py</code></a> at upstream commit <code><!-- gen:inline:upstream_commit -->b7435bea<!-- /gen:inline:upstream_commit --></code> (<!-- gen:inline:generated -->2026-11-27<!-- /gen:inline:generated -->). Raw data: <a href="data/services-catalog.json">services-catalog.json</a>.</p>
+    <p class="meta">Counts and the release are read from <a href="https://github.com/smilinTux/skstacks">smilinTux/skstacks</a> by <a href="https://github.com/smilinTux/skstacks-skworld-io/blob/main/scripts/gen-data.py"><code>scripts/gen-data.py</code></a> at upstream commit <code><!-- gen:inline:upstream_commit -->2956b6fe<!-- /gen:inline:upstream_commit --></code> (<!-- gen:inline:generated -->2026-11-28<!-- /gen:inline:generated -->). Raw data: <a href="data/services-catalog.json">services-catalog.json</a>.</p>
   </section>
 
   <section class="sec" id="services">
@@ -154,7 +154,7 @@
   <div class="pgrid">
     <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skdash"><span class="pname">skdash <span class="tier">optional</span></span><span class="pblurb">Dashy service dashboard, Traefik-API discovery</span><span class="phost">Dashy <code>4.7.10</code></span></a>
     <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skhealth"><span class="pname">skhealth <span class="tier">optional</span></span><span class="pblurb">Lightweight infrastructure health checks with alerts</span></a>
-    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skmon"><span class="pname">skmon <span class="tier">optional</span></span><span class="pblurb">Observability stack (metrics, logs, alerts, optional profiles)</span><span class="phost">VictoriaMetrics <code>v1.155.0</code>, Grafana Alloy <code>v1.21.3</code>, Loki <code>3.7.9</code>, Grafana <code>13.3.0</code>, Alertmanager <code>v0.35.0</code> (all digest-pinned, <code>pins.yml</code>)</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skmon"><span class="pname">skmon <span class="tier">optional</span></span><span class="pblurb">Observability stack (metrics, logs, alerts, optional profiles)</span><span class="phost">VictoriaMetrics <code>v1.155.0</code>, Grafana Alloy <code>v1.21.3</code>, Loki <code>3.7.10</code>, Grafana <code>13.3.1</code>, Alertmanager <code>v0.35.0</code> (all digest-pinned, <code>pins.yml</code>)</span></a>
     <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/sknet"><span class="pname">sknet <span class="tier">optional</span></span><span class="pblurb">Network flow visibility: Akvorado flow collector and console (Kafka + ClickHouse), optional live view</span><span class="phost">Akvorado <code>2026.10.1</code>, Kafka <code>4.3.1</code>, ClickHouse <code>26.8</code>, Caddy <code>2.11.9</code> (tag-pinned)</span></a>
     <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skport"><span class="pname">skport <span class="tier">optional</span></span><span class="pblurb">Portainer CE (Swarm web UI)</span><span class="phost">Portainer CE <code>2.45.4</code></span></a>
     <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skpulse"><span class="pname">skpulse <span class="tier">optional</span></span><span class="pblurb">Uptime Kuma status monitoring</span><span class="phost">Uptime Kuma <code>2.5.5</code></span></a>
@@ -218,6 +218,15 @@
     <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skstream"><span class="pname">skstream <span class="tier">optional</span></span><span class="pblurb">Plex + Real-Debrid (DUMB)</span><span class="phost">plexinc/pms-docker:1.43.5.11079-b3b13e506, kometateam/kometa:v2.5.5</span></a>
   </div>
 </div>
+<div class="cat" id="cat-other">
+  <div class="cat-head"><h3>Other</h3><span class="cat-count">3</span></div>
+  <p class="cat-blurb">Services not yet sorted into a category.</p>
+  <div class="pgrid">
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skai"><span class="pname">skai <span class="tier">optional</span></span><span class="pblurb">SKAI is the estate&#x27;s answer engine: fast chat with any model behind an OpenAI-compatible gateway</span><span class="phost">ghcr.io/open-webui/open-webui:v0.13.4, pgvector/pgvector:0.8.7-pg17-bookworm, ghcr.io/speaches-ai/speaches:0.8.3-cpu</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skcorpus"><span class="pname">skcorpus <span class="tier">optional</span></span><span class="pblurb">Small, read-only OpenAPI tool server (FastAPI) that lets the skai answer engine search our own knowledge corpora</span><span class="phost">smilintux/skpayment-runtime:py3.11-20261123</span></a>
+    <a class="pcard" href="https://github.com/smilinTux/skstacks/tree/main/v1/ansible/optional/skembed"><span class="pname">skembed <span class="tier">optional</span></span><span class="pblurb">SKEmbed serves one text embedding model on CPU as a swarm service with an OpenAI-compatible <code>POST /v1/embeddings</code>. It exists so that query embeddings for retrieval (skcorpus) and for uploaded documents (skai) do not need a GPU, and so that the model that built a vector collection is the same one that embeds the queries against it</span><span class="phost">ghcr.io/huggingface/text-embeddings-inference:cpu-1.9.4</span></a>
+  </div>
+</div>
 <!-- /gen:catalog -->
     <p class="meta">Full detail per service (dependencies, exposed hostnames, storage, required vault keys, opt-in flags): <a href="https://github.com/smilinTux/skstacks/blob/main/docs/v1-service-catalog.md">docs/v1-service-catalog.md</a>.</p>
   </section>
@@ -257,14 +266,18 @@
     <p>Instances pin tags, not branches. Each <code>skstacks-v2.X.Y</code> tag points at the exact commit that was tested, and its CHANGELOG section says what an instance has to do, if anything, before it rolls.</p>
     <div class="panel">
 <!-- gen:release -->
-<p class="rel-tag"><a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.35"><code>skstacks-v2.26.35</code></a> <span class="rel-date">2026-11-27</span></p>
+<p class="rel-tag"><a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.37"><code>skstacks-v2.26.37</code></a> <span class="rel-date">2026-11-28</span></p>
 <ul class="plist">
-  <li>sksso: one shared branded email set for every Authentik email (#467)</li>
-  <li>Image updates (Renovate)</li>
-  <li>sknet: views per estate</li>
-  <li>skmesh: the IdP manager keeps access once a tile binds the application</li>
+  <li>skvector: optional web UI host behind SSO</li>
+  <li>skpods: no trash and no version history, so a delete really deletes (also on external storage)</li>
+  <li>skstor: optional node-local Garage metadata, with snapshots on the shared tree</li>
+  <li>skembed: CPU embedding service with an OpenAI-compatible API (new role)</li>
+  <li>skcorpus: read-only corpus search tool server (new role)</li>
+  <li>skcorpus: read-only pgvector backend</li>
+  <li>skai: answer engine with web search and corpus knowledge base (new role)</li>
+  <li>sksso: optional OIDC client for skai</li>
 </ul>
-<p class="meta">Earlier: <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.34">v2.26.34</a> (2026-11-26) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.33">v2.26.33</a> (2026-11-23) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.32">v2.26.32</a> (2026-11-23) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.31">v2.26.31</a> (2026-11-21) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.30">v2.26.30</a> (2026-11-20)</p>
+<p class="meta">Earlier: <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.36">v2.26.36</a> (2026-11-27) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.35">v2.26.35</a> (2026-11-27) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.34">v2.26.34</a> (2026-11-26) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.33">v2.26.33</a> (2026-11-23) &middot; <a href="https://github.com/smilinTux/skstacks/tree/skstacks-v2.26.32">v2.26.32</a> (2026-11-23)</p>
 <!-- /gen:release -->
       <p class="meta" style="margin-top:.6rem"><a href="https://github.com/smilinTux/skstacks/blob/main/CHANGELOG.md">Full CHANGELOG</a> &middot; <a href="https://github.com/smilinTux/skstacks/blob/main/docs/testing.md">How a release is tested</a> &middot; <a href="https://github.com/smilinTux/skstacks/blob/main/docs/dependency-updates.md">Dependency updates</a></p>
     </div>

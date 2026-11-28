@@ -1,12 +1,12 @@
 {
-  "generated": "2026-11-27",
-  "upstream_commit": "b7435bea",
-  "release": "skstacks-v2.26.35",
-  "release_date": "2026-11-27",
-  "v1_total": 46,
+  "generated": "2026-11-28",
+  "upstream_commit": "2956b6fe",
+  "release": "skstacks-v2.26.37",
+  "release_date": "2026-11-28",
+  "v1_total": 49,
   "v1_core": 4,
-  "v1_optional": 42,
-  "categories": 8,
+  "v1_optional": 45,
+  "categories": 9,
   "by_category": {
     "Edge and security": 8,
     "Identity and access": 4,
@@ -15,7 +15,8 @@
     "Collaboration and productivity": 7,
     "Automation and development": 6,
     "Search and AI": 2,
-    "Media and home": 5
+    "Media and home": 5,
+    "Other": 3
   },
   "v2_total": 28
 }
